@@ -1,0 +1,29 @@
+{
+    "name": "biig/happii",
+    "description": "Library that helps you build APIs with Symfony",
+    "type": "library",
+    "require": {
+        "zircote/swagger-php": "^3.0",
+        "nekland/tools": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4",
+        "behat/behat": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Biig\\Happii\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maxime Veber",
+            "email": "nek.dev@gmail.com"
+        },
+        {
+            "name": "BiiG",
+            "homepage": "https://www.biig.fr"
+        }
+    ]
+}

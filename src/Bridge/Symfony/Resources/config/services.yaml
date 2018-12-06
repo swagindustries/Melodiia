@@ -1,0 +1,13 @@
+services:
+    happii.routing_loader:
+        class: Biig\Happii\Bridge\Symfony\Routing\LoadGeneratedRoutes
+        public: true
+        arguments:
+            $config: '@happii.configuration'
+
+    happii.configuration:
+        class: Biig\Happii\Bridge\Symfony\HappiConfiguration
+        arguments:
+            $config: '%happii.config%'
+
+    Biig\Happii\HappiiConfigurationInterface: '@happii.configuration'
