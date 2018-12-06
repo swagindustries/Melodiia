@@ -26,7 +26,7 @@ class OpenApiController
     public function __construct(\Twig_Environment $templating, RouterInterface $router)
     {
         $this->templating = $templating;
-        $this->router     = $router;
+        $this->router = $router;
     }
 
     public function __invoke(Request $request)

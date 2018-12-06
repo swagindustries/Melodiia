@@ -5,7 +5,7 @@ namespace Biig\Happii\Bridge\Symfony;
 use Biig\Happii\HappiiConfigurationInterface;
 
 /**
- * Class HappiConfiguration
+ * Class HappiConfiguration.
  */
 final class HappiConfiguration implements HappiiConfigurationInterface
 {
@@ -31,7 +31,7 @@ final class HappiConfiguration implements HappiiConfigurationInterface
             if ($api['enable_doc']) {
                 $docConf[$name] = [
                     'paths' => $api['paths'],
-                    'base_path' => $api['base_path']
+                    'base_path' => $api['base_path'],
                 ];
             }
         }

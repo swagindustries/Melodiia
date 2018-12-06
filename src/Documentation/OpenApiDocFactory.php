@@ -2,17 +2,14 @@
 
 namespace Biig\Happii\Documentation;
 
-
 use Nekland\Tools\StringTools;
 use OpenApi\Analysis;
 use OpenApi\Annotations\Info;
 use OpenApi\Annotations\OpenApi;
-use OpenApi\Annotations\PathItem;
-use OpenApi\Context;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class OpenApiDocFactory
+ * Class OpenApiDocFactory.
  *
  * Feel free to decorate this class. Do not extend it.
  */
@@ -21,7 +18,7 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
     private $requestStack;
     private $config;
 
-    public function __construct(RequestStack $requestStack, $config)
+    public function __construct(RequestStack $requestStack, array $config)
     {
         $this->requestStack = $requestStack;
         $this->config = $config;
@@ -30,16 +27,14 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
     public function createOpenApiAnalysis(): Analysis
     {
         $config = [
-            //'_context' => new Context(['generated' => true]),
             'info' => new Info([
-                //'_context' => new Context(['generated' => true]),
                 'title' => $this->config['title'],
-                'version' => $this->config['version']
+                'version' => $this->config['version'],
             ]),
             'paths' => [],
             'servers' => [
-                ['url' => $this->getApiPath()]
-            ]
+                ['url' => $this->getApiPath()],
+            ],
         ];
 
         $analysis = new Analysis();

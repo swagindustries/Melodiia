@@ -2,8 +2,8 @@
 
 namespace Biig\Happii\Bridge\Symfony\DependencyInjection;
 
-use Biig\Happii\Documentation\Controller\OpenApiController;
 use Biig\Happii\Bridge\Symfony\Exception\ConfigException;
+use Biig\Happii\Documentation\Controller\OpenApiController;
 use Biig\Happii\Documentation\Controller\OpenApiJsonController;
 use Biig\Happii\Documentation\OpenApiDocFactory;
 use Symfony\Component\Config\FileLocator;
@@ -45,7 +45,7 @@ class HappiiExtension extends Extension
             }
 
             // Register doc controllers
-            if ($apiConf['doc_factory'] === null) {
+            if (null === $apiConf['doc_factory']) {
                 $openApiFactory = new Definition(OpenApiDocFactory::class);
                 $openApiFactory->setAutowired(true);
                 $openApiFactory->setArgument(1, [

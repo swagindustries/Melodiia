@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class SwaggerJsonController
+ * Class SwaggerJsonController.
  *
  * This controller is very specific to swagger-php.
  */
@@ -28,7 +28,7 @@ class OpenApiJsonController
     /**
      * DocumentationController constructor.
      *
-     * @param string|string[]               $paths   List of path where controller may be located.
+     * @param string|string[]               $paths   list of path where controller may be located
      * @param DocumentationFactoryInterface $factory
      *
      * @throws ConfigException

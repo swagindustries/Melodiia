@@ -12,6 +12,7 @@ class LoadGeneratedRoutes
 {
     private $config;
     private $isLoaded = false;
+
     public function __construct(HappiiConfigurationInterface $config)
     {
         $this->config = $config;
@@ -26,7 +27,7 @@ class LoadGeneratedRoutes
         }
         $routes = new RouteCollection();
 
-        foreach($this->config->getDocumentationConfig() as $apiName => $conf) {
+        foreach ($this->config->getDocumentationConfig() as $apiName => $conf) {
             $path = $conf['base_path'];
 
             if (!StringTools::endsWith($path, '/')) {
@@ -37,11 +38,11 @@ class LoadGeneratedRoutes
 
             $htmlRoute = new Route(
                 $path . '.html',
-                [ '_controller' => 'happii.' . $apiName . '.open_api_view_controller']
+                ['_controller' => 'happii.' . $apiName . '.open_api_view_controller']
             );
             $jsonRoute = new Route(
                 $path . '.json',
-                [ '_controller' => 'happii.' . $apiName . '.open_api_json_controller']
+                ['_controller' => 'happii.' . $apiName . '.open_api_json_controller']
             );
 
             $routes->add('happii_' . $apiName . '_docs_json', $jsonRoute);

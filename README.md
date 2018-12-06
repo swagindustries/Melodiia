@@ -26,7 +26,7 @@ Add the bundle to your bundle list:
 Biig\Happii\Bridge\Symfony\HappiiBundle::class => ['all' => true]
 ```
 
-Setup the configuration
+Setup the configuration:
 
 ```yaml
 # config/packages/happii.yaml
