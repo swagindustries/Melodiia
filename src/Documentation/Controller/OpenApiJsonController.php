@@ -5,7 +5,6 @@ namespace Biig\Happii\Documentation\Controller;
 use Biig\Happii\Bridge\Symfony\Exception\ConfigException;
 use Biig\Happii\Documentation\DocumentationFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -43,7 +42,7 @@ class OpenApiJsonController
         $this->factory = $factory;
     }
 
-    public function __invoke(Request $request, $ext = 'html')
+    public function __invoke()
     {
         $openApi = \OpenApi\scan($this->paths, ['analysis' => $this->factory->createOpenApiAnalysis()]);
 

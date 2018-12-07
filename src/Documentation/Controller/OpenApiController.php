@@ -40,6 +40,7 @@ class OpenApiController
                 $queryParams .= $key . '=' . $param;
             }
         }
+
         $response->setContent($this->templating->render(
             '@Happii/openapi.html.twig',
             [
