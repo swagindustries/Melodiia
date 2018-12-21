@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('doc_factory')->defaultNull()->end()
                             ->scalarNode('base_path')->defaultValue('/')->end()
                             ->scalarNode('title')->defaultNull()->end()
+                            ->scalarNode('description')->defaultNull()->end()
                             ->scalarNode('version')->defaultValue('1.0.0')->end()
                         ->end()
                     ->end()

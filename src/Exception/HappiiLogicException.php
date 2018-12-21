@@ -1,6 +1,6 @@
 <?php
 
-namespace BiiG\Happii\Exception;
+namespace Biig\Happii\Exception;
 
 class HappiiLogicException extends \LogicException implements HappiiException
 {

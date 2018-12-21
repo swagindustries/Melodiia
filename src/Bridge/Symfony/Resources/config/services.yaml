@@ -10,4 +10,12 @@ services:
         arguments:
             $config: '%happii.config%'
 
+    happii.serialization.created_normalizer:
+        class: Biig\Happii\Serialization\Json\CreatedNormalizer
+        tags: { name: 'serializer.normalizer' }
+
+    happii.serialization.error_normalizer:
+        class: Biig\Happii\Serialization\Json\ErrorNormalizer
+        tags: { name: 'serializer.normalizer' }
+
     Biig\Happii\HappiiConfigurationInterface: '@happii.configuration'

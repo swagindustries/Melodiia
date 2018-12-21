@@ -2,6 +2,8 @@
 
 namespace Biig\Happii\Bridge\Symfony\Exception;
 
-class ConfigException extends \Exception
+use Biig\Happii\Exception\HappiiLogicException;
+
+class ConfigException extends HappiiLogicException
 {
 }

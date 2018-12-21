@@ -24,7 +24,7 @@ class HappiiExtensionTest extends TestCase
         ]];
 
         $container = new ContainerBuilder();
-        $container->setParameter('kernel.project_dir', __DIR__ . '/../../..');
+        $container->setParameter('kernel.project_dir', __DIR__ . '/../../../../..');
         $extension->load($config, $container);
 
         $this->assertTrue($container->hasDefinition('happii.main.open_api_view_controller'));

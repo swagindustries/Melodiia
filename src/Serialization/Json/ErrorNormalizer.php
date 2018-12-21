@@ -1,0 +1,33 @@
+<?php
+
+namespace Biig\Happii\Serialization\Json;
+
+
+use Biig\Happii\Response\AbstractUserDataErrorResponse;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
+class ErrorNormalizer implements NormalizerInterface
+{
+    /**
+     * @param AbstractUserDataErrorResponse $object
+     * @param null                          $format
+     * @param array                         $context
+     *
+     * @return array|bool|float|int|string
+     */
+    public function normalize($object, $format = null, array $context = array())
+    {
+        $res = ['violations' => []];
+
+        foreach ($object->getErrors() as $error) {
+            $res['violations'][$error->getPropertyPath()] = $error->getErrors();
+        }
+
+        return $res;
+    }
+
+    public function supportsNormalization($data, $format = null)
+    {
+        return is_object($data) && $data instanceof AbstractUserDataErrorResponse;
+    }
+}
