@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Happii\Test\Response\Listener;
+namespace Biig\Melodiia\Test\Response\Listener;
 
-use Biig\Happii\Response\ApiResponse;
-use Biig\Happii\Response\Listener\SerializeOnKernelView;
+use Biig\Melodiia\Response\ApiResponse;
+use Biig\Melodiia\Response\Listener\SerializeOnKernelView;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;

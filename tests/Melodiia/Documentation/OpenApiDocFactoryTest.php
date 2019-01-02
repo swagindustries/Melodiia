@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Happii\Test\Documentation;
+namespace Biig\Melodiia\Test\Documentation;
 
-use Biig\Happii\Documentation\DocumentationFactoryInterface;
-use Biig\Happii\Documentation\OpenApiDocFactory;
+use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
+use Biig\Melodiia\Documentation\OpenApiDocFactory;
 use OpenApi\Analysis;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;

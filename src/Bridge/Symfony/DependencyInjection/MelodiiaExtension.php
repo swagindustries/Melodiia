@@ -1,11 +1,11 @@
 <?php
 
-namespace Biig\Happii\Bridge\Symfony\DependencyInjection;
+namespace Biig\Melodiia\Bridge\Symfony\DependencyInjection;
 
-use Biig\Happii\Bridge\Symfony\Exception\ConfigException;
-use Biig\Happii\Documentation\Controller\OpenApiController;
-use Biig\Happii\Documentation\Controller\OpenApiJsonController;
-use Biig\Happii\Documentation\OpenApiDocFactory;
+use Biig\Melodiia\Bridge\Symfony\Exception\ConfigException;
+use Biig\Melodiia\Documentation\Controller\OpenApiController;
+use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
+use Biig\Melodiia\Documentation\OpenApiDocFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-class HappiiExtension extends Extension
+class MelodiiaExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -30,7 +30,7 @@ class HappiiExtension extends Extension
             $this->configureApi($name, $apiConf, $container);
         }
 
-        $container->setParameter('happii.config', $config);
+        $container->setParameter('melodiia.config', $config);
     }
 
     private function configureApi(string $name, array $apiConf, ContainerBuilder $container)
@@ -75,11 +75,11 @@ class HappiiExtension extends Extension
 
     private function getServiceName(string $apiName, string $serviceName)
     {
-        return 'happii.' . $apiName . '.' . $serviceName;
+        return 'melodiia.' . $apiName . '.' . $serviceName;
     }
 
     public function getAlias()
     {
-        return 'happii';
+        return 'melodiia';
     }
 }

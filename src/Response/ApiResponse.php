@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Happii\Response;
+namespace Biig\Melodiia\Response;
 
 interface ApiResponse
 {

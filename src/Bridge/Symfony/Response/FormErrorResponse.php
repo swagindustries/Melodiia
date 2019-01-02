@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Happii\Bridge\Symfony\Response;
+namespace Biig\Melodiia\Bridge\Symfony\Response;
 
-use Biig\Happii\Exception\InvalidResponseException;
-use Biig\Happii\Response\Model\UserDataError;
-use Biig\Happii\Response\AbstractUserDataErrorResponse;
+use Biig\Melodiia\Exception\InvalidResponseException;
+use Biig\Melodiia\Response\Model\UserDataError;
+use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
 use Nekland\Tools\StringTools;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Happii\Response;
+namespace Biig\Melodiia\Response;
 
-use Biig\Happii\Response\Model\UserDataError;
+use Biig\Melodiia\Response\Model\UserDataError;
 
 abstract class AbstractUserDataErrorResponse implements ApiResponse
 {

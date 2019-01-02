@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Happii\Test\Serialization\Json;
+namespace Biig\Melodiia\Test\Serialization\Json;
 
-use Biig\Happii\Response\AbstractUserDataErrorResponse;
-use Biig\Happii\Response\Model\UserDataError;
-use Biig\Happii\Serialization\Json\ErrorNormalizer;
+use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
+use Biig\Melodiia\Response\Model\UserDataError;
+use Biig\Melodiia\Serialization\Json\ErrorNormalizer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 

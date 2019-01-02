@@ -1,7 +1,7 @@
 <?php
 
-namespace Biig\Happii\Exception;
+namespace Biig\Melodiia\Exception;
 
-class InvalidResponseException extends HappiiLogicException
+class InvalidResponseException extends MelodiiaLogicException
 {
 }

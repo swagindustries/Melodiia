@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Happii\Serialization\Json;
+namespace Biig\Melodiia\Serialization\Json;
 
 
-use Biig\Happii\Response\AbstractUserDataErrorResponse;
+use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ErrorNormalizer implements NormalizerInterface

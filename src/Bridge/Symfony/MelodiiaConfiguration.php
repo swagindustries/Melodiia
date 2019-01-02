@@ -1,13 +1,13 @@
 <?php
 
-namespace Biig\Happii\Bridge\Symfony;
+namespace Biig\Melodiia\Bridge\Symfony;
 
-use Biig\Happii\HappiiConfigurationInterface;
+use Biig\Melodiia\MelodiiaConfigurationInterface;
 
 /**
- * Class HappiConfiguration.
+ * Class MelodiiaConfiguration.
  */
-final class HappiConfiguration implements HappiiConfigurationInterface
+final class MelodiiaConfiguration implements MelodiiaConfigurationInterface
 {
     /**
      * @var array

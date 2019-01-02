@@ -1,9 +1,9 @@
 <?php
 
-namespace Happii\Bridge\Symfony\Response;
+namespace Biig\Melodiia\Bridge\Symfony\Response;
 
-use Biig\Happii\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Happii\Response\Model\UserDataError;
+use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
+use Biig\Melodiia\Response\Model\UserDataError;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -37,7 +37,7 @@ class FormErrorResponseTest extends TestCase
     }
 
     /**
-     * @expectedException \Biig\Happii\Exception\InvalidResponseException
+     * @expectedException \Biig\Melodiia\Exception\InvalidResponseException
      */
     public function testItFailsIfFormNotSubmitted()
     {
@@ -46,7 +46,7 @@ class FormErrorResponseTest extends TestCase
     }
 
     /**
-     * @expectedException \Biig\Happii\Exception\InvalidResponseException
+     * @expectedException \Biig\Melodiia\Exception\InvalidResponseException
      */
     public function testItFailsIfFormHasNoError()
     {

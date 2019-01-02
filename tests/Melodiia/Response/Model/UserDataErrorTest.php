@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Happii\Test\Response\Model;
+namespace Biig\Melodiia\Test\Response\Model;
 
-use Biig\Happii\Response\Model\UserDataError;
+use Biig\Melodiia\Response\Model\UserDataError;
 use PHPUnit\Framework\TestCase;
 
 class UserDataErrorTest extends TestCase

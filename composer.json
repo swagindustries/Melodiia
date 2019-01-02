@@ -1,8 +1,9 @@
 {
-    "name": "biig/happii",
-    "description": "Library that helps you build APIs with Symfony",
+    "name": "biig/melodiia",
+    "description": "Library that helps you build APIs",
     "type": "library",
     "require": {
+        "php": ">=7.2",
         "zircote/swagger-php": "^3.0",
         "nekland/tools": "^2.0"
     },
@@ -15,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Biig\\Happii\\": "src/"
+            "Biig\\Melodiia\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Biig\\Happii\\Test\\": "tests/Happii/"
+            "Biig\\Melodiia\\Test\\": "tests/Melodiia/"
         }
     },
     "license": "MIT",

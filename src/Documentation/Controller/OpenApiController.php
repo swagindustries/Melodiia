@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Happii\Documentation\Controller;
+namespace Biig\Melodiia\Documentation\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +42,7 @@ class OpenApiController
         }
 
         $response->setContent($this->templating->render(
-            '@Happii/openapi.html.twig',
+            '@Melodiia/openapi.html.twig',
             [
                 'url_to_json' => $this->router->generate(
                     str_replace('html', 'json', $request->get('_route')),

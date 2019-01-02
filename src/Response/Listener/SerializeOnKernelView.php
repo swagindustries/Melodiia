@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Happii\Response\Listener;
+namespace Biig\Melodiia\Response\Listener;
 
-use Biig\Happii\Response\ApiResponse;
+use Biig\Melodiia\Response\ApiResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;

@@ -1,8 +1,8 @@
 <?php
 
-namespace BiiG\Happii\Test\Documentation\Controller;
+namespace Biig\Melodiia\Test\Documentation\Controller;
 
-use Biig\Happii\Documentation\Controller\OpenApiController;
+use Biig\Melodiia\Documentation\Controller\OpenApiController;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;

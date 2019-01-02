@@ -1,29 +1,29 @@
 services:
-    happii.routing_loader:
-        class: Biig\Happii\Bridge\Symfony\Routing\LoadGeneratedRoutes
+    melodiia.routing_loader:
+        class: Biig\Melodiia\Bridge\Symfony\Routing\LoadGeneratedRoutes
         public: true
         arguments:
-            $config: '@happii.configuration'
+            $config: '@melodiia.configuration'
 
-    happii.configuration:
-        class: Biig\Happii\Bridge\Symfony\HappiConfiguration
+    melodiia.configuration:
+        class: Biig\Melodiia\Bridge\Symfony\MelodiiaConfiguration
         arguments:
-            $config: '%happii.config%'
+            $config: '%melodiia.config%'
 
 
     # Priority -1 is DX. It allow the user to implement its own normalizers
     # that will take over those.
-    happii.serialization.created_normalizer:
-        class: Biig\Happii\Serialization\Json\CreatedNormalizer
+    melodiia.serialization.created_normalizer:
+        class: Biig\Melodiia\Serialization\Json\CreatedNormalizer
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
-    happii.serialization.error_normalizer:
-        class: Biig\Happii\Serialization\Json\ErrorNormalizer
+    melodiia.serialization.error_normalizer:
+        class: Biig\Melodiia\Serialization\Json\ErrorNormalizer
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
-    Biig\Happii\HappiiConfigurationInterface: '@happii.configuration'
+    Biig\Melodiia\MelodiiaConfigurationInterface: '@melodiia.configuration'
 
-    happii.response_listener:
-        class: Biig\Happii\Response\Listener\SerializeOnKernelView
+    melodiia.response_listener:
+        class: Biig\Melodiia\Response\Listener\SerializeOnKernelView
         autoconfigure: true
         autowire: true

@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Happii\Bridge\Symfony\Exception;
+namespace Biig\Melodiia\Bridge\Symfony\Exception;
 
-use Biig\Happii\Exception\HappiiLogicException;
+use Biig\Melodiia\Exception\MelodiiaLogicException;
 
-class ConfigException extends HappiiLogicException
+class ConfigException extends MelodiiaLogicException
 {
 }

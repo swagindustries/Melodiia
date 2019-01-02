@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Happii\Response;
+namespace Biig\Melodiia\Response;
 
 
 class Ok implements ApiResponse

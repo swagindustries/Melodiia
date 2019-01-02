@@ -1,5 +1,5 @@
-Happii
-======
+Melodiia
+========
 
 Finally some competitor to ApiPlatform. And you're gonna like it.
 
@@ -15,7 +15,7 @@ Install
 -------
 
 ```bash
-composer require biig/happii
+composer require biig/melodiia
 ```
 
 ### Symfony setup
@@ -23,25 +23,25 @@ composer require biig/happii
 Add the bundle to your bundle list:
 
 ```php
-Biig\Happii\Bridge\Symfony\HappiiBundle::class => ['all' => true]
+Biig\Melodiia\Bridge\Symfony\MelodiiaBundle::class => ['all' => true]
 ```
 
 Setup the configuration:
 
 ```yaml
-# config/packages/happii.yaml
+# config/packages/melodiia.yaml
 
-happii:
+melodiia:
     apis:
         # Choose the name of your api here
         main: ~
 ```
 
-Add happii routing:
+Add melodiia routing:
 
 ```yaml
 admin_routes:
-    resource: 'happii.routing_loader:loadRoutes'
+    resource: 'melodiia.routing_loader:loadRoutes'
     type: service
 ```
 

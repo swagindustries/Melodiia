@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Happii\Documentation;
+namespace Biig\Melodiia\Documentation;
 
 use Nekland\Tools\StringTools;
 use OpenApi\Analysis;

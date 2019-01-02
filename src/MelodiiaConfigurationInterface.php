@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Happii;
+namespace Biig\Melodiia;
 
-interface HappiiConfigurationInterface
+interface MelodiiaConfigurationInterface
 {
     /**
      * Return [api_name => [base_path, path]]

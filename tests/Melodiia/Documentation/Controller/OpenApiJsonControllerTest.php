@@ -1,9 +1,9 @@
 <?php
 
-namespace BiiG\Happii\Test\Documentation\Controller;
+namespace Biig\Melodiia\Test\Documentation\Controller;
 
-use Biig\Happii\Documentation\Controller\OpenApiJsonController;
-use Biig\Happii\Documentation\DocumentationFactoryInterface;
+use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
+use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
 use OpenApi\Analysis;
 use OpenApi\Annotations\Info;
 use OpenApi\Annotations\OpenApi;

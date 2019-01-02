@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Happii\Test\Serialization\Json;
+namespace Biig\Melodiia\Test\Serialization\Json;
 
-use Biig\Happii\Response\Created;
-use Biig\Happii\Serialization\Json\CreatedNormalizer;
+use Biig\Melodiia\Response\Created;
+use Biig\Melodiia\Serialization\Json\CreatedNormalizer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 

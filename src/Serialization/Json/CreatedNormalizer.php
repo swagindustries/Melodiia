@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Happii\Serialization\Json;
+namespace Biig\Melodiia\Serialization\Json;
 
-use Biig\Happii\Response\Created;
+use Biig\Melodiia\Response\Created;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CreatedNormalizer implements NormalizerInterface

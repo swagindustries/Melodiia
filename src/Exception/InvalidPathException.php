@@ -1,7 +1,7 @@
 <?php
 
-namespace BiiG\Happii\Exception;
+namespace BiiG\Melodiia\Exception;
 
-class InvalidPathException extends HappiiLogicException
+class InvalidPathException extends MelodiiaLogicException
 {
 }
