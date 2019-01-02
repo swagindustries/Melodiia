@@ -10,12 +10,20 @@ services:
         arguments:
             $config: '%happii.config%'
 
+
+    # Priority -1 is DX. It allow the user to implement its own normalizers
+    # that will take over those.
     happii.serialization.created_normalizer:
         class: Biig\Happii\Serialization\Json\CreatedNormalizer
-        tags: { name: 'serializer.normalizer' }
+        tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
     happii.serialization.error_normalizer:
         class: Biig\Happii\Serialization\Json\ErrorNormalizer
-        tags: { name: 'serializer.normalizer' }
+        tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
     Biig\Happii\HappiiConfigurationInterface: '@happii.configuration'
+
+    happii.response_listener:
+        class: Biig\Happii\Response\Listener\SerializeOnKernelView
+        autoconfigure: true
+        autowire: true
