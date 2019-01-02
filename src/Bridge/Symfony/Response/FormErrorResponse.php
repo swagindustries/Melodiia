@@ -77,6 +77,8 @@ class FormErrorResponse extends AbstractUserDataErrorResponse
     }
 
     /**
+     * Feel free to extend this class and override this method.
+     *
      * @param FormError $formError
      *
      * @return array [$message, $propertyPath]
@@ -87,6 +89,11 @@ class FormErrorResponse extends AbstractUserDataErrorResponse
         // $form->getCause()->getPropertyPath() does not
         // represent the data but the form.
         $propertyPath = $this->resolvePropertyPath($formError->getOrigin());
+        $cause = $formError->getCause();
+
+        if (get_class($cause) === 'Symfony\\Component\\Security\\Csrf\\CsrfToken') {
+            return ['csrf token', $propertyPath];
+        }
 
         return [$formError->getCause()->getMessage(), $propertyPath];
     }
