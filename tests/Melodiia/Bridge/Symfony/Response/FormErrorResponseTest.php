@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Bridge\Symfony\Response;
 
-use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use Biig\Melodiia\Response\Model\UserDataError;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
@@ -57,7 +56,6 @@ class FormErrorResponseTest extends TestCase
 
     public function testItTransformFormErrorToArrayOfUserDataError()
     {
-
         $form = $this->formFactory
             ->createNamedBuilder('')
             ->add('foo', TextType::class, ['constraints' => new NotBlank()])

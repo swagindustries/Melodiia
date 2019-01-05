@@ -32,7 +32,7 @@ class OpenApiDocFactoryTest extends TestCase
             'title' => 'hello',
             'version' => '1.0.0',
             'basePath' => '/foo',
-            'description' => null
+            'description' => null,
         ]);
         $request = $this->prophesize(Request::class);
         $request->getHttpHost()->willReturn('http://localhost');

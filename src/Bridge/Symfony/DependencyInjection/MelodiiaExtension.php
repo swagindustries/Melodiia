@@ -31,6 +31,7 @@ class MelodiiaExtension extends Extension
         }
 
         $container->setParameter('melodiia.config', $config);
+        $this->disableFormExtensionIfNeeded($container, $config['form_extensions']);
     }
 
     private function configureApi(string $name, array $apiConf, ContainerBuilder $container)
@@ -70,6 +71,13 @@ class MelodiiaExtension extends Extension
             $container->setDefinition($factoryServiceName, $openApiFactory);
             $container->setDefinition($this->getServiceName($name, 'open_api_view_controller'), $viewControllerDefinition);
             $container->setDefinition($this->getServiceName($name, 'open_api_json_controller'), $jsonControllerDefinition);
+        }
+    }
+
+    private function disableFormExtensionIfNeeded(ContainerBuilder $builder, array $config)
+    {
+        if (!$config['datetime']) {
+            $builder->removeDefinition('melodiia.form.extension.datetime');
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace Biig\Melodiia\Response;
 
-class Ok implements ApiResponse
+abstract class AbstractApiResponse implements ApiResponse
 {
     /** @var string */
     private $message;
@@ -15,10 +15,5 @@ class Ok implements ApiResponse
     public function getMessage(): string
     {
         return $this->message;
-    }
-
-    public function httpStatus(): int
-    {
-        return 200;
     }
 }

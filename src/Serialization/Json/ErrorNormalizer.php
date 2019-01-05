@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Serialization\Json;
 
-
 use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 

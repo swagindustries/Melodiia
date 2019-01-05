@@ -9,7 +9,7 @@ abstract class AbstractUserDataErrorResponse implements ApiResponse
     /**
      * @return UserDataError[]
      */
-    public abstract function getErrors(): array;
+    abstract public function getErrors(): array;
 
     public function httpStatus(): int
     {

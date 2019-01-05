@@ -1,6 +1,6 @@
 <?php
 
-namespace BiiG\Melodiia\Exception;
+namespace Biig\Melodiia\Exception;
 
 /**
  * Class MelodiiaException.
