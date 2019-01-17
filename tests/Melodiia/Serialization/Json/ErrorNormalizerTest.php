@@ -44,6 +44,7 @@ class ErrorNormalizerTest extends TestCase
 class DummyError extends AbstractUserDataErrorResponse
 {
     private $errors;
+
     public function __construct($errors)
     {
         $this->errors = $errors;

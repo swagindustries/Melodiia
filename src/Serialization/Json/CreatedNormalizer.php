@@ -12,7 +12,7 @@ class CreatedNormalizer implements NormalizerInterface
         $res = [];
         $resource = $object->getResourceId();
 
-        if ($resource !== null) {
+        if (null !== $resource) {
             $res['resource'] = $resource;
         }
         $res['id'] = $object->getId();

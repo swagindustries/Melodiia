@@ -30,7 +30,7 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
             'info' => new Info([
                 'title' => $this->config['title'],
                 'version' => $this->config['version'],
-                'description' => $this->config['description']
+                'description' => $this->config['description'],
             ]),
             'paths' => [],
             'servers' => [

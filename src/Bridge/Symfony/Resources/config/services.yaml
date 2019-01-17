@@ -27,3 +27,7 @@ services:
         class: Biig\Melodiia\Response\Listener\SerializeOnKernelView
         autoconfigure: true
         autowire: true
+
+imports:
+    - 'crud.yaml'
+    - 'form.yaml'

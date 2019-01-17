@@ -3,8 +3,8 @@
 namespace Biig\Melodiia\Bridge\Symfony\Response;
 
 use Biig\Melodiia\Exception\InvalidResponseException;
-use Biig\Melodiia\Response\Model\UserDataError;
 use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
+use Biig\Melodiia\Response\Model\UserDataError;
 use Nekland\Tools\StringTools;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
@@ -67,7 +67,7 @@ class FormErrorResponse extends AbstractUserDataErrorResponse
                 $propertyPath = '.' . $propertyPath;
             }
             $propertyPath = $part . $propertyPath;
-        } while($form = $form->getParent());
+        } while ($form = $form->getParent());
 
         // Because of the condition in the while, it may ends with a dot at
         // the start, which is wrong, let's remove it.
@@ -91,7 +91,7 @@ class FormErrorResponse extends AbstractUserDataErrorResponse
         $propertyPath = $this->resolvePropertyPath($formError->getOrigin());
         $cause = $formError->getCause();
 
-        if (get_class($cause) === 'Symfony\\Component\\Security\\Csrf\\CsrfToken') {
+        if ('Symfony\\Component\\Security\\Csrf\\CsrfToken' === get_class($cause)) {
             return ['csrf token', $propertyPath];
         }
 

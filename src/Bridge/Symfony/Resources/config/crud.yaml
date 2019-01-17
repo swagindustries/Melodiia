@@ -1,0 +1,13 @@
+services:
+    melodiia.doctrine.data_provider:
+        class: Biig\Melodiia\Bridge\Doctrine\DoctrineDataStore
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    melodiia.crud.controller.create:
+        class: Biig\Melodiia\Crud\Controller\Create
+        arguments:
+            $dataStore: '@melodiia.doctrine.data_provider'
+            $formFactory: '@form.factory'
+            $dispatcher: '@event_dispatcher'
+        tags: [ controller.service_arguments ]
