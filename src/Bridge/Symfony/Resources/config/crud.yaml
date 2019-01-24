@@ -11,3 +11,9 @@ services:
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
         tags: [ controller.service_arguments ]
+
+    melodiia.crud.controller.get:
+        class: Biig\Melodiia\Crud\Controller\Get
+        arguments:
+            $dataStore: '@melodiia.doctrine.data_provider'
+        tags: [ controller.service_arguments ]

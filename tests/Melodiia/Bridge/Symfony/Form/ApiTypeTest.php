@@ -36,12 +36,14 @@ class ApiTypeTest extends FormIntegrationTestCase
 
     protected function getTypes()
     {
-        return [new ApiType];
+        return [new ApiType()];
     }
 }
 
-class FakeModel {
+class FakeModel
+{
     private $foo;
+
     public function __construct(string $foo)
     {
         $this->foo = $foo;

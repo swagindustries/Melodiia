@@ -4,10 +4,12 @@ namespace Biig\Melodiia\Crud\Controller;
 
 use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use Biig\Melodiia\Crud\CrudableModelInterface;
+use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
+use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\Created;
 use Biig\Melodiia\Response\WrongDataInput;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -18,7 +20,7 @@ use Zend\Json\Json;
 /**
  * Crud controller that create data model with the data from the request using a form.
  */
-final class Create
+final class Create implements CrudControllerInterface
 {
     public const EVENT_PRE_CREATE = 'melodiia.crud.pre_create';
     public const EVENT_POST_CREATE = 'melodiia.crud.post_create';
@@ -39,11 +41,11 @@ final class Create
         $this->dispatcher = $dispatcher;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): ApiResponse
     {
         // Metadata you can specify in routing definition
-        $modelClass = $request->attributes->get('melodiia_model');
-        $form = $request->attributes->get('melodiia_form');
+        $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
+        $form = $request->attributes->get(self::FORM_ATTRIBUTE);
 
         if (empty($modelClass) || !class_exists($modelClass) || !is_subclass_of($modelClass, CrudableModelInterface::class)) {
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');

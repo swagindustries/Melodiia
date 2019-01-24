@@ -21,6 +21,12 @@ services:
         class: Biig\Melodiia\Serialization\Json\ErrorNormalizer
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
+    melodiia.serialization.ok_content_normalizer:
+        class: Biig\Melodiia\Serialization\Json\OkContentNormalizer
+        arguments:
+            $normalizer: '@serializer.normalizer.object'
+        tags: [{ name: 'serializer.normalizer', priority: -1 }]
+
     Biig\Melodiia\MelodiiaConfigurationInterface: '@melodiia.configuration'
 
     melodiia.response_listener:
