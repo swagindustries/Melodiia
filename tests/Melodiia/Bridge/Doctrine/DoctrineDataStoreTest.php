@@ -1,7 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Doctrine;
+namespace Biig\Melodiia\Test\Bridge\Doctrine;
 
+use Biig\Melodiia\Bridge\Doctrine\DoctrineDataStore;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
