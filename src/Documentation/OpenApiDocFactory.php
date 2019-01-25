@@ -15,8 +15,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class OpenApiDocFactory implements DocumentationFactoryInterface
 {
+    /** @var RequestStack */
     private $requestStack;
+
+    /** @var array */
     private $config;
+
 
     public function __construct(RequestStack $requestStack, array $config)
     {
@@ -34,7 +38,7 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
             ]),
             'paths' => [],
             'servers' => [
-                ['url' => $this->getApiPath()],
+                ['url' => 'http://' . $this->getApiPath()],
             ],
         ];
 
@@ -48,7 +52,7 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
 
     private function getApiPath()
     {
-        $path = $this->config['basePath'];
+        $path = $this->config['base_path'];
         if (!StringTools::startsWith($path, '/')) {
             $path = '/' . $path;
         }

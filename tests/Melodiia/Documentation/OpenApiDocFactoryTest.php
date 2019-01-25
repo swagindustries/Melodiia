@@ -31,7 +31,7 @@ class OpenApiDocFactoryTest extends TestCase
         $factory = $this->createFactory([
             'title' => 'hello',
             'version' => '1.0.0',
-            'basePath' => '/foo',
+            'base_path' => '/foo',
             'description' => null,
         ]);
         $request = $this->prophesize(Request::class);
