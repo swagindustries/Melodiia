@@ -20,4 +20,9 @@ class DoctrineDataStore implements DataStoreInterface
         $this->entityManager->persist($model);
         $this->entityManager->flush($model);
     }
+
+    public function find(string $type, $id): ?object
+    {
+        return $this->entityManager->getRepository($type)->find($id);
+    }
 }
