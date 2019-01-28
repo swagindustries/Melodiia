@@ -1,0 +1,14 @@
+language: php
+php:
+    - 7.2
+    - 7.3
+
+branches:
+    only:
+        - master
+
+install:
+    - composer install
+
+script:
+    - ./vendor/bin/phpunit -c phpunit.xml.dist

@@ -15,7 +15,8 @@
         "phpspec/prophecy": "^1.8",
         "twig/twig": "^2.5",
         "symfony/symfony": "^4.2",
-        "doctrine/orm": "^2.6"
+        "doctrine/orm": "^2.6",
+        "justinrainbow/json-schema": "^5.2"
     },
     "autoload": {
         "psr-4": {

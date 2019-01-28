@@ -3,6 +3,7 @@
 namespace Biig\Melodiia\Bridge\Symfony\DependencyInjection;
 
 use Biig\Melodiia\Bridge\Symfony\Exception\ConfigException;
+use Biig\Melodiia\Bridge\Symfony\Routing\CrudDocumentationFactory;
 use Biig\Melodiia\Documentation\Controller\OpenApiController;
 use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
 use Biig\Melodiia\Documentation\OpenApiDocFactory;
@@ -45,19 +46,26 @@ class MelodiiaExtension extends Extension
                 $apiConf['paths'][] = $defaultPath;
             }
 
-            // Register doc controllers
-            if (null === $apiConf['doc_factory']) {
-                $openApiFactory = new Definition(OpenApiDocFactory::class);
-                $openApiFactory->setAutowired(true);
-                $openApiFactory->setArgument(1, [
-                    'title' => $apiConf['title'] ?? $name,
-                    'version' => $apiConf['version'],
-                    'basePath' => $apiConf['base_path'],
-                ]);
-            }
+
+            // Register documentation factory
+            $openApiFactory = new Definition(OpenApiDocFactory::class);
+            $openApiFactory->setAutowired(true);
+            $apiConf['title'] = $apiConf['title'] ?? $name;
+            $openApiFactory->setArgument(1, $apiConf);
+
+            $crudDocumentation = new Definition(CrudDocumentationFactory::class);
 
             $factoryServiceName = $this->getServiceName($name, 'open_api_doc_factory');
+            $crudDocServiceName = $this->getServiceName($name, 'crud_documentation');
 
+            $container->setDefinition($factoryServiceName, $openApiFactory);
+            $crudDocumentation->setDecoratedService($factoryServiceName);
+            $crudDocumentation->setArgument(0, new Reference($crudDocServiceName . '.inner'));
+            $crudDocumentation->setArgument(1, new Reference('router'));
+            $crudDocumentation->setArgument(2, $apiConf['base_path']);
+            $container->setDefinition($crudDocServiceName, $crudDocumentation);
+
+            // Register doc controllers
             $jsonControllerDefinition = new Definition(OpenApiJsonController::class);
             $jsonControllerDefinition->setAutowired(true);
             $jsonControllerDefinition->setArgument(0, $apiConf['paths']);
@@ -68,7 +76,6 @@ class MelodiiaExtension extends Extension
             $viewControllerDefinition->setAutowired(true);
             $viewControllerDefinition->addTag('controller.service_arguments');
 
-            $container->setDefinition($factoryServiceName, $openApiFactory);
             $container->setDefinition($this->getServiceName($name, 'open_api_view_controller'), $viewControllerDefinition);
             $container->setDefinition($this->getServiceName($name, 'open_api_json_controller'), $jsonControllerDefinition);
         }
