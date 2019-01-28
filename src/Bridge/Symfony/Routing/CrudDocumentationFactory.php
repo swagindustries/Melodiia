@@ -129,9 +129,13 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
                 new Response([
                     'response' => 201,
                     'description' => 'Resource created.'
-                ])
+                ]),
+                new Response([
+                    'response' => 400,
+                    'description' => 'Your request don\'t match the validation constraints.',
+                ]),
             ],
-            'operationId' => $model . ':get',
+            'operationId' => $model . ':post',
             'summary' => $defaults[self::DOCUMENTATION_SUMMARY] ?? 'Create a resource',
             'description' => $defaults[self::DOCUMENTATION_DESCRIPTION] ?? 'Return the id of the created resource',
             'tags' => [$tag]
