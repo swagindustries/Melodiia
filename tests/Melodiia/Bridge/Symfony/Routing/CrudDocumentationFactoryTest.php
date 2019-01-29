@@ -11,6 +11,7 @@ use GuzzleHttp\Client;
 use Nekland\Utils\Tempfile\TemporaryDirectory;
 use OpenApi\Analysis;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -108,6 +109,24 @@ class CrudDocumentationFactoryTest extends TestCase
         $this->assertTrue($validator->isValid());
 
         $tmpDir->remove();
+    }
+
+    public function testItIgnoreRouteWhenDisabledSpecified()
+    {
+        $route = new Route('/foo', [
+            CrudDocumentationFactory::DOCUMENTATION_DISABLED => true,
+            '_controller' => 'melodiia.crud.controller.get',
+            CrudControllerInterface::MODEL_ATTRIBUTE => FakeModel::class]
+        );
+        $routeCollection = new RouteCollection();
+        $routeCollection->add('foo', $route);
+
+        $this->router->getRouteCollection()->willReturn($routeCollection);
+        $analysis = $this->prophesize(Analysis::class);
+        $analysis->addAnnotation(Argument::cetera())->shouldNotBeCalled();
+        $this->decorated->createOpenApiAnalysis()->willReturn($analysis->reveal());
+
+        $this->assertNotNull($this->factory->createOpenApiAnalysis());
     }
 }
 
