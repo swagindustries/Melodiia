@@ -77,14 +77,6 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
                 new Response([
                     'response' => 200,
                     'description' => 'Resource exists and is returned.',
-                    'content' => [
-                        new MediaType([
-                            'mediaType' => 'application/json',
-                            'schema' => new Schema([
-                               'ref' => '#ref/components/schemas/' . $model
-                            ])
-                        ])
-                    ]
                 ]),
                 new Response([
                     'response' => 404,
