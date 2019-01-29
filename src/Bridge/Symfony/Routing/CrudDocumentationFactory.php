@@ -26,6 +26,7 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
     public const DOCUMENTATION_TAG = 'documentation_tag';
     public const DOCUMENTATION_SUMMARY = 'documentation_summary';
     public const DOCUMENTATION_DESCRIPTION = 'documentation_description';
+    public const DOCUMENTATION_DISABLED = 'documentation_disabled';
 
     /** @var DocumentationFactoryInterface */
     private $decorated;
@@ -49,7 +50,14 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
 
         foreach ($this->router->getRouteCollection() as $route) {
             /** @var Route $route */
-            $controller = $route->getDefaults()['_controller'] ?? null;
+            $defaults = $route->getDefaults();
+            $controller = $defaults['_controller'] ?? null;
+            $disabled = $defaults[self::DOCUMENTATION_DISABLED] ?? false;
+
+            if ($disabled) {
+                continue;
+            }
+
             if ($controller === 'melodiia.crud.controller.get') {
                 $analysis->addAnnotation($this->createDocForGet($route), null);
             }
