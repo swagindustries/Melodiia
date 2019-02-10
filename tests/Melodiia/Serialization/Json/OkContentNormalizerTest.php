@@ -40,6 +40,17 @@ class OkContentNormalizerTest extends TestCase
         $this->assertEquals('foo normalized', $res);
     }
 
+    public function testItDoesNotEnforceEmptyGroupArray()
+    {
+        $okContent = new OkContent('foo');
+
+        $this->mainNormalizer->normalize('foo', 'json', [])->willReturn('foo normalized')->shouldBeCalled();
+
+        $res = $this->okContentNormalizer->normalize($okContent, 'json');
+
+        $this->assertEquals('foo normalized', $res);
+    }
+
     public function testItSupportsOnlyOkContentInstance()
     {
         $this->assertTrue($this->okContentNormalizer->supportsNormalization(new OkContent('foo')));

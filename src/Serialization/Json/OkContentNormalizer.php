@@ -26,7 +26,7 @@ class OkContentNormalizer implements NormalizerInterface
      * @param string    $format
      * @param array     $context
      *
-     * @return array|bool|float|int|string|void
+     * @return array|bool|float|int|string
      */
     public function normalize($object, $format = null, array $context = array())
     {
@@ -35,7 +35,9 @@ class OkContentNormalizer implements NormalizerInterface
             $groups = array_merge($context['groups'], $groups);
         }
 
-        $context['groups'] = $groups;
+        if (!empty($groups)) {
+            $context['groups'] = $groups;
+        }
 
         return $this->decorated->normalize($object->getContent(), $format, $context);
     }
