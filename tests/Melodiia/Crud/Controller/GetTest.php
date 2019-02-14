@@ -8,14 +8,19 @@ use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\NotFound;
 use Biig\Melodiia\Response\OkContent;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class GetTest extends TestCase
 {
     /** @var DataStoreInterface|ObjectProphecy */
     private $dataStore;
+
+    /** @var AuthorizationCheckerInterface|ObjectProphecy */
+    private $authorizationChecker;
 
     /** @var Get */
     private $controller;
@@ -23,7 +28,8 @@ class GetTest extends TestCase
     public function setUp()
     {
         $this->dataStore = $this->prophesize(DataStoreInterface::class);
-        $this->controller = new Get($this->dataStore->reveal());
+        $this->authorizationChecker = $this->prophesize(AuthorizationCheckerInterface::class);
+        $this->controller = new Get($this->dataStore->reveal(), $this->authorizationChecker->reveal());
     }
 
     public function testItIsIntanceOfMelodiiaController()
@@ -38,6 +44,7 @@ class GetTest extends TestCase
         $attributes = $this->prophesize(ParameterBag::class);
         $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
         $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
+        $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $request->attributes = $attributes->reveal();
 
         $res = ($this->controller)($request->reveal(), 'id');
@@ -53,10 +60,47 @@ class GetTest extends TestCase
         $attributes = $this->prophesize(ParameterBag::class);
         $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
         $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
+        $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $request->attributes = $attributes->reveal();
 
         $res = ($this->controller)($request->reveal(), 'id');
 
         $this->assertInstanceOf(NotFound::class, $res);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function testItCheckAccessToResourceIfSpecifiedInConfiguration()
+    {
+        $this->dataStore->find('foo', 'id')->willReturn(new \stdClass())->shouldBeCalled();
+        $request = $this->prophesize(Request::class);
+        $attributes = $this->prophesize(ParameterBag::class);
+        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
+        $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
+        $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('view');
+        $request->attributes = $attributes->reveal();
+
+        $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(false);
+
+        ($this->controller)($request->reveal(), 'id');
+    }
+
+    public function testItCheckAccessAndSuccessIfAuthorized()
+    {
+        $this->dataStore->find('foo', 'id')->willReturn(new \stdClass())->shouldBeCalled();
+        $request = $this->prophesize(Request::class);
+        $attributes = $this->prophesize(ParameterBag::class);
+        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
+        $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
+        $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('view');
+        $request->attributes = $attributes->reveal();
+
+        $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(true);
+
+        $res = ($this->controller)($request->reveal(), 'id');
+
+        $this->assertInstanceOf(OkContent::class, $res);
+        $this->assertInstanceOf(\stdClass::class, $res->getContent());
     }
 }

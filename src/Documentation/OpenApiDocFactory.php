@@ -21,7 +21,6 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
     /** @var array */
     private $config;
 
-
     public function __construct(RequestStack $requestStack, array $config)
     {
         $this->requestStack = $requestStack;

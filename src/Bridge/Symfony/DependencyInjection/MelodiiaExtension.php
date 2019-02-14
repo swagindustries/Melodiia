@@ -46,7 +46,6 @@ class MelodiiaExtension extends Extension
                 $apiConf['paths'][] = $defaultPath;
             }
 
-
             // Register documentation factory
             $openApiFactory = new Definition(OpenApiDocFactory::class);
             $openApiFactory->setAutowired(true);

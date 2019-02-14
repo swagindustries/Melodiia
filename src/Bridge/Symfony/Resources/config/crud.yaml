@@ -16,4 +16,5 @@ services:
         class: Biig\Melodiia\Crud\Controller\Get
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
+            $checker: '@security.authorization_checker'
         tags: [ controller.service_arguments ]
