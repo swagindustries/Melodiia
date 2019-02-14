@@ -40,6 +40,13 @@ class SerializeOnKernelView implements EventSubscriberInterface
             return;
         }
 
-        $event->setResponse(new JsonResponse($this->serializer->serialize($response, 'json'), $response->httpStatus(), [], true));
+        $event->setResponse(
+            new JsonResponse(
+                $this->serializer->serialize($response, 'json'),
+                $response->httpStatus(),
+                [],
+                true
+            )
+        );
     }
 }
