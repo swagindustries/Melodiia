@@ -7,7 +7,6 @@ use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
 use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
 use Biig\Melodiia\Documentation\OpenApiDocFactory;
-use GuzzleHttp\Client;
 use Nekland\Utils\Tempfile\TemporaryDirectory;
 use OpenApi\Analysis;
 use PHPUnit\Framework\TestCase;
@@ -100,10 +99,10 @@ class CrudDocumentationFactoryTest extends TestCase
 
         // OpenApi format check
         $json = json_decode($json);
-        $validator = new \JsonSchema\Validator;
+        $validator = new \JsonSchema\Validator();
         $validator->validate(
             $json,
-            (object)['$ref' => 'file://' . realpath(__DIR__ . '/../../../../openapi3-schema.json')]
+            (object) ['$ref' => 'file://' . realpath(__DIR__ . '/../../../../openapi3-schema.json')]
         );
         // Get errors with $validator->getErrors()
         $this->assertTrue($validator->isValid());
@@ -116,7 +115,7 @@ class CrudDocumentationFactoryTest extends TestCase
         $route = new Route('/foo', [
             CrudDocumentationFactory::DOCUMENTATION_DISABLED => true,
             '_controller' => 'melodiia.crud.controller.get',
-            CrudControllerInterface::MODEL_ATTRIBUTE => FakeModel::class]
+            CrudControllerInterface::MODEL_ATTRIBUTE => FakeModel::class, ]
         );
         $routeCollection = new RouteCollection();
         $routeCollection->add('foo', $route);
@@ -130,8 +129,8 @@ class CrudDocumentationFactoryTest extends TestCase
     }
 }
 
-
-class FakeModel {
+class FakeModel
+{
     private $foo;
 
     /**
@@ -159,5 +158,4 @@ class FakeModel {
     {
         $this->foo = $foo;
     }
-
 }

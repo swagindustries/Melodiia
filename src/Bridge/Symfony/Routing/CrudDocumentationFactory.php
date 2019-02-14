@@ -7,8 +7,6 @@ use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
 use Nekland\Tools\StringTools;
 use OpenApi\Analysis;
 use OpenApi\Annotations\Get;
-use OpenApi\Annotations\JsonContent;
-use OpenApi\Annotations\MediaType;
 use OpenApi\Annotations\Parameter;
 use OpenApi\Annotations\Post;
 use OpenApi\Annotations\Response;
@@ -17,7 +15,7 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Router;
 
 /**
- * Class CrudDocumentationFactory
+ * Class CrudDocumentationFactory.
  *
  * Feel free to extends and redefine some of the methods of the
  */
@@ -58,10 +56,10 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
                 continue;
             }
 
-            if ($controller === 'melodiia.crud.controller.get') {
+            if ('melodiia.crud.controller.get' === $controller) {
                 $analysis->addAnnotation($this->createDocForGet($route), null);
             }
-            if ($controller === 'melodiia.crud.controller.create') {
+            if ('melodiia.crud.controller.create' === $controller) {
                 $analysis->addAnnotation($this->createDocForCreate($route), null);
             }
         }
@@ -89,7 +87,7 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
                 new Response([
                     'response' => 404,
                     'description' => 'Resource doesn\'t exist.',
-                ])
+                ]),
             ],
             'operationId' => $model . ':get',
             'parameters' => [
@@ -101,13 +99,13 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
                     'ref' => '#ref/components/schemas/Id',
                     'schema' => new Schema([
                         'type' => 'string',
-                        'schema' => 'id'
-                    ])
-                ])
+                        'schema' => 'id',
+                    ]),
+                ]),
             ],
             'summary' => $defaults[self::DOCUMENTATION_SUMMARY] ?? 'Return a resource',
             'description' => $defaults[self::DOCUMENTATION_DESCRIPTION] ?? 'Return the ressource based on given id',
-            'tags' => [$tag]
+            'tags' => [$tag],
         ]);
 
         return $annot;
@@ -128,7 +126,7 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
             'responses' => [
                 new Response([
                     'response' => 201,
-                    'description' => 'Resource created.'
+                    'description' => 'Resource created.',
                 ]),
                 new Response([
                     'response' => 400,
@@ -138,7 +136,7 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
             'operationId' => $model . ':post',
             'summary' => $defaults[self::DOCUMENTATION_SUMMARY] ?? 'Create a resource',
             'description' => $defaults[self::DOCUMENTATION_DESCRIPTION] ?? 'Return the id of the created resource',
-            'tags' => [$tag]
+            'tags' => [$tag],
         ]);
 
         return $annot;
@@ -161,7 +159,7 @@ class CrudDocumentationFactory implements DocumentationFactoryInterface
     {
         return [
             'melodiia.crud.controller.create',
-            'melodiia.crud.controller.get'
+            'melodiia.crud.controller.get',
         ];
     }
 }

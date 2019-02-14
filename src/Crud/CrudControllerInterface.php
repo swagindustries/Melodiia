@@ -7,4 +7,5 @@ interface CrudControllerInterface
     public const MODEL_ATTRIBUTE = 'melodiia_model';
     public const FORM_ATTRIBUTE = 'melodiia_form';
     public const SERIALIZATION_GROUP = 'melodiia_serialization_group';
+    public const SECURITY_CHECK = 'melodiia_security_check';
 }
