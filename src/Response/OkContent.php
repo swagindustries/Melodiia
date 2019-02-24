@@ -25,6 +25,11 @@ class OkContent implements ApiResponse, SerializationContextAwareInterface
         return $this->content;
     }
 
+    public function isCollection(): bool
+    {
+        return !is_array($this->content) && is_iterable($this->content);
+    }
+
     public function httpStatus(): int
     {
         return 200;

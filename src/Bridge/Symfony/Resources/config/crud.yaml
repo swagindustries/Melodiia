@@ -2,7 +2,7 @@ services:
     melodiia.doctrine.data_provider:
         class: Biig\Melodiia\Bridge\Doctrine\DoctrineDataStore
         arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
+            $registry: '@doctrine'
 
     melodiia.crud.controller.create:
         class: Biig\Melodiia\Crud\Controller\Create
@@ -10,6 +10,23 @@ services:
             $dataStore: '@melodiia.doctrine.data_provider'
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
+            $checker: '@security.authorization_checker'
+        tags: [ controller.service_arguments ]
+
+    melodiia.crud.controller.update:
+        class: Biig\Melodiia\Crud\Controller\Update
+        arguments:
+            $dataStore: '@melodiia.doctrine.data_provider'
+            $formFactory: '@form.factory'
+            $dispatcher: '@event_dispatcher'
+            $checker: '@security.authorization_checker'
+        tags: [ controller.service_arguments ]
+
+    melodiia.crud.controller.get_all:
+        class: Biig\Melodiia\Crud\Controller\GetAll
+        arguments:
+            $dataStore: '@melodiia.doctrine.data_provider'
+            $checker: '@security.authorization_checker'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get:

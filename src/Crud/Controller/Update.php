@@ -11,6 +11,7 @@ use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\Ok;
+use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Response\WrongDataInput;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -89,6 +90,6 @@ final class Update implements CrudControllerInterface
             return $event->getResponse();
         }
 
-        return new Ok($data->getId());
+        return new OkContent(['id' => $data->getId()]);
     }
 }

@@ -3,6 +3,9 @@
 namespace Biig\Melodiia\Serialization\Json;
 
 use Biig\Melodiia\Response\OkContent;
+use Pagerfanta\Pagerfanta;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -16,9 +19,13 @@ class OkContentNormalizer implements NormalizerInterface
     /** @var NormalizerInterface */
     private $decorated;
 
-    public function __construct(NormalizerInterface $normalizer)
+    /** @var RequestStack */
+    private $requestStack;
+
+    public function __construct(NormalizerInterface $normalizer, RequestStack $requestStack)
     {
         $this->decorated = $normalizer;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -39,7 +46,43 @@ class OkContentNormalizer implements NormalizerInterface
             $context['groups'] = $groups;
         }
 
-        return $this->decorated->normalize($object->getContent(), $format, $context);
+        // Simple object case
+        if (!$object->isCollection()) {
+            return $this->decorated->normalize($object->getContent(), $format, $context);
+        }
+
+        // Collection case
+        $content = $object->getContent();
+        $result = [];
+
+        // Pagination case
+        if ($content instanceof Pagerfanta) {
+            $result['meta'] = ['totalPages' => $content->getNbPages()];
+            $uri = $this->requestStack->getMasterRequest()->getUri();
+            $previousPage = $uri;
+            $nextPage = $uri;
+
+            if ($content->hasPreviousPage()) {
+                $previousPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getPreviousPage(), $uri);
+            }
+            if ($content->hasNextPage()) {
+                $nextPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNextPage(), $uri);
+            }
+
+            $result['links'] = [
+                'prev' => $previousPage,
+                'next' => $nextPage,
+                'last' => \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri),
+                'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri)
+            ];
+        }
+
+        $result['data'] = [];
+        foreach ($content as $item) {
+            $result['data'][] = $this->decorated->normalize($item, $format, $context);
+        }
+
+        return $result;
     }
 
     /**
