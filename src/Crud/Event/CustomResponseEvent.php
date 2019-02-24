@@ -2,6 +2,8 @@
 
 namespace Biig\Melodiia\Crud\Event;
 
+use Biig\Melodiia\Response\ApiResponse;
+
 class CustomResponseEvent extends CrudEvent
 {
     /** @var ApiResponse|null */
@@ -12,7 +14,7 @@ class CustomResponseEvent extends CrudEvent
         $this->response = $response;
     }
 
-    public function getResponse(): ApiResponse
+    public function getResponse(): ?ApiResponse
     {
         return $this->response;
     }

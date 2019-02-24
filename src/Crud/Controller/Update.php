@@ -10,7 +10,7 @@ use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\Created;
+use Biig\Melodiia\Response\Ok;
 use Biig\Melodiia\Response\WrongDataInput;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -20,12 +20,12 @@ use Zend\Json\Json;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Crud controller that create data model with the data from the request using a form.
+ * Crud controller that update data model with the data from the request using a form.
  */
-final class Create implements CrudControllerInterface
+final class Update implements CrudControllerInterface
 {
-    public const EVENT_PRE_CREATE = 'melodiia.crud.pre_create';
-    public const EVENT_POST_CREATE = 'melodiia.crud.post_create';
+    public const EVENT_PRE_UPDATE = 'melodiia.crud.pre_update';
+    public const EVENT_POST_UPDATE = 'melodiia.crud.post_update';
 
     /** @var DataStoreInterface */
     private $dataStore;
@@ -47,9 +47,8 @@ final class Create implements CrudControllerInterface
         $this->checker = $checker;
     }
 
-    public function __invoke(Request $request): ApiResponse
+    public function __invoke(Request $request, $id): ApiResponse
     {
-        // Metadata you can specify in routing definition
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
@@ -58,7 +57,9 @@ final class Create implements CrudControllerInterface
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
         }
 
-        if ($securityCheck && !$this->checker->isGranted($securityCheck)) {
+        $data = $this->dataStore->find($modelClass, $id);
+
+        if ($securityCheck && !$this->checker->isGranted($securityCheck, $data)) {
             throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));
         }
 
@@ -66,7 +67,8 @@ final class Create implements CrudControllerInterface
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
         }
 
-        $form = $this->formFactory->createNamed('', $form);
+
+        $form = $this->formFactory->createNamed('', $form, $data);
         $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);
         $form->submit($inputData);
 
@@ -78,15 +80,15 @@ final class Create implements CrudControllerInterface
             return new FormErrorResponse($form);
         }
         $data = $form->getData();
-        $this->dispatcher->dispatch(self::EVENT_PRE_CREATE, new CrudEvent($data));
+        $this->dispatcher->dispatch(self::EVENT_PRE_UPDATE, new CrudEvent($data));
 
         $this->dataStore->save($data);
-        $this->dispatcher->dispatch(self::EVENT_POST_CREATE, $event = new CustomResponseEvent($data));
+        $this->dispatcher->dispatch(self::EVENT_POST_UPDATE, $event = new CustomResponseEvent($data));
 
         if ($event->hasCustomResponse()) {
             return $event->getResponse();
         }
 
-        return new Created($data->getId());
+        return new Ok($data->getId());
     }
 }
