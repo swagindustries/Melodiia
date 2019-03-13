@@ -59,8 +59,8 @@ class OkContentNormalizer implements NormalizerInterface
         if ($content instanceof Pagerfanta) {
             $result['meta'] = ['totalPages' => $content->getNbPages()];
             $uri = $this->requestStack->getMasterRequest()->getUri();
-            $previousPage = $uri;
-            $nextPage = $uri;
+            $previousPage = null;
+            $nextPage = null;
 
             if ($content->hasPreviousPage()) {
                 $previousPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getPreviousPage(), $uri);
