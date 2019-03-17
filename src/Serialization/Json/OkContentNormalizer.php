@@ -7,6 +7,9 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class OkContentNormalizer.
@@ -14,17 +17,15 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  * Normalize only the content of OkContent object using the serialization
  * context contained in OkContent object.
  */
-class OkContentNormalizer implements NormalizerInterface
+class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
-    /** @var NormalizerInterface */
-    private $decorated;
+    use SerializerAwareTrait;
 
     /** @var RequestStack */
     private $requestStack;
 
-    public function __construct(NormalizerInterface $normalizer, RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->decorated = $normalizer;
         $this->requestStack = $requestStack;
     }
 
@@ -48,7 +49,7 @@ class OkContentNormalizer implements NormalizerInterface
 
         // Simple object case
         if (!$object->isCollection()) {
-            return $this->decorated->normalize($object->getContent(), $format, $context);
+            return $this->serializer->normalize($object->getContent(), $format, $context);
         }
 
         // Collection case
@@ -79,7 +80,7 @@ class OkContentNormalizer implements NormalizerInterface
 
         $result['data'] = [];
         foreach ($content as $item) {
-            $result['data'][] = $this->decorated->normalize($item, $format, $context);
+            $result['data'][] = $this->serializer->normalize($item, $format, $context);
         }
 
         return $result;

@@ -12,6 +12,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class OkContentNormalizerTest extends TestCase
 {
@@ -29,12 +30,13 @@ class OkContentNormalizerTest extends TestCase
 
     public function setUp()
     {
-        $this->mainNormalizer = $this->prophesize(NormalizerInterface::class);
+        $this->mainNormalizer = $this->prophesize(Serializer::class);
         $this->requestStack = $this->prophesize(RequestStack::class);
         $this->request = $this->prophesize(Request::class);
         $this->requestStack->getMasterRequest()->willReturn($this->request->reveal());
 
-        $this->okContentNormalizer = new OkContentNormalizer($this->mainNormalizer->reveal(), $this->requestStack->reveal());
+        $this->okContentNormalizer = new OkContentNormalizer($this->requestStack->reveal());
+        $this->okContentNormalizer->setSerializer($this->mainNormalizer->reveal());
     }
 
     public function testItIsInstanceOfNormalizerInterface()

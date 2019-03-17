@@ -64,7 +64,7 @@ class UpdateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $this->request->attributes = $this->attributes->reveal();
         $this->request->getContent()->willReturn('{"awesome":"json"}');
-        $this->form->submit(['awesome' => 'json'])->willReturn();
+        $this->form->submit(['awesome' => 'json'], false)->willReturn();
         $this->formFactory->createNamed('', Argument::cetera())->willReturn($this->form);
 
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass());

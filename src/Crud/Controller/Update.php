@@ -71,7 +71,7 @@ final class Update implements CrudControllerInterface
 
         $form = $this->formFactory->createNamed('', $form, $data);
         $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);
-        $form->submit($inputData);
+        $form->submit($inputData, false);
 
         if (!$form->isSubmitted()) {
             return new WrongDataInput();
