@@ -64,6 +64,6 @@ class FakeTypeUsingApiType extends \Biig\Melodiia\Bridge\Symfony\Form\AbstractTy
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => FakeModel::class]);
+        $resolver->setDefaults(['data_class' => FakeModel::class, 'value_object' => true]);
     }
 }

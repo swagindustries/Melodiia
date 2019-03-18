@@ -23,8 +23,9 @@ services:
 
     melodiia.serialization.ok_content_normalizer:
         class: Biig\Melodiia\Serialization\Json\OkContentNormalizer
+        autoconfigure: true
         arguments:
-            $normalizer: '@serializer.normalizer.object'
+            $requestStack: '@request_stack'
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
     Biig\Melodiia\MelodiiaConfigurationInterface: '@melodiia.configuration'
