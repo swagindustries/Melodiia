@@ -38,4 +38,19 @@ final class MelodiiaConfiguration implements MelodiiaConfigurationInterface
 
         return $docConf;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getApiEndpoints(): array
+    {
+        $endpoints = [];
+        $apis = $this->config['apis'];
+
+        foreach ($apis as $api) {
+            $endpoints[] = $api['base_path'];
+        }
+
+        return $endpoints;
+    }
 }

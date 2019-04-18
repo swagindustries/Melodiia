@@ -2,7 +2,7 @@
 
 namespace Biig\Melodiia\Bridge\Symfony\Routing;
 
-use BiiG\Melodiia\Exception\MelodiiaRuntimeIssueException;
+use Biig\Melodiia\Exception\MelodiiaRuntimeIssueException;
 use Biig\Melodiia\MelodiiaConfigurationInterface;
 use Nekland\Tools\StringTools;
 use Symfony\Component\Routing\Route;
