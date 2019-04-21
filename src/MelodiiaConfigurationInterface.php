@@ -2,6 +2,9 @@
 
 namespace Biig\Melodiia;
 
+/**
+ * @internal inheritance
+ */
 interface MelodiiaConfigurationInterface
 {
     /**
@@ -11,4 +14,11 @@ interface MelodiiaConfigurationInterface
      * @return array
      */
     public function getDocumentationConfig(): array;
+
+    /**
+     * Return all base path of Melodiia.
+     *
+     * @return array
+     */
+    public function getApiEndpoints(): array;
 }
