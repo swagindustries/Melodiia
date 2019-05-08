@@ -9,7 +9,6 @@ use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\Ok;
 use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaFormType;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;

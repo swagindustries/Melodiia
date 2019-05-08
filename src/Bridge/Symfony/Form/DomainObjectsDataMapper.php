@@ -20,18 +20,20 @@ class DomainObjectsDataMapper extends PropertyPathMapper implements DataMapperIn
     /**
      * @param FormInterface[] $form
      * @param string          $dataClass
-     * @return null|object
+     *
      * @throws \ReflectionException
+     *
+     * @return object|null
      */
     public function createObject(iterable $form, string $dataClass = null)
     {
-        if ($dataClass === null && $form instanceof FormInterface) {
+        if (null === $dataClass && $form instanceof FormInterface) {
             $dataClass = $form->getConfig()->getOption('data_class');
         }
 
         $form = iterator_to_array($form);
 
-        if ($dataClass === null || !class_exists($dataClass)) {
+        if (null === $dataClass || !class_exists($dataClass)) {
             return null;
         }
 

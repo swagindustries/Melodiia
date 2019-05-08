@@ -16,8 +16,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Zend\Json\Json;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Zend\Json\Json;
 
 /**
  * Crud controller that create data model with the data from the request using a form.

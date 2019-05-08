@@ -4,6 +4,12 @@ services:
         arguments:
             $registry: '@doctrine'
 
+    melodiia.crud.filters.filter_collection_factory:
+        class: Biig\Melodiia\Crud\FilterCollectionFactory
+        arguments:
+            $formFactory: '@form.factory'
+            $filters: !tagged melodiia.crud_filter
+
     melodiia.crud.controller.create:
         class: Biig\Melodiia\Crud\Controller\Create
         arguments:
@@ -27,6 +33,7 @@ services:
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
+            $collectionFactory: '@melodiia.crud.filters.filter_collection_factory'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get:

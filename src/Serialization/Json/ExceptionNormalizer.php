@@ -36,7 +36,7 @@ final class ExceptionNormalizer implements NormalizerInterface
     }
 
     /**
-     * This method is from ApiPlatform core
+     * This method is from ApiPlatform core.
      */
     private function getErrorMessage($object, array $context, bool $debug = false): string
     {
@@ -50,6 +50,7 @@ final class ExceptionNormalizer implements NormalizerInterface
                 $message = Response::$statusTexts[$statusCode];
             }
         }
+
         return $message;
     }
 }

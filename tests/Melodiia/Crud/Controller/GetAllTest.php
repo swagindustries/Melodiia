@@ -2,8 +2,11 @@
 
 namespace Biig\Melodiia\Test\Crud\Controller;
 
+use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use Biig\Melodiia\Crud\Controller\GetAll;
 use Biig\Melodiia\Crud\CrudControllerInterface;
+use Biig\Melodiia\Crud\FilterCollection;
+use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
@@ -12,6 +15,7 @@ use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -29,6 +33,12 @@ class GetAllTest extends TestCase
 
     /** @var ParameterBag|ObjectProphecy */
     private $attributes;
+
+    /** @var FilterCollectionFactoryInterface|ObjectProphecy */
+    private $filtersFactory;
+
+    /** @var FilterCollection|ObjectProphecy */
+    private $filtersCollection;
 
     /** @var GetAll */
     private $controller;
@@ -48,7 +58,16 @@ class GetAllTest extends TestCase
         $this->request->attributes = $this->attributes->reveal();
         $this->request->query = $query->reveal();
 
-        $this->controller = new GetAll($this->dataStore->reveal(), $this->authorizationChecker->reveal());
+        $this->filtersCollection = $this->prophesize(FilterCollection::class);
+        $this->filtersCollection->getForm()->willReturn($this->prophesize(FormInterface::class)->reveal());
+        $this->filtersFactory = $this->prophesize(FilterCollectionFactoryInterface::class);
+        $this->filtersFactory->createCollection(Argument::cetera())->willReturn($this->filtersCollection->reveal());
+
+        $this->controller = new GetAll(
+            $this->dataStore->reveal(),
+            $this->authorizationChecker->reveal(),
+            $this->filtersFactory->reveal()
+        );
     }
 
     public function testItIsIntanceOfMelodiiaController()
@@ -86,5 +105,22 @@ class GetAllTest extends TestCase
         $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(false);
 
         ($this->controller)($this->request->reveal(), 'id');
+    }
+
+    public function testItReturnsErrorFromFilters()
+    {
+        $request = $this->request->reveal();
+        /** @var FormInterface|ObjectProphecy $form */
+        $form = $this->prophesize(FormInterface::class);
+        $form->handleRequest($request)->shouldBeCalled()->willReturn();
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(false);
+
+        $this->filtersCollection->getForm()->willReturn($form->reveal());
+        $this->dataStore->getPaginated(Argument::cetera())->shouldNotBeCalled();
+
+        $res = ($this->controller)($request);
+
+        $this->assertInstanceOf(FormErrorResponse::class, $res);
     }
 }

@@ -98,7 +98,7 @@ class OkContentNormalizerTest extends TestCase
     public function testItSerializePager()
     {
         $content = [
-            'foo', 'bar', 'baz', 'hello', 'world', 'more', 'content', 'yaya', 'yoyo', 'random', 'words'
+            'foo', 'bar', 'baz', 'hello', 'world', 'more', 'content', 'yaya', 'yoyo', 'random', 'words',
         ];
         $pager = new Pagerfanta(new ArrayAdapter($content));
         $pager->setMaxPerPage(4);
@@ -107,22 +107,22 @@ class OkContentNormalizerTest extends TestCase
         $this->request->getUri()->willReturn('http://foo.com/bar?page=2');
 
         foreach (['world', 'more', 'content', 'yaya'] as $data) {
-            $this->mainNormalizer->normalize($data, Argument::cetera())->willReturn($data .' normalized')->shouldBeCalled();
+            $this->mainNormalizer->normalize($data, Argument::cetera())->willReturn($data . ' normalized')->shouldBeCalled();
         }
 
         $res = $this->okContentNormalizer->normalize($okContent);
 
         $this->assertEquals([
             'data' => [
-                'world normalized', 'more normalized', 'content normalized', 'yaya normalized'
+                'world normalized', 'more normalized', 'content normalized', 'yaya normalized',
             ],
             'meta' => ['totalPages' => 3],
             'links' => [
                 'prev' => 'http://foo.com/bar?page=1',
                 'next' => 'http://foo.com/bar?page=3',
                 'last' => 'http://foo.com/bar?page=3',
-                'first' => 'http://foo.com/bar?page=1'
-            ]
+                'first' => 'http://foo.com/bar?page=1',
+            ],
         ], $res);
     }
 }

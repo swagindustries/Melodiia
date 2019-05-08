@@ -13,7 +13,7 @@ class ExceptionNormalizerTest extends TestCase
         $normalizer = new ExceptionNormalizer();
         $this->assertTrue($normalizer->supportsNormalization($this->prophesize(FlattenException::class)->reveal()));
         $this->assertTrue($normalizer->supportsNormalization(new \Exception()));
-        $this->assertFalse($normalizer->supportsNormalization(new \stdClass));
+        $this->assertFalse($normalizer->supportsNormalization(new \stdClass()));
     }
 
     public function testItNormalizeWithoutTraceByDefault()

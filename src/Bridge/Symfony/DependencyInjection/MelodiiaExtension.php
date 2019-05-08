@@ -4,6 +4,7 @@ namespace Biig\Melodiia\Bridge\Symfony\DependencyInjection;
 
 use Biig\Melodiia\Bridge\Symfony\Exception\ConfigException;
 use Biig\Melodiia\Bridge\Symfony\Routing\CrudDocumentationFactory;
+use Biig\Melodiia\Crud\FilterInterface;
 use Biig\Melodiia\Documentation\Controller\OpenApiController;
 use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
 use Biig\Melodiia\Documentation\OpenApiDocFactory;
@@ -16,6 +17,8 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class MelodiiaExtension extends Extension
 {
+    const TAG_CRUD_FILTER = 'melodiia.crud_filter';
+
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader(
@@ -33,6 +36,9 @@ class MelodiiaExtension extends Extension
 
         $container->setParameter('melodiia.config', $config);
         $this->disableFormExtensionIfNeeded($container, $config['form_extensions']);
+
+        // Autoconf
+        $container->registerForAutoconfiguration(FilterInterface::class)->addTag(self::TAG_CRUD_FILTER);
     }
 
     private function configureApi(string $name, array $apiConf, ContainerBuilder $container)
