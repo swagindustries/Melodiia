@@ -5,11 +5,9 @@ namespace Biig\Melodiia\Serialization\Json;
 use Biig\Melodiia\Response\OkContent;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class OkContentNormalizer.
@@ -74,7 +72,7 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
                 'prev' => $previousPage,
                 'next' => $nextPage,
                 'last' => \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri),
-                'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri)
+                'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri),
             ];
         }
 

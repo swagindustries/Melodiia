@@ -60,11 +60,11 @@ class MelodiiaConfigurationTest extends TestCase
                     'enable_doc' => false,
                     'doc_factory' => null,
                     'description' => null,
-                ]
+                ],
             ],
             'form_extensions' => [
-                'datetime' => true
-            ]
+                'datetime' => true,
+            ],
         ];
     }
 }

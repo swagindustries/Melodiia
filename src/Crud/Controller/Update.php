@@ -10,15 +10,14 @@ use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\Ok;
 use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Response\WrongDataInput;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Zend\Json\Json;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Zend\Json\Json;
 
 /**
  * Crud controller that update data model with the data from the request using a form.
@@ -67,7 +66,6 @@ final class Update implements CrudControllerInterface
         if (empty($form) || !class_exists($form)) {
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
         }
-
 
         $form = $this->formFactory->createNamed('', $form, $data);
         $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);

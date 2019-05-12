@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Test\Bridge\Symfony\Form;
 
-
 use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -45,6 +44,7 @@ class FakeValueObject
 
     /**
      * FakeValueObject constructor.
+     *
      * @param $hello
      * @param $foo
      */
