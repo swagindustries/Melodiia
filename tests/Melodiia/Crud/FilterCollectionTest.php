@@ -64,6 +64,18 @@ class FilterCollectionTest extends TestCase
         $collection = new FilterCollection($this->formFactory->reveal(), [new FakeFilter()]);
         $collection->getForm();
     }
+
+    public function testItBuildsAFormEvenWithNoFilters()
+    {
+        /** @var FormBuilderInterface|ObjectProphecy $builder */
+        $builder = $this->prophesize(FormBuilderInterface::class);
+        $builder->add('fake', TextType::class)->shouldNotBeCalled();
+        $builder->getForm()->willReturn($form = $this->prophesize(FormInterface::class)->reveal())->shouldBeCalled();
+        $this->formFactory->createNamedBuilder(Argument::cetera())->willReturn($builder->reveal());
+
+        $collection = new FilterCollection($this->formFactory->reveal(), []);
+        $collection->getForm();
+    }
 }
 
 class FakeFilter implements FilterInterface

@@ -26,6 +26,7 @@ class FilterCollection
     public function __construct(FormFactoryInterface $formFactory, array $filters)
     {
         $this->formFactory = $formFactory;
+        $this->filters = [];
         foreach ($filters as $filter) {
             $this->add($filter);
         }
