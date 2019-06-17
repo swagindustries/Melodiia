@@ -9,8 +9,14 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('melodiia');
+        $treeBuilder = new TreeBuilder('melodiia');
+        
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC for symfony/config < 4.2
+            $rootNode = $treeBuilder->root('melodiia');
+        }
 
         $rootNode
             ->children()
