@@ -37,7 +37,7 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
             ]),
             'paths' => [],
             'servers' => [
-                ['url' => 'http://' . $this->getApiPath()],
+                ['url' => $this->getApiUrl()],
             ],
         ];
 
@@ -49,13 +49,13 @@ final class OpenApiDocFactory implements DocumentationFactoryInterface
         return $analysis;
     }
 
-    private function getApiPath()
+    private function getApiUrl()
     {
         $path = $this->config['base_path'];
         if (!StringTools::startsWith($path, '/')) {
             $path = '/' . $path;
         }
 
-        return $this->requestStack->getMasterRequest()->getHttpHost() . $path;
+        return $this->requestStack->getMasterRequest()->getSchemeAndHttpHost() . $path;
     }
 }

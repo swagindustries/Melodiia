@@ -35,7 +35,7 @@ class OpenApiDocFactoryTest extends TestCase
             'description' => null,
         ]);
         $request = $this->prophesize(Request::class);
-        $request->getHttpHost()->willReturn('http://localhost');
+        $request->getSchemeAndHttpHost()->willReturn('http://localhost');
         $this->requestStack->getMasterRequest()->willReturn($request);
         $this->assertInstanceOf(Analysis::class, $factory->createOpenApiAnalysis());
     }
