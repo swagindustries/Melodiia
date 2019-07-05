@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.3.2] - 2019-07-05
+### Changed
+- #19 Documentation is now using scheme of the application
+
 ## [0.3.1] - 2019-06-17
 ### Fixed
 - #17 fixes issue with GetAll controller with no filters
