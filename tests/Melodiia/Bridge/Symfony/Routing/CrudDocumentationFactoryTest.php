@@ -59,7 +59,7 @@ class CrudDocumentationFactoryTest extends TestCase
     {
         // Mocks
         $request = $this->prophesize(Request::class);
-        $request->getHttpHost()->willReturn('http://localhost:9999');
+        $request->getSchemeAndHttpHost()->willReturn('http://localhost:9999');
         $requestStack = $this->prophesize(RequestStack::class);
         $requestStack->getMasterRequest()->willReturn($request->reveal());
 
