@@ -2,6 +2,7 @@
 
 namespace Biig\Melodiia\Test\Bridge\Symfony\Form;
 
+use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
 use Biig\Melodiia\Bridge\Symfony\Form\Type\ApiType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +33,28 @@ class ApiTypeTest extends FormIntegrationTestCase
         $data = $form->getData();
         $this->assertInstanceOf(FakeModel::class, $data);
         $this->assertEquals('some content', $data->getFoo());
+    }
+
+    public function testItSupportsCustomDataMapper()
+    {
+        $customDataMapper = new class extends DomainObjectsDataMapper {
+            private $hasBeenCalled = false;
+            public function createObject(iterable $form, string $dataClass = null)
+            {
+                $this->hasBeenCalled = true;
+                return parent::createObject($form, $dataClass);
+            }
+
+            public function hasBeenCalled() { return $this->hasBeenCalled; }
+        };
+        $form = $this->factory->createNamed('', FakeTypeUsingApiType::class, null, [
+            'customDataMapper' => $customDataMapper
+        ]);
+        $form->submit(['foo' => 'some content']);
+        $data = $form->getData();
+        $this->assertInstanceOf(FakeModel::class, $data);
+        $this->assertEquals('some content', $data->getFoo());
+        $this->assertTrue($customDataMapper->hasBeenCalled());
     }
 
     protected function getTypes()
