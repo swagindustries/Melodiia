@@ -21,6 +21,12 @@ class ApiType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $dataMapper = $this->dataMapper;
+
+        if ($options['customDataMapper'] !== null) {
+            $dataMapper = $options['customDataMapper'];
+        }
+
         if ($options['value_object']) {
             $builder->setDataMapper($this->dataMapper);
         }
@@ -31,6 +37,7 @@ class ApiType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'value_object' => false,
+            'customDataMapper' => null,
 
             /*
              * Creates data object just like standard form would do
@@ -41,8 +48,15 @@ class ApiType extends AbstractType
              * @throws \ReflectionException
              */
             'empty_data' => function (FormInterface $form) {
-                return $this->dataMapper->createObject($form);
+                $dataMapper = $this->dataMapper;
+                if ($form->getConfig()->getOption('customDataMapper') !== null) {
+                    $dataMapper = $form->getConfig()->getOption('customDataMapper');
+                }
+
+                return $dataMapper->createObject($form);
             },
         ]);
+
+        $resolver->setAllowedTypes('customDataMapper', ['null', DomainObjectsDataMapper::class]);
     }
 }

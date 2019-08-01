@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * Add support for objects that require constructor instantiation.
  */
-class DomainObjectsDataMapper extends PropertyPathMapper implements DataMapperInterface
+class DomainObjectsDataMapper extends PropertyPathMapper implements DomainObjectDataMapperInterface
 {
     public function mapFormsToData($forms, &$data)
     {
@@ -18,12 +18,7 @@ class DomainObjectsDataMapper extends PropertyPathMapper implements DataMapperIn
     }
 
     /**
-     * @param FormInterface[] $form
-     * @param string          $dataClass
-     *
-     * @throws \ReflectionException
-     *
-     * @return object|null
+     * {@inheritDoc}
      */
     public function createObject(iterable $form, string $dataClass = null)
     {
