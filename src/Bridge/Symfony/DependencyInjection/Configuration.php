@@ -10,7 +10,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('melodiia');
-        
+
         if (method_exists($treeBuilder, 'getRootNode')) {
             $rootNode = $treeBuilder->getRootNode();
         } else {
