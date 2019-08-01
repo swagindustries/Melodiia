@@ -2,6 +2,7 @@
 
 namespace Biig\Melodiia\Bridge\Symfony\Form\Type;
 
+use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectDataMapperInterface;
 use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -28,7 +29,7 @@ class ApiType extends AbstractType
         }
 
         if ($options['value_object']) {
-            $builder->setDataMapper($this->dataMapper);
+            $builder->setDataMapper($dataMapper);
         }
     }
 
@@ -57,6 +58,6 @@ class ApiType extends AbstractType
             },
         ]);
 
-        $resolver->setAllowedTypes('customDataMapper', ['null', DomainObjectsDataMapper::class]);
+        $resolver->setAllowedTypes('customDataMapper', ['null', DomainObjectDataMapperInterface::class]);
     }
 }
