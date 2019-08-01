@@ -24,7 +24,7 @@ class ApiType extends AbstractType
     {
         $dataMapper = $this->dataMapper;
 
-        if ($options['customDataMapper'] !== null) {
+        if (null !== $options['customDataMapper']) {
             $dataMapper = $options['customDataMapper'];
         }
 
@@ -50,7 +50,7 @@ class ApiType extends AbstractType
              */
             'empty_data' => function (FormInterface $form) {
                 $dataMapper = $this->dataMapper;
-                if ($form->getConfig()->getOption('customDataMapper') !== null) {
+                if (null !== $form->getConfig()->getOption('customDataMapper')) {
                     $dataMapper = $form->getConfig()->getOption('customDataMapper');
                 }
 

@@ -37,18 +37,23 @@ class ApiTypeTest extends FormIntegrationTestCase
 
     public function testItSupportsCustomDataMapper()
     {
-        $customDataMapper = new class extends DomainObjectsDataMapper {
+        $customDataMapper = new class() extends DomainObjectsDataMapper {
             private $hasBeenCalled = false;
+
             public function createObject(iterable $form, string $dataClass = null)
             {
                 $this->hasBeenCalled = true;
+
                 return parent::createObject($form, $dataClass);
             }
 
-            public function hasBeenCalled() { return $this->hasBeenCalled; }
+            public function hasBeenCalled()
+            {
+                return $this->hasBeenCalled;
+            }
         };
         $form = $this->factory->createNamed('', FakeTypeUsingApiType::class, null, [
-            'customDataMapper' => $customDataMapper
+            'customDataMapper' => $customDataMapper,
         ]);
         $form->submit(['foo' => 'some content']);
         $data = $form->getData();

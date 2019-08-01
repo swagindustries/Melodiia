@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Bridge\Symfony\Form;
 
-use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
 use Symfony\Component\Form\FormInterface;
 
@@ -18,7 +17,7 @@ class DomainObjectsDataMapper extends PropertyPathMapper implements DomainObject
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createObject(iterable $form, string $dataClass = null)
     {
