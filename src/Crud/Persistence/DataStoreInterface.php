@@ -2,7 +2,7 @@
 
 namespace Biig\Melodiia\Crud\Persistence;
 
-use Biig\Melodiia\Crud\FilterCollection;
+use Biig\Melodiia\Crud\FilterCollectionInterface;
 use Pagerfanta\Pagerfanta;
 
 interface DataStoreInterface
@@ -18,12 +18,12 @@ interface DataStoreInterface
     public function find(string $type, $id): ?object;
 
     /**
-     * @param string           $type
-     * @param int              $page
-     * @param FilterCollection $filters
-     * @param int              $maxPerPage
+     * @param string                    $type
+     * @param int                       $page
+     * @param FilterCollectionInterface $filters
+     * @param int                       $maxPerPage
      *
      * @return Pagerfanta
      */
-    public function getPaginated(string $type, int $page, FilterCollection $filters, $maxPerPage = 30): PagerFanta;
+    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): PagerFanta;
 }

@@ -7,10 +7,10 @@ use Symfony\Component\Form\FormFactoryInterface;
 class FilterCollectionFactory implements FilterCollectionFactoryInterface
 {
     /** @var FormFactoryInterface */
-    private $formFactory;
+    protected $formFactory;
 
     /** @var FilterInterface[] */
-    private $filters;
+    protected $filters;
 
     public function __construct(FormFactoryInterface $formFactory, iterable $filters = [])
     {
@@ -18,9 +18,9 @@ class FilterCollectionFactory implements FilterCollectionFactoryInterface
         $this->filters = $filters;
     }
 
-    public function createCollection(string $type): FilterCollection
+    public function createCollection(string $type): FilterCollectionInterface
     {
-        $filters = new FilterCollection($this->formFactory, []);
+        $filters = $this->getInstance();
 
         foreach ($this->filters as $filter) {
             if ($filter->supports($type)) {
@@ -29,5 +29,10 @@ class FilterCollectionFactory implements FilterCollectionFactoryInterface
         }
 
         return $filters;
+    }
+
+    protected function getInstance(): FilterCollectionInterface
+    {
+        return new FilterCollection($this->formFactory, []);
     }
 }

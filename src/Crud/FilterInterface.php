@@ -11,9 +11,9 @@ interface FilterInterface
     /**
      * Takes a query object as parameter. It will be a QueryBuilder in the case of Doctrine usage.
      *
-     * @param QueryBuilder $queryBuilder The object managed name is `item` inside the given query builder
+     * @param mixed $queryBuilder The object managed name is `item` inside the given query builder
      */
-    public function filter(QueryBuilder $queryBuilder, FormInterface $form): void;
+    public function filter($queryBuilder, FormInterface $form): void;
 
     /**
      * The filter support the class/entity/resource or not.

@@ -6,7 +6,6 @@ use Biig\Melodiia\Crud\FilterCollection;
 use Biig\Melodiia\Crud\FilterCollectionFactory;
 use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
 use Biig\Melodiia\Crud\FilterInterface;
-use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +25,7 @@ class FilterCollectionFactoryTest extends TestCase
     public function testItCreatesCollection()
     {
         $subject = new FilterCollectionFactory($this->formFactory->reveal(), [new class() implements FilterInterface {
-            public function filter(QueryBuilder $queryBuilder, FormInterface $form): void
+            public function filter($queryBuilder, FormInterface $form): void
             { /* do nothing */
             }
 
