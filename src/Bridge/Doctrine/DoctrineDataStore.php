@@ -2,7 +2,7 @@
 
 namespace Biig\Melodiia\Bridge\Doctrine;
 
-use Biig\Melodiia\Crud\FilterCollection;
+use Biig\Melodiia\Crud\FilterCollectionInterface;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\ImpossibleToPaginateWithDoctrineRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -13,7 +13,7 @@ use Pagerfanta\Pagerfanta;
 class DoctrineDataStore implements DataStoreInterface
 {
     /** @var ManagerRegistry */
-    private $doctrineRegistry;
+    protected $doctrineRegistry;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -31,7 +31,7 @@ class DoctrineDataStore implements DataStoreInterface
         return $this->getEntityManager()->getRepository($type)->find($id);
     }
 
-    public function getPaginated(string $type, int $page, FilterCollection $filters, $maxPerPage = 30): PagerFanta
+    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): PagerFanta
     {
         $doctrineRepository = $this->getEntityManager()->getRepository($type);
 

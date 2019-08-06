@@ -3,15 +3,14 @@
 namespace Biig\Melodiia\Crud;
 
 use Biig\Melodiia\Exception\NoFormFilterCreatedException;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class FilterCollection
+class FilterCollection implements FilterCollectionInterface
 {
     /** @var FilterInterface[] */
-    private $filters;
+    protected $filters;
 
     /** @var FormFactoryInterface */
     private $formFactory;
@@ -37,7 +36,7 @@ class FilterCollection
         $this->filters[] = $filter;
     }
 
-    public function filter(QueryBuilder $query): void
+    public function filter($query): void
     {
         if (null === $this->form) {
             throw new NoFormFilterCreatedException('The filter form was not generated. You probably forgot to call `$collection->getForm()->handleRequest($request)`.');

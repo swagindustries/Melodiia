@@ -4,5 +4,5 @@ namespace Biig\Melodiia\Crud;
 
 interface FilterCollectionFactoryInterface
 {
-    public function createCollection(string $type): FilterCollection;
+    public function createCollection(string $type): FilterCollectionInterface;
 }

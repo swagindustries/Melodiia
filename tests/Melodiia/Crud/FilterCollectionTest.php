@@ -80,7 +80,7 @@ class FilterCollectionTest extends TestCase
 
 class FakeFilter implements FilterInterface
 {
-    public function filter(QueryBuilder $queryBuilder, FormInterface $form): void
+    public function filter($queryBuilder, FormInterface $form): void
     {
         // this is fake
     }

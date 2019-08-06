@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0]
+- #25 Improve compatibility of CRUD stuff, but breaks the compatibility
+
 ## [0.3.3] - 2019-08-01
 - #22 Add possibility to define a custom data normalizer for ApiType 
 
