@@ -97,6 +97,7 @@ class OkContentNormalizerTest extends TestCase
 
     public function testItSerializePager()
     {
+        // 11 words
         $content = [
             'foo', 'bar', 'baz', 'hello', 'world', 'more', 'content', 'yaya', 'yoyo', 'random', 'words',
         ];
@@ -116,7 +117,12 @@ class OkContentNormalizerTest extends TestCase
             'data' => [
                 'world normalized', 'more normalized', 'content normalized', 'yaya normalized',
             ],
-            'meta' => ['totalPages' => 3],
+            'meta' => [
+                'totalPages' => 3,
+                'totalResults' => 11,
+                'currentPage' => 2,
+                'maxPerPage' => 4,
+            ],
             'links' => [
                 'prev' => 'http://foo.com/bar?page=1',
                 'next' => 'http://foo.com/bar?page=3',

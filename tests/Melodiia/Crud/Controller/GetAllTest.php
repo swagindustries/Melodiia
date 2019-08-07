@@ -7,6 +7,7 @@ use Biig\Melodiia\Crud\Controller\GetAll;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\FilterCollection;
 use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
+use Biig\Melodiia\Crud\PagesRequest;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
@@ -32,6 +33,9 @@ class GetAllTest extends TestCase
     private $request;
 
     /** @var ParameterBag|ObjectProphecy */
+    private $queries;
+
+    /** @var ParameterBag|ObjectProphecy */
     private $attributes;
 
     /** @var FilterCollectionFactoryInterface|ObjectProphecy */
@@ -52,11 +56,14 @@ class GetAllTest extends TestCase
         $this->attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $this->attributes->get(CrudControllerInterface::MAX_PER_PAGE_ATTRIBUTE, 30)->willReturn(30);
-        $query = $this->prophesize(ParameterBag::class);
-        $query->getInt('page', Argument::cetera())->willReturn(1);
+        $this->attributes->get(CrudControllerInterface::MAX_PER_PAGE_QUERY_ATTRIBUTE, 'max_per_page')->willReturn('max_per_page');
+        $this->attributes->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(30);
+        $this->attributes->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(false);
+        $this->queries = $this->prophesize(ParameterBag::class);
+        $this->queries->getInt('page', Argument::cetera())->willReturn(1);
         $this->request = $this->prophesize(Request::class);
         $this->request->attributes = $this->attributes->reveal();
-        $this->request->query = $query->reveal();
+        $this->request->query = $this->queries->reveal();
 
         $this->filtersCollection = $this->prophesize(FilterCollection::class);
         $this->filtersCollection->getForm()->willReturn($this->prophesize(FormInterface::class)->reveal());
@@ -78,6 +85,60 @@ class GetAllTest extends TestCase
     public function testItReturnResourceFromDataStoreInsideOkContent()
     {
         $this->dataStore->getPaginated(FakeMelodiiaModel::class, Argument::cetera())->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
+
+        $res = ($this->controller)($this->request->reveal());
+
+        $this->assertInstanceOf(OkContent::class, $res);
+        $this->assertTrue($res->isCollection());
+        $this->assertIsIterable($res->getContent());
+    }
+
+    public function testItDoesNotAllowUserToAskForALimitIfNotConfigured()
+    {
+        $this->queries->getInt('max_per_page', 0)->willReturn(15)->shouldNotBeCalled();
+        $this->dataStore->getPaginated(FakeMelodiiaModel::class, Argument::any(), $this->filtersCollection->reveal(), 30, Argument::any())->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
+
+        $res = ($this->controller)($this->request->reveal());
+
+        $this->assertInstanceOf(OkContent::class, $res);
+        $this->assertTrue($res->isCollection());
+        $this->assertIsIterable($res->getContent());
+    }
+
+    public function testItDoAllowUserToAskForALimitIfConfigured()
+    {
+        $this->attributes->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(true);
+        $this->queries->getInt('max_per_page', 0)->willReturn(15)->shouldBeCalled();
+        $this->dataStore->getPaginated(FakeMelodiiaModel::class, Argument::any(), $this->filtersCollection->reveal(), 15, Argument::any())->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
+
+        $res = ($this->controller)($this->request->reveal());
+
+        $this->assertInstanceOf(OkContent::class, $res);
+        $this->assertTrue($res->isCollection());
+        $this->assertIsIterable($res->getContent());
+    }
+
+    public function testThatNoUserRequestCanSurpassTheConfiguredLimitPerPage()
+    {
+        $this->attributes->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(true);
+        $this->attributes->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(555);
+        $this->queries->getInt('max_per_page', 0)->willReturn(666 * 666 * 666)->shouldBeCalled();
+        $this->dataStore->getPaginated(FakeMelodiiaModel::class, Argument::any(), $this->filtersCollection->reveal(), 555, Argument::any())->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
+
+        $res = ($this->controller)($this->request->reveal());
+
+        $this->assertInstanceOf(OkContent::class, $res);
+        $this->assertTrue($res->isCollection());
+        $this->assertIsIterable($res->getContent());
+    }
+
+    public function testItRetrieveLimitPerPageAtSpecifiedLocationInAttributes()
+    {
+        $this->attributes->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(true);
+        $this->attributes->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(555);
+        $this->attributes->get(CrudControllerInterface::MAX_PER_PAGE_QUERY_ATTRIBUTE, 'max_per_page')->shouldBeCalled()->willReturn('size');
+        $this->queries->getInt('size', 0)->willReturn(12)->shouldBeCalled();
+        $this->dataStore->getPaginated(FakeMelodiiaModel::class, Argument::any(), $this->filtersCollection->reveal(), 12, Argument::any())->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
 
         $res = ($this->controller)($this->request->reveal());
 

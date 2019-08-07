@@ -6,6 +6,7 @@ use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
+use Biig\Melodiia\Crud\PagesRequestFactory;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\OkContent;
@@ -60,10 +61,9 @@ class GetAll implements CrudControllerInterface
             return new FormErrorResponse($form);
         }
 
-        $page = $request->query->getInt('page', 1);
-        $maxPerPage = $request->attributes->get(self::MAX_PER_PAGE_ATTRIBUTE, 30);
+        $pageRequest = PagesRequestFactory::build($request);
 
-        $items = $this->dataStore->getPaginated($modelClass, $page, $filters, $maxPerPage);
+        $items = $this->dataStore->getPaginated($modelClass, $pageRequest->getPage(), $filters, $pageRequest->getMaxPerPage(), $pageRequest);
 
         return new OkContent($items, $groups);
     }

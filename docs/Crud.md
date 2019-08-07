@@ -10,6 +10,8 @@ For any further usage, consider using your own controller.
 
 Here is an example of configuration:
 
+#### Simple operationl
+
 ```yaml
 acme_article_create:
     path: /api/v1/articles
@@ -27,7 +29,24 @@ acme_article_update:
         melodiia_model: App\Entity\Article
         melodiia_form: App\Form\ArticleType
 
+acme_article_get:
+    path: /api/v1/articles/{id}
+    controller: 'melodiia.crud.controller.get'
+    methods: ['GET']
+    defaults:
+        melodiia_model: App\Entity\Article
+        melodiia_security_check: 'some content runnable in AuthorizationChecker class'
 
+```
+
+#### Collection
+
+The collection configuration is more advanced due to the use case, please consider following examples.
+
+The key "melodiia_allow_user_define_max_per_page" default value is "false" 
+
+```yaml
+# The user can specify in query parameter under "max_per_page" key a maximum of 50 items per page
 acme_article_get_collection:
     path: /api/v1/articles
     controller: 'melodiia.crud.controller.get_all'
@@ -35,13 +54,20 @@ acme_article_get_collection:
     defaults:
         melodiia_model: App\Entity\Article
         melodiia_serialization_group: "list-article"
+        melodiia_security_check: 'some content runnable in AuthorizationChecker class'
+        melodiia_allow_user_define_max_per_page: true 
+        melodiia_max_per_page_allowed: 50
 
-acme_article_get:
-    path: /api/v1/articles/{id}
-    controller: 'melodiia.crud.controller.get'
+
+# Static use case the user can't ask for a specific count of items per page. The max count of items returned will be 25
+acme_article_get_collection2:
+    path: /api/v1/articles
+    controller: 'melodiia.crud.controller.get_all'
     methods: ['GET']
     defaults:
         melodiia_model: App\Entity\Article
+        melodiia_serialization_group: "list-article"
+        melodiia_max_per_page: 25
 ```
 
 Learn more about available options in `CrudControllerInterface`.
