@@ -42,3 +42,11 @@ services:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
         tags: [ controller.service_arguments ]
+
+    melodiia.crud.controller.delete:
+        class: Biig\Melodiia\Crud\Controller\Delete
+        arguments:
+            $dataStore: '@melodiia.doctrine.data_provider'
+            $checker: '@security.authorization_checker'
+            $dispatcher: '@event_dispatcher'
+        tags: [ controller.service_arguments ]
