@@ -1,8 +1,7 @@
 Melodiia
 ========
 
-Finally some competitor to ApiPlatform. And you're gonna like it.
-
+Finally some competitor to ApiPlatform.
 
 Features
 --------
