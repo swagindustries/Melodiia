@@ -57,10 +57,10 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
         // Pagination case
         if ($content instanceof Pagerfanta) {
             $result['meta'] = [
-                'totalPages'   => $content->getNbPages(),
+                'totalPages' => $content->getNbPages(),
                 'totalResults' => $content->getNbResults(),
-                'currentPage'  => $content->getCurrentPage(),
-                'maxPerPage'   => $content->getMaxPerPage(),
+                'currentPage' => $content->getCurrentPage(),
+                'maxPerPage' => $content->getMaxPerPage(),
             ];
             $uri = $this->requestStack->getMasterRequest()->getUri();
             $previousPage = null;

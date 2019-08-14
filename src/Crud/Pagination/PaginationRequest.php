@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Biig\Melodiia\Crud;
+namespace Biig\Melodiia\Crud\Pagination;
 
-class PagesRequest
+class PaginationRequest
 {
     /** @var int */
     private $page;

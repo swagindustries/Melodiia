@@ -6,7 +6,7 @@ use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
-use Biig\Melodiia\Crud\PagesRequestFactory;
+use Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\OkContent;
@@ -25,14 +25,19 @@ class GetAll implements CrudControllerInterface
     /** @var FilterCollectionFactoryInterface */
     private $filterCollectionFactory;
 
+    /** @var PaginationRequestFactoryInterface */
+    private $pagesRequestFactory;
+
     public function __construct(
         DataStoreInterface $dataStore,
         AuthorizationCheckerInterface $checker,
-        FilterCollectionFactoryInterface $collectionFactory
+        FilterCollectionFactoryInterface $collectionFactory,
+        PaginationRequestFactoryInterface $pagesRequestFactory
     ) {
         $this->dataStore = $dataStore;
         $this->checker = $checker;
         $this->filterCollectionFactory = $collectionFactory;
+        $this->pagesRequestFactory = $pagesRequestFactory;
     }
 
     public function __invoke(Request $request)
@@ -61,9 +66,8 @@ class GetAll implements CrudControllerInterface
             return new FormErrorResponse($form);
         }
 
-        $pageRequest = PagesRequestFactory::build($request);
-
-        $items = $this->dataStore->getPaginated($modelClass, $pageRequest->getPage(), $filters, $pageRequest->getMaxPerPage(), $pageRequest);
+        $pageRequest = $this->pagesRequestFactory->createPaginationRequest($request);
+        $items = $this->dataStore->getPaginated($modelClass, $pageRequest->getPage(), $filters, $pageRequest->getMaxPerPage());
 
         return new OkContent($items, $groups);
     }

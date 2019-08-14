@@ -10,7 +10,7 @@ For any further usage, consider using your own controller.
 
 Here is an example of configuration:
 
-#### Simple operationl
+#### Simple operation
 
 ```yaml
 acme_article_create:
@@ -98,7 +98,7 @@ class TypeFilter implements \Biig\Melodiia\Crud\FilterInterface
         $this->types = $types;
     }
 
-    public function filter(QueryBuilder $query, FormInterface $form): void
+    public function filter($query, Symfony\Component\Form\FormInterface $form): void
     {
         $type = $form->get('type')->getData();
         if ($type !== null) {
@@ -114,7 +114,7 @@ class TypeFilter implements \Biig\Melodiia\Crud\FilterInterface
         return $class === MyEntity::class;
     }
 
-    public function buildForm(FormBuilderInterface $formBuilder): void
+    public function buildForm(Symfony\Component\Form\FormBuilderInterface $formBuilder): void
     {
         $formBuilder->add('type', ChoiceType::class, [
             'choices' => $this->types            

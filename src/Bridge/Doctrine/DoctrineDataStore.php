@@ -3,7 +3,6 @@
 namespace Biig\Melodiia\Bridge\Doctrine;
 
 use Biig\Melodiia\Crud\FilterCollectionInterface;
-use Biig\Melodiia\Crud\PagesRequest;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\ImpossibleToPaginateWithDoctrineRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -32,7 +31,7 @@ class DoctrineDataStore implements DataStoreInterface
         return $this->getEntityManager()->getRepository($type)->find($id);
     }
 
-    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30, PagesRequest $pagesRequest = null): PagerFanta
+    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): PagerFanta
     {
         $doctrineRepository = $this->getEntityManager()->getRepository($type);
 
@@ -44,9 +43,8 @@ class DoctrineDataStore implements DataStoreInterface
         $filters->filter($qb);
 
         $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
-        // If pages request is specified
-        $pager->setCurrentPage($pagesRequest ? $pagesRequest->getPage() : $page);
-        $pager->setMaxPerPage($pagesRequest ? $pagesRequest->getMaxPerPage() :$maxPerPage);
+        $pager->setCurrentPage($page);
+        $pager->setMaxPerPage($maxPerPage);
 
         return $pager;
     }
