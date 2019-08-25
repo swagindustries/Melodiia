@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2019-08-25
+- #29 Add new configuration for pagination. (dynamic max per page)
+  Notice: this is a minor BC break but it should be smooth upgrade for everyone ATM.
+
 ## [0.4.0] - 2019-08-06
 - #25 Improve compatibility of CRUD stuff, but breaks the compatibility
 
