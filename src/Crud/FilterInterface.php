@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Crud;
 
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 

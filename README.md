@@ -44,6 +44,12 @@ admin_routes:
     type: service
 ```
 
+### Documentation 
+
+ - [Configure my first crud operations !](./docs/Crud.md)
+ - [Integration with Symfony ](./docs/Symfony.md)
+
+Feel free to open an issue, if you encounter problems implementing Melodiia
 
 FAQ
 ---

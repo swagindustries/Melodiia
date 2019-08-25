@@ -10,6 +10,14 @@ services:
             $formFactory: '@form.factory'
             $filters: !tagged melodiia.crud_filter
 
+    Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
+        alias: 'melodiia.crud.pagination.pages_request_factory'
+
+    melodiia.crud.pagination.pages_request_factory:
+        class: Biig\Melodiia\Crud\Pagination\PaginationRequestFactory
+        arguments:
+            $configuration: '@melodiia.configuration'
+
     melodiia.crud.controller.create:
         class: Biig\Melodiia\Crud\Controller\Create
         arguments:
@@ -34,6 +42,7 @@ services:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
             $collectionFactory: '@melodiia.crud.filters.filter_collection_factory'
+            $pagesRequestFactory: '@Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get:

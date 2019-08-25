@@ -43,10 +43,25 @@ melodiia:
             description: |
                 This is an awesome API. Really.
             version: 1.0.0
+            pagination:
+                max_per_page_attribute: 'max_per_page'
         # Melodiia comes with some form extensions, it makes your life easier
         # but in some case this could break some parts of an existing application
         # or just not act like you expect. That's why you can't disable extensions.
         form_extensions:
             # enabled by default, set false to disable.
             datetime: true
+```
+
+III. Override Melodiia services
+-------------
+
+The below configuration override the default pagination request factory.
+So Melodiia will execute `Your\FQCN\YourClass` instead of `Biig\Melodiia\Crud\Pagination\PaginationRequestFactory` to create PaginationRequest object
+
+```yaml
+#services.yaml
+
+Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
+    alias: Namespace\To\Your\Class
 ```

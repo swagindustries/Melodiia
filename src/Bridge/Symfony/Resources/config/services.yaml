@@ -9,6 +9,7 @@ services:
         class: Biig\Melodiia\Bridge\Symfony\MelodiiaConfiguration
         arguments:
             $config: '%melodiia.config%'
+            $router: '@router.default'
 
 
     # Priority -1 is DX. It allow the user to implement its own normalizers
