@@ -47,12 +47,15 @@ final class Delete implements CrudControllerInterface
 
         $data = $this->dataStore->find($modelClass, $id);
 
-        if ($data === null) {
-            throw new NotFoundHttpException('Cannot find related resource');
+        if (null === $data) {
+            throw new NotFoundHttpException(\sprintf('resource item "%s" with id "%s" can not be found', $modelClass, $id));
         }
 
         if ($securityCheck && !$this->checker->isGranted($securityCheck, $data)) {
-            throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));
+            throw new AccessDeniedException(\sprintf('You can\'t perform a delete operation of the resource item "%s" with id "%s"',
+                $modelClass,
+                $id
+            ));
         }
 
         $this->dispatcher->dispatch(self::EVENT_PRE_DELETE, new CrudEvent($data));
