@@ -52,4 +52,17 @@ class DoctrineDataStoreTest extends TestCase
         $pager = $dataStore->getPaginated('DummyEntity', 1, $filters->reveal(), 30);
         $this->assertInstanceOf(Pagerfanta::class, $pager);
     }
+
+    public function testItDeletesUsingTheEntityManager()
+    {
+        $obj = new \stdClass();
+        $entityManager = $this->prophesize(EntityManagerInterface::class);
+        $entityManager->remove($obj)->shouldBeCalled();
+        $entityManager->flush($obj)->shouldBeCalled();
+        $managerRegistry = $this->prophesize(ManagerRegistry::class);
+        $managerRegistry->getManager()->willReturn($entityManager->reveal());
+
+        $datastore = new DoctrineDataStore($managerRegistry->reveal());
+        $datastore->remove($obj);
+    }
 }

@@ -49,6 +49,12 @@ class DoctrineDataStore implements DataStoreInterface
         return $pager;
     }
 
+    public function remove(object $model)
+    {
+        $this->getEntityManager()->remove($model);
+        $this->getEntityManager()->flush($model);
+    }
+
     protected function getEntityManager(): EntityManagerInterface
     {
         return $this->doctrineRegistry->getManager();

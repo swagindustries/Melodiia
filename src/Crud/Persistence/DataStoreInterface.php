@@ -8,6 +8,7 @@ use Pagerfanta\Pagerfanta;
 interface DataStoreInterface
 {
     public function save(object $model);
+    public function remove(object $model);
 
     /**
      * @param string     $type
