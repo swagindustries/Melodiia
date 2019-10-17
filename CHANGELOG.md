@@ -6,8 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Change
+
+## [0.4.2] - 2019-10-17
 - #33 add delete controller for CRUD
-- BC Break: data store needs a new `remove` method
+- Add new `remove` method to DoctrineDataStore
+- Refacto check model class inside crud controllers
 
 ## [0.4.1] - 2019-08-25
 - #29 Add new configuration for pagination. (dynamic max per page)
