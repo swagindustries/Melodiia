@@ -3,12 +3,10 @@
 namespace Biig\Melodiia\Crud\Controller;
 
 use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
 use Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -16,6 +14,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GetAll implements CrudControllerInterface
 {
+    use CrudControllerTrait;
+
     /** @var DataStoreInterface */
     private $dataStore;
 
@@ -47,12 +47,7 @@ class GetAll implements CrudControllerInterface
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
         $groups = $request->attributes->get(self::SERIALIZATION_GROUP, []);
 
-        if (
-            empty($modelClass) || !class_exists($modelClass)
-            || !is_subclass_of($modelClass, CrudableModelInterface::class)
-        ) {
-            throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
-        }
+        $this->assertModelClassInvalid($modelClass);
 
         if ($securityCheck && !$this->checker->isGranted($securityCheck)) {
             throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));

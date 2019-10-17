@@ -2,12 +2,10 @@
 
 namespace Biig\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\Ok;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +15,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class Delete implements CrudControllerInterface
 {
+    use CrudControllerTrait;
+
     public const EVENT_PRE_DELETE = 'melodiia.crud.pre_delete';
     public const EVENT_POST_DELETE = 'melodiia.crud.post_delete';
 
@@ -41,9 +41,7 @@ final class Delete implements CrudControllerInterface
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
 
-        if (empty($modelClass) || !class_exists($modelClass) || !is_subclass_of($modelClass, CrudableModelInterface::class)) {
-            throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
-        }
+        $this->assertModelClassInvalid($modelClass);
 
         $data = $this->dataStore->find($modelClass, $id);
 

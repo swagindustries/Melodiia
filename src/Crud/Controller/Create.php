@@ -3,7 +3,6 @@
 namespace Biig\Melodiia\Crud\Controller;
 
 use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
@@ -24,6 +23,8 @@ use Zend\Json\Json;
  */
 final class Create implements CrudControllerInterface
 {
+    use CrudControllerTrait;
+
     public const EVENT_PRE_CREATE = 'melodiia.crud.pre_create';
     public const EVENT_POST_CREATE = 'melodiia.crud.post_create';
 
@@ -54,9 +55,7 @@ final class Create implements CrudControllerInterface
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
 
-        if (empty($modelClass) || !class_exists($modelClass) || !is_subclass_of($modelClass, CrudableModelInterface::class)) {
-            throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
-        }
+        $this->assertModelClassInvalid($modelClass);
 
         if ($securityCheck && !$this->checker->isGranted($securityCheck)) {
             throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));

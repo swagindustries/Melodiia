@@ -13,6 +13,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class Get implements CrudControllerInterface
 {
+    use CrudControllerTrait;
+
     /** @var DataStoreInterface */
     private $dataStore;
 
@@ -30,6 +32,8 @@ final class Get implements CrudControllerInterface
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $groups = $request->attributes->get(self::SERIALIZATION_GROUP, []);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
+
+        $this->assertModelClassInvalid($modelClass);
 
         $data = $this->dataStore->find($modelClass, $id);
 

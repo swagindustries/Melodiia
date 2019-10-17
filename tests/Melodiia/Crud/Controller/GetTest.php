@@ -7,6 +7,7 @@ use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\NotFound;
 use Biig\Melodiia\Response\OkContent;
+use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -39,10 +40,10 @@ class GetTest extends TestCase
 
     public function testItReturnResourceFromDataStoreInsideOkContent()
     {
-        $this->dataStore->find('foo', 'id')->willReturn(new \stdClass())->shouldBeCalled();
+        $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass())->shouldBeCalled();
         $request = $this->prophesize(Request::class);
         $attributes = $this->prophesize(ParameterBag::class);
-        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
+        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
         $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $request->attributes = $attributes->reveal();
@@ -55,10 +56,10 @@ class GetTest extends TestCase
 
     public function testItReturnNotFoundResponseInCaseOfNoResultFromDataStore()
     {
-        $this->dataStore->find('foo', 'id')->willReturn(null)->shouldBeCalled();
+        $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(null)->shouldBeCalled();
         $request = $this->prophesize(Request::class);
         $attributes = $this->prophesize(ParameterBag::class);
-        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
+        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
         $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $request->attributes = $attributes->reveal();
@@ -73,10 +74,10 @@ class GetTest extends TestCase
      */
     public function testItCheckAccessToResourceIfSpecifiedInConfiguration()
     {
-        $this->dataStore->find('foo', 'id')->willReturn(new \stdClass())->shouldBeCalled();
+        $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass())->shouldBeCalled();
         $request = $this->prophesize(Request::class);
         $attributes = $this->prophesize(ParameterBag::class);
-        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
+        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
         $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('view');
         $request->attributes = $attributes->reveal();
@@ -88,10 +89,10 @@ class GetTest extends TestCase
 
     public function testItCheckAccessAndSuccessIfAuthorized()
     {
-        $this->dataStore->find('foo', 'id')->willReturn(new \stdClass())->shouldBeCalled();
+        $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass())->shouldBeCalled();
         $request = $this->prophesize(Request::class);
         $attributes = $this->prophesize(ParameterBag::class);
-        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn('foo');
+        $attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $attributes->get(CrudControllerInterface::SERIALIZATION_GROUP, [])->willReturn([]);
         $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('view');
         $request->attributes = $attributes->reveal();
