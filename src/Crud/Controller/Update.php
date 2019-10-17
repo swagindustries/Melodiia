@@ -3,7 +3,6 @@
 namespace Biig\Melodiia\Crud\Controller;
 
 use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
@@ -24,6 +23,8 @@ use Zend\Json\Json;
  */
 final class Update implements CrudControllerInterface
 {
+    use CrudControllerTrait;
+
     public const EVENT_PRE_UPDATE = 'melodiia.crud.pre_update';
     public const EVENT_POST_UPDATE = 'melodiia.crud.post_update';
 
@@ -53,9 +54,7 @@ final class Update implements CrudControllerInterface
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
 
-        if (empty($modelClass) || !class_exists($modelClass) || !is_subclass_of($modelClass, CrudableModelInterface::class)) {
-            throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
-        }
+        $this->assertModelClassInvalid($modelClass);
 
         $data = $this->dataStore->find($modelClass, $id);
 
