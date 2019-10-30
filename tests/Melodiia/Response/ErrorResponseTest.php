@@ -1,8 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Response;
+namespace Biig\Melodiia\Test\Response;
 
 use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
+use Biig\Melodiia\Response\ErrorResponse;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
