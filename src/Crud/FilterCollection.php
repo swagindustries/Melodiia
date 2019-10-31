@@ -56,6 +56,7 @@ class FilterCollection implements FilterCollectionInterface
         $builder = $this->formFactory->createNamedBuilder('', FormType::class, null, [
             'method' => 'GET',
             'csrf_protection' => false,
+            'allow_extra_fields' => true,
         ]);
 
         foreach ($this->filters as $filter) {
