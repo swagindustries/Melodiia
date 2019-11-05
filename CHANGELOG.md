@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Change
 
+## [0.4.4] - 2019-11-05
+- Add possibility for Create/Update controller to configure the `clearMissing` parameter of Symfony `Form->submit()` method.
+
 ## [0.4.3] - 2019-10-30
 - Add new `ErrorResponse` class which allow serializing custom errors
 
