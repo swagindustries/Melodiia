@@ -15,6 +15,11 @@ interface CrudControllerInterface
     public const FORM_ATTRIBUTE = 'melodiia_form';
 
     /**
+     * This attribute is boolean, it's value is transfer to the Symfony Form->submit method.
+     */
+    public const FORM_CLEAR_MISSING = 'melodiia_clear_missing';
+
+    /**
      * This attribute should contains the serialization group to use for serialization concern of the items to return.
      */
     public const SERIALIZATION_GROUP = 'melodiia_serialization_group';

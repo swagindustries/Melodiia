@@ -53,6 +53,7 @@ final class Update implements CrudControllerInterface
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
+        $clearMissing = $request->attributes->getBoolean(self::FORM_CLEAR_MISSING, false);
 
         $this->assertModelClassInvalid($modelClass);
 
@@ -68,7 +69,7 @@ final class Update implements CrudControllerInterface
 
         $form = $this->formFactory->createNamed('', $form, $data);
         $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);
-        $form->submit($inputData, false);
+        $form->submit($inputData, $clearMissing);
 
         if (!$form->isSubmitted()) {
             return new WrongDataInput();

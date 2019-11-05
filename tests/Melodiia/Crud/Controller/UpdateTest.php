@@ -61,6 +61,7 @@ class UpdateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $this->attributes->get(CrudControllerInterface::FORM_ATTRIBUTE)->willReturn(FakeMelodiiaFormType::class);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(false);
         $this->request->attributes = $this->attributes->reveal();
         $this->request->getContent()->willReturn('{"awesome":"json"}');
         $this->form->submit(['awesome' => 'json'], false)->willReturn();
@@ -99,12 +100,30 @@ class UpdateTest extends TestCase
         $this->assertEquals(400, $res->httpStatus());
     }
 
-    public function testItCreateMelodiiaObject()
+    public function testItUpdateMelodiiaObject()
     {
         $this->form->isSubmitted()->willReturn(true);
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
+        $this->dispatcher->dispatch(Update::EVENT_PRE_UPDATE, Argument::type(CrudEvent::class))->shouldBeCalled();
+        $this->dispatcher->dispatch(Update::EVENT_POST_UPDATE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
+        $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
+
+        /** @var ApiResponse $res */
+        $res = ($this->controller)($this->request->reveal(), 'id');
+
+        $this->assertInstanceOf(OkContent::class, $res);
+    }
+
+    public function testICanChangeClearMissingOption()
+    {
+        $this->form->isSubmitted()->willReturn(true);
+        $this->form->isValid()->willReturn(true);
+
+        $this->form->getData()->willReturn(new FakeMelodiiaModel());
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(true);
+        $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
         $this->dispatcher->dispatch(Update::EVENT_PRE_UPDATE, Argument::type(CrudEvent::class))->shouldBeCalled();
         $this->dispatcher->dispatch(Update::EVENT_POST_UPDATE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
