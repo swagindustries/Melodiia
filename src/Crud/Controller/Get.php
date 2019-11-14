@@ -35,14 +35,12 @@ final class Get implements CrudControllerInterface
 
         $this->assertModelClassInvalid($modelClass);
 
-        $data = $this->dataStore->find($modelClass, $id);
+        if (null === $data = $this->dataStore->find($modelClass, $id)) {
+            return new NotFound();
+        }
 
         if ($securityCheck && !$this->checker->isGranted($securityCheck, $data)) {
             throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', get_class($data)));
-        }
-
-        if (null === $data) {
-            return new NotFound();
         }
 
         return new OkContent($data, $groups);
