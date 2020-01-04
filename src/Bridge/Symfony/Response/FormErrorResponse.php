@@ -62,6 +62,11 @@ class FormErrorResponse extends AbstractUserDataErrorResponse
         do {
             $part = (string) $form->getPropertyPath();
 
+            // Transform "[foo]" property path to "foo"
+            if (StringTools::startsWith($part, '[') && !is_numeric($objectPropertyPath = StringTools::removeEnd(StringTools::removeStart($part, '['), ']'))) {
+                $part = $objectPropertyPath;
+            }
+
             // Basically this condition means the data is object so we need a dot
             if (!empty($propertyPath) && !StringTools::startsWith($propertyPath, '[')) {
                 $propertyPath = '.' . $propertyPath;
