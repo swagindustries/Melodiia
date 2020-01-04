@@ -98,6 +98,19 @@ class CreateTest extends TestCase
         $this->assertEquals(400, $res->httpStatus());
     }
 
+    /**
+     * Issue #28
+     */
+    public function testItReturnProperlyOnWrongInput()
+    {
+        $this->request->getContent()->willReturn('{"awesome":json"}'); // Wrong JSON
+
+        /** @var ApiResponse $res */
+        $res = ($this->controller)($this->request->reveal(), 'id');
+        $this->assertInstanceOf(ApiResponse::class, $res);
+        $this->assertEquals(400, $res->httpStatus());
+    }
+
     public function testItCreateMelodiiaObject()
     {
         $this->form->isSubmitted()->willReturn(true);

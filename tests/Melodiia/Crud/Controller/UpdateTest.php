@@ -61,8 +61,9 @@ class UpdateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $this->attributes->get(CrudControllerInterface::FORM_ATTRIBUTE)->willReturn(FakeMelodiiaFormType::class);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
-        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(false);
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, null)->willReturn(null);
         $this->request->attributes = $this->attributes->reveal();
+        $this->request->getMethod()->willReturn('POST');
         $this->request->getContent()->willReturn('{"awesome":"json"}');
         $this->form->submit(['awesome' => 'json'], false)->willReturn();
         $this->formFactory->createNamed('', Argument::cetera())->willReturn($this->form);
@@ -84,6 +85,60 @@ class UpdateTest extends TestCase
         /** @var ApiResponse $res */
         $res = ($this->controller)($this->request->reveal(), 'id');
 
+        $this->assertInstanceOf(ApiResponse::class, $res);
+        $this->assertEquals(400, $res->httpStatus());
+    }
+
+    /**
+     * Issue #54
+     */
+    public function testItClearMissingWhileNullGivenAndMethodPatch()
+    {
+        // Mocking
+        $this->form->isSubmitted()->willReturn(true);
+        $this->form->isValid()->willReturn(true);
+        $this->form->getData()->willReturn(new FakeMelodiiaModel());
+        $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
+
+        // Most important check
+        $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
+
+        $this->request->getMethod()->willReturn('PATCH');
+
+        /** @var ApiResponse $res */
+        $res = ($this->controller)($this->request->reveal(), 'id');
+
+        $this->assertInstanceOf(ApiResponse::class, $res);
+        $this->assertEquals(200, $res->httpStatus());
+    }
+
+    public function testItClearMissingWhenEnforcedToTrue()
+    {
+        // Mocking
+        $this->form->isSubmitted()->willReturn(true);
+        $this->form->isValid()->willReturn(true);
+        $this->form->getData()->willReturn(new FakeMelodiiaModel());
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, null)->willReturn(true);
+        $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
+
+        // Most important check
+        $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
+
+        /** @var ApiResponse $res */
+        $res = ($this->controller)($this->request->reveal(), 'id');
+        $this->assertInstanceOf(ApiResponse::class, $res);
+        $this->assertEquals(200, $res->httpStatus());
+    }
+
+    /**
+     * Issue #28
+     */
+    public function testItReturnProperlyOnWrongInput()
+    {
+        $this->request->getContent()->willReturn('{"awesome":json"}'); // Wrong JSON
+
+        /** @var ApiResponse $res */
+        $res = ($this->controller)($this->request->reveal(), 'id');
         $this->assertInstanceOf(ApiResponse::class, $res);
         $this->assertEquals(400, $res->httpStatus());
     }
