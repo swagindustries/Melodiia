@@ -66,10 +66,10 @@ class FormErrorResponseTest extends TestCase
         $formErrorResponse = new FormErrorResponse($form);
         $this->assertInternalType('array', $errors = $formErrorResponse->getErrors());
         $this->assertCount(1, $errors);
-        $this->assertInstanceOf(UserDataError::class, $errors['[foo]']);
-        $this->assertEquals('[foo]', $errors['[foo]']->getPropertyPath());
-        $this->assertInternalType('array', $errors['[foo]']->getErrors());
-        $this->assertInternalType('string', $errors['[foo]']->getErrors()[0]);
+        $this->assertInstanceOf(UserDataError::class, $errors['foo']);
+        $this->assertEquals('foo', $errors['foo']->getPropertyPath());
+        $this->assertInternalType('array', $errors['foo']->getErrors());
+        $this->assertInternalType('string', $errors['foo']->getErrors()[0]);
     }
 
     public function testManyErrorForOneFormField()
@@ -84,7 +84,7 @@ class FormErrorResponseTest extends TestCase
         $formErrorResponse = new FormErrorResponse($form);
         $errors = $formErrorResponse->getErrors();
 
-        $this->assertCount(2, $errors['[foo]']->getErrors());
+        $this->assertCount(2, $errors['foo']->getErrors());
     }
 
     public function testNestedFormErrors()
@@ -99,8 +99,8 @@ class FormErrorResponseTest extends TestCase
 
         $formErrorResponse = new FormErrorResponse($form);
         $errors = $formErrorResponse->getErrors();
-        $this->assertCount(1, $errors['[foo]']->getErrors());
-        $this->assertCount(1, $errors['[bar][baz]']->getErrors());
+        $this->assertCount(1, $errors['foo']->getErrors());
+        $this->assertCount(1, $errors['bar.baz']->getErrors());
     }
 
     public function testCollectionFormErrors()
@@ -121,8 +121,9 @@ class FormErrorResponseTest extends TestCase
 
         $formErrorResponse = new FormErrorResponse($form);
         $errors = $formErrorResponse->getErrors();
-        $this->assertCount(1, $errors['[foo][0]']->getErrors());
-        $this->assertCount(1, $errors['[foo][1]']->getErrors());
+
+        $this->assertCount(1, $errors['foo[0]']->getErrors());
+        $this->assertCount(1, $errors['foo[1]']->getErrors());
     }
 
     public function testItReturnRightPropertyPathForFormWithObject()
