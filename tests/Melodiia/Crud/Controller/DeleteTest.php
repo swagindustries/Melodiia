@@ -10,6 +10,7 @@ use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\Ok;
+use Biig\Melodiia\Test\MockDispatcherTrait;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -21,6 +22,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteTest extends TestCase
 {
+    use MockDispatcherTrait;
+
     /** @var Request|ObjectProphecy */
     private $request;
 
@@ -83,8 +86,8 @@ class DeleteTest extends TestCase
     public function testItDeletesUsingDataStore()
     {
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new FakeMelodiiaModel());
-        $this->dispatcher->dispatch(Delete::EVENT_PRE_DELETE, Argument::type(CrudEvent::class))->shouldBeCalled();
-        $this->dispatcher->dispatch(Delete::EVENT_POST_DELETE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Delete::EVENT_PRE_DELETE)->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Delete::EVENT_POST_DELETE)->shouldBeCalled();
         $this->dataStore->remove(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */

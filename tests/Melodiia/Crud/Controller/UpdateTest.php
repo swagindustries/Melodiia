@@ -10,6 +10,7 @@ use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\OkContent;
+use Biig\Melodiia\Test\MockDispatcherTrait;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaFormType;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use PHPUnit\Framework\TestCase;
@@ -24,6 +25,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateTest extends TestCase
 {
+    use MockDispatcherTrait;
+
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;
 
@@ -161,8 +164,8 @@ class UpdateTest extends TestCase
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->dispatcher->dispatch(Update::EVENT_PRE_UPDATE, Argument::type(CrudEvent::class))->shouldBeCalled();
-        $this->dispatcher->dispatch(Update::EVENT_POST_UPDATE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Update::EVENT_PRE_UPDATE)->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Update::EVENT_POST_UPDATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */
@@ -179,8 +182,8 @@ class UpdateTest extends TestCase
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(true);
         $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
-        $this->dispatcher->dispatch(Update::EVENT_PRE_UPDATE, Argument::type(CrudEvent::class))->shouldBeCalled();
-        $this->dispatcher->dispatch(Update::EVENT_POST_UPDATE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Update::EVENT_PRE_UPDATE)->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Update::EVENT_POST_UPDATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */

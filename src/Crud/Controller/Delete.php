@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-final class Delete implements CrudControllerInterface
+final class Delete extends BaseCrudController implements CrudControllerInterface
 {
     use CrudControllerTrait;
 
@@ -26,14 +26,11 @@ final class Delete implements CrudControllerInterface
     /** @var AuthorizationCheckerInterface */
     private $checker;
 
-    /** @var EventDispatcherInterface */
-    private $dispatcher;
-
     public function __construct(DataStoreInterface $dataStore, AuthorizationCheckerInterface $checker, EventDispatcherInterface $dispatcher)
     {
+        parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
         $this->checker = $checker;
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(Request $request, $id)
@@ -56,9 +53,9 @@ final class Delete implements CrudControllerInterface
             ));
         }
 
-        $this->dispatcher->dispatch(self::EVENT_PRE_DELETE, new CrudEvent($data));
+        $this->dispatch(new CrudEvent($data), self::EVENT_PRE_DELETE);
         $this->dataStore->remove($data);
-        $this->dispatcher->dispatch(self::EVENT_POST_DELETE, $event = new CustomResponseEvent($data));
+        $this->dispatch($event = new CustomResponseEvent($data),self::EVENT_POST_DELETE);
 
         if ($event->hasCustomResponse()) {
             return $event->getResponse();

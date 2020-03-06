@@ -10,6 +10,7 @@ use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\Created;
+use Biig\Melodiia\Test\MockDispatcherTrait;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaFormType;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use PHPUnit\Framework\TestCase;
@@ -24,6 +25,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateTest extends TestCase
 {
+    use MockDispatcherTrait;
+
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;
 
@@ -117,8 +120,8 @@ class CreateTest extends TestCase
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->dispatcher->dispatch(Create::EVENT_PRE_CREATE, Argument::type(CrudEvent::class))->shouldBeCalled();
-        $this->dispatcher->dispatch(Create::EVENT_POST_CREATE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Create::EVENT_PRE_CREATE)->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Create::EVENT_POST_CREATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */
@@ -134,8 +137,8 @@ class CreateTest extends TestCase
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->dispatcher->dispatch(Create::EVENT_PRE_CREATE, Argument::type(CrudEvent::class))->shouldBeCalled();
-        $this->dispatcher->dispatch(Create::EVENT_POST_CREATE, Argument::type(CustomResponseEvent::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Create::EVENT_PRE_CREATE)->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Create::EVENT_POST_CREATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, true)->willReturn(false);
         $this->form->submit(['awesome' => 'json'], false)->willReturn()->shouldBeCalled();
