@@ -23,7 +23,7 @@ class DoctrineDataStore implements DataStoreInterface
     public function save(object $model)
     {
         $this->getEntityManager()->persist($model);
-        $this->getEntityManager()->flush($model);
+        $this->getEntityManager()->flush();
     }
 
     public function find(string $type, $id): ?object
