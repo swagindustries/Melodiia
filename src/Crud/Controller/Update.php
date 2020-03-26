@@ -2,8 +2,6 @@
 
 namespace Biig\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
@@ -16,12 +14,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Zend\Json\Json;
 
 /**
  * Crud controller that update data model with the data from the request using a form.
  */
-final class Update implements CrudControllerInterface
+final class Update extends BaseCrudController
 {
     use CrudControllerTrait;
 
@@ -53,7 +50,7 @@ final class Update implements CrudControllerInterface
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
-        $clearMissing = $request->attributes->getBoolean(self::FORM_CLEAR_MISSING, false);
+        $clearMissing = $request->attributes->getBoolean(self::FORM_CLEAR_MISSING, null);
 
         $this->assertModelClassInvalid($modelClass);
 
@@ -67,17 +64,12 @@ final class Update implements CrudControllerInterface
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
         }
 
-        $form = $this->formFactory->createNamed('', $form, $data);
-        $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);
-        $form->submit($inputData, $clearMissing);
-
-        if (!$form->isSubmitted()) {
-            return new WrongDataInput();
+        $formOrResponse = $this->decodeInputData($this->formFactory, $form, $request, $clearMissing);
+        if ($formOrResponse instanceof ApiResponse) {
+            return $formOrResponse;
         }
+        $form = $formOrResponse;
 
-        if (!$form->isValid()) {
-            return new FormErrorResponse($form);
-        }
         $data = $form->getData();
         $this->dispatcher->dispatch(self::EVENT_PRE_UPDATE, new CrudEvent($data));
 

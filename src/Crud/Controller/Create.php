@@ -21,7 +21,7 @@ use Zend\Json\Json;
 /**
  * Crud controller that create data model with the data from the request using a form.
  */
-final class Create implements CrudControllerInterface
+final class Create extends BaseCrudController
 {
     use CrudControllerTrait;
 
@@ -66,17 +66,12 @@ final class Create implements CrudControllerInterface
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
         }
 
-        $form = $this->formFactory->createNamed('', $form);
-        $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);
-        $form->submit($inputData, $clearMissing);
-
-        if (!$form->isSubmitted()) {
-            return new WrongDataInput();
+        $formOrResponse = $this->decodeInputData($this->formFactory, $form, $request, $clearMissing);
+        if ($formOrResponse instanceof ApiResponse) {
+            return $formOrResponse;
         }
+        $form = $formOrResponse;
 
-        if (!$form->isValid()) {
-            return new FormErrorResponse($form);
-        }
         $data = $form->getData();
         $this->dispatcher->dispatch(self::EVENT_PRE_CREATE, new CrudEvent($data));
 
