@@ -48,6 +48,7 @@ admin_routes:
 
  - [Configure my first crud operations !](./docs/Crud.md)
  - [Integration with Symfony ](./docs/Symfony.md)
+ - [Presentation of Melodiia @Biig-io](https://docs.google.com/presentation/d/1dtxUOzZFGRq7Ar5YV5aZ6AN60RhDbf_0OcXKj5iiDS8/edit?usp=sharing)
 
 Feel free to open an issue, if you encounter problems implementing Melodiia
 
