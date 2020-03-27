@@ -34,17 +34,14 @@ final class Create extends BaseCrudController
     /** @var FormFactoryInterface */
     private $formFactory;
 
-    /** @var EventDispatcherInterface */
-    private $dispatcher;
-
     /** @var AuthorizationCheckerInterface */
     private $checker;
 
     public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker)
     {
+        parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
         $this->formFactory = $formFactory;
-        $this->dispatcher = $dispatcher;
         $this->checker = $checker;
     }
 
@@ -73,10 +70,10 @@ final class Create extends BaseCrudController
         $form = $formOrResponse;
 
         $data = $form->getData();
-        $this->dispatcher->dispatch(self::EVENT_PRE_CREATE, new CrudEvent($data));
+        $this->dispatch(new CrudEvent($data), self::EVENT_PRE_CREATE);
 
         $this->dataStore->save($data);
-        $this->dispatcher->dispatch(self::EVENT_POST_CREATE, $event = new CustomResponseEvent($data));
+        $this->dispatch($event = new CustomResponseEvent($data), self::EVENT_POST_CREATE);
 
         if ($event->hasCustomResponse()) {
             return $event->getResponse();

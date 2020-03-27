@@ -7,9 +7,15 @@ php:
 branches:
     only:
         - master
+matrix:
+    fast_finish: true
+    include:
+        # Minimum supported dependencies with the latest and oldest PHP version
+        - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
 
 install:
-    - composer install
+    - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
 
 script:
     - ./vendor/bin/phpunit -c phpunit.xml.dist
