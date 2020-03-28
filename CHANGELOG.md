@@ -5,7 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Change
+## [0.5.0] - 2020-03-28
+### Added
+- Full compatibility to Symfony 5.x
+
+### Changed
+- the crud controllers now allow partial data on patch by default
+
+### Fixed
+- Fix issue with subresources persistence
+- FormError are more consistent
+- CRUD controllers now output 400 error on malformed json instead or 500 error
 
 ## [0.4.4] - 2019-11-05
 - Add possibility for Create/Update controller to configure the `clearMissing` parameter of Symfony `Form->submit()` method.
