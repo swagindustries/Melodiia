@@ -8,7 +8,6 @@ use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\OkContent;
-use Biig\Melodiia\Response\WrongDataInput;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +60,7 @@ final class Update extends BaseCrudController
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');
         }
 
-        $formOrResponse = $this->decodeInputData($this->formFactory, $form, $request, $clearMissing);
+        $formOrResponse = $this->decodeInputData($this->formFactory, $form, $request, $clearMissing, $data);
         if ($formOrResponse instanceof ApiResponse) {
             return $formOrResponse;
         }

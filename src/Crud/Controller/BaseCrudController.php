@@ -27,13 +27,13 @@ abstract class BaseCrudController implements CrudControllerInterface
     /**
      * @return ApiResponse|FormInterface
      */
-    protected function decodeInputData(FormFactoryInterface $formFactory, string $form, Request $request, bool $clearMissing = null)
+    protected function decodeInputData(FormFactoryInterface $formFactory, string $form, Request $request, bool $clearMissing = null, object $data = null)
     {
         if (null === $clearMissing) {
             $clearMissing = !in_array($request->getMethod(), ['POST', 'PUT']);
         }
         try {
-            $form = $formFactory->createNamed('', $form);
+            $form = $formFactory->createNamed('', $form, $data);
             $inputData = Json::decode($request->getContent(), Json::TYPE_ARRAY);
             $form->submit($inputData, $clearMissing);
 
