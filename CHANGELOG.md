@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.5.1] - 2020-03-31
+### Fixed
+- Update CRUD Controller was not working as expected anymore, this has been fixed, update asap
+
 ## [0.5.0] - 2020-03-28
 ### Added
 - Full compatibility to Symfony 5.x
