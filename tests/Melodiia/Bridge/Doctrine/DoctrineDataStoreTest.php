@@ -27,7 +27,7 @@ class DoctrineDataStoreTest extends TestCase
         $obj = new \stdClass();
         $entityManager = $this->prophesize(EntityManagerInterface::class);
         $entityManager->persist($obj)->shouldBeCalled();
-        $entityManager->flush($obj)->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
         $managerRegistry = $this->prophesize(ManagerRegistry::class);
         $managerRegistry->getManager()->willReturn($entityManager->reveal());
 

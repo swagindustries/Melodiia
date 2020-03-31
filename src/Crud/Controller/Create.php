@@ -2,21 +2,17 @@
 
 namespace Biig\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\Created;
-use Biig\Melodiia\Response\WrongDataInput;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Zend\Json\Json;
 
 /**
  * Crud controller that create data model with the data from the request using a form.
