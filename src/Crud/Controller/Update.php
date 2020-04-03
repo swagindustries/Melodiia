@@ -5,12 +5,16 @@ namespace Biig\Melodiia\Crud\Controller;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
+use Biig\Melodiia\Crud\Tools\IdResolverInterface;
+use Biig\Melodiia\Crud\Tools\SimpleIdResolver;
+use Biig\Melodiia\Exception\IdMissingException;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\OkContent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -33,20 +37,30 @@ final class Update extends BaseCrudController
     /** @var AuthorizationCheckerInterface */
     private $checker;
 
-    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker)
+    /** @var IdResolverInterface */
+    private $idResolver;
+
+    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker, IdResolverInterface $idResolver = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
         $this->formFactory = $formFactory;
         $this->checker = $checker;
+        $this->idResolver = $idResolver ?? new SimpleIdResolver();
     }
 
-    public function __invoke(Request $request, $id): ApiResponse
+    public function __invoke(Request $request): ApiResponse
     {
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
         $clearMissing = $request->attributes->getBoolean(self::FORM_CLEAR_MISSING, null);
+
+        try {
+            $id = $this->idResolver->resolveId($request, $modelClass);
+        } catch (IdMissingException $e) {
+            throw new NotFoundHttpException('No id found', $e);
+        }
 
         $this->assertModelClassInvalid($modelClass);
 

@@ -2,12 +2,12 @@
 
 namespace Biig\Melodiia\Test\Crud\Controller;
 
-
 use Biig\Melodiia\Crud\Controller\Delete;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
+use Biig\Melodiia\Crud\Tools\IdResolverInterface;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\Ok;
 use Biig\Melodiia\Test\MockDispatcherTrait;
@@ -54,10 +54,14 @@ class DeleteTest extends TestCase
         $this->attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $this->request->attributes = $this->attributes->reveal();
 
+        $idResolver = $this->prophesize(IdResolverInterface::class);
+        $idResolver->resolveId(Argument::type(Request::class), Argument::type('string'))->willReturn('id');
+
         $this->controller = new Delete(
             $this->dataStore->reveal(),
             $this->checker->reveal(),
-            $this->dispatcher->reveal()
+            $this->dispatcher->reveal(),
+            $idResolver->reveal()
         );
     }
 
@@ -68,7 +72,7 @@ class DeleteTest extends TestCase
     {
         $this->dataStore->find(Argument::any(), 'id')->willReturn(null);
 
-        ($this->controller)($this->request->reveal(), 'id');
+        ($this->controller)($this->request->reveal());
     }
 
     /**
@@ -80,7 +84,7 @@ class DeleteTest extends TestCase
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('edit');
         $this->checker->isGranted(Argument::cetera())->willReturn(false);
 
-        ($this->controller)($this->request->reveal(), 'id');
+        ($this->controller)($this->request->reveal());
     }
 
     public function testItDeletesUsingDataStore()
@@ -91,7 +95,7 @@ class DeleteTest extends TestCase
         $this->dataStore->remove(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(Ok::class, $res);
     }

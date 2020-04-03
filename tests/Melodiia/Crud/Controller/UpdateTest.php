@@ -8,6 +8,7 @@ use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
+use Biig\Melodiia\Crud\Tools\IdResolverInterface;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Test\MockDispatcherTrait;
@@ -73,11 +74,16 @@ class UpdateTest extends TestCase
 
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass());
 
+
+        $idResolver = $this->prophesize(IdResolverInterface::class);
+        $idResolver->resolveId(Argument::type(Request::class), Argument::type('string'))->willReturn('id');
+
         $this->controller = new Update(
             $this->dataStore->reveal(),
             $this->formFactory->reveal(),
             $this->dispatcher->reveal(),
-            $this->checker->reveal()
+            $this->checker->reveal(),
+            $idResolver->reveal()
         );
     }
 
@@ -86,7 +92,7 @@ class UpdateTest extends TestCase
         $this->form->isSubmitted()->willReturn(false);
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(ApiResponse::class, $res);
         $this->assertEquals(400, $res->httpStatus());
@@ -109,7 +115,7 @@ class UpdateTest extends TestCase
         $this->request->getMethod()->willReturn('PATCH');
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(ApiResponse::class, $res);
         $this->assertEquals(200, $res->httpStatus());
@@ -128,7 +134,7 @@ class UpdateTest extends TestCase
         $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
         $this->assertInstanceOf(ApiResponse::class, $res);
         $this->assertEquals(200, $res->httpStatus());
     }
@@ -141,7 +147,7 @@ class UpdateTest extends TestCase
         $this->request->getContent()->willReturn('{"awesome":json"}'); // Wrong JSON
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
         $this->assertInstanceOf(ApiResponse::class, $res);
         $this->assertEquals(400, $res->httpStatus());
     }
@@ -152,7 +158,7 @@ class UpdateTest extends TestCase
         $this->form->isValid()->willReturn(false);
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(FormErrorResponse::class, $res);
         $this->assertEquals(400, $res->httpStatus());
@@ -169,7 +175,7 @@ class UpdateTest extends TestCase
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(OkContent::class, $res);
     }
@@ -187,7 +193,7 @@ class UpdateTest extends TestCase
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
 
         /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(OkContent::class, $res);
     }
@@ -200,6 +206,6 @@ class UpdateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('edit');
         $this->checker->isGranted(Argument::cetera())->willReturn(false);
 
-        ($this->controller)($this->request->reveal(), 'id');
+        ($this->controller)($this->request->reveal());
     }
 }
