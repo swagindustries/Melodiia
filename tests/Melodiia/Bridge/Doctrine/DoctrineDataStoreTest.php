@@ -58,7 +58,7 @@ class DoctrineDataStoreTest extends TestCase
         $obj = new \stdClass();
         $entityManager = $this->prophesize(EntityManagerInterface::class);
         $entityManager->remove($obj)->shouldBeCalled();
-        $entityManager->flush($obj)->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
         $managerRegistry = $this->prophesize(ManagerRegistry::class);
         $managerRegistry->getManager()->willReturn($entityManager->reveal());
 

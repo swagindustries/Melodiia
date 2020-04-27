@@ -6,6 +6,9 @@ use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Event\CrudEvent;
 use Biig\Melodiia\Crud\Event\CustomResponseEvent;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
+use Biig\Melodiia\Crud\Tools\IdResolverInterface;
+use Biig\Melodiia\Crud\Tools\SimpleIdResolver;
+use Biig\Melodiia\Exception\IdMissingException;
 use Biig\Melodiia\Response\Ok;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,17 +29,27 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
     /** @var AuthorizationCheckerInterface */
     private $checker;
 
-    public function __construct(DataStoreInterface $dataStore, AuthorizationCheckerInterface $checker, EventDispatcherInterface $dispatcher)
+    /** @var IdResolverInterface */
+    private $idResolver;
+
+    public function __construct(DataStoreInterface $dataStore, AuthorizationCheckerInterface $checker, EventDispatcherInterface $dispatcher, IdResolverInterface $idResolver = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
         $this->checker = $checker;
+        $this->idResolver = $idResolver ?? new SimpleIdResolver();
     }
 
-    public function __invoke(Request $request, $id)
+    public function __invoke(Request $request)
     {
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
+
+        try {
+            $id = $this->idResolver->resolveId($request, $modelClass);
+        } catch(IdMissingException $e) {
+            throw new NotFoundHttpException('No id found', $e);
+        }
 
         $this->assertModelClassInvalid($modelClass);
 

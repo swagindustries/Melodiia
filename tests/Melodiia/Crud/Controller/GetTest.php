@@ -5,6 +5,7 @@ namespace Biig\Melodiia\Test\Crud\Controller;
 use Biig\Melodiia\Crud\Controller\Get;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
+use Biig\Melodiia\Crud\Tools\IdResolverInterface;
 use Biig\Melodiia\Response\NotFound;
 use Biig\Melodiia\Response\OkContent;
 use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
@@ -30,7 +31,11 @@ class GetTest extends TestCase
     {
         $this->dataStore = $this->prophesize(DataStoreInterface::class);
         $this->authorizationChecker = $this->prophesize(AuthorizationCheckerInterface::class);
-        $this->controller = new Get($this->dataStore->reveal(), $this->authorizationChecker->reveal());
+
+        $idResolver = $this->prophesize(IdResolverInterface::class);
+        $idResolver->resolveId(Argument::type(Request::class), Argument::type('string'))->willReturn('id');
+
+        $this->controller = new Get($this->dataStore->reveal(), $this->authorizationChecker->reveal(), $idResolver->reveal());
     }
 
     public function testItIsIntanceOfMelodiiaController()
@@ -48,7 +53,7 @@ class GetTest extends TestCase
         $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $request->attributes = $attributes->reveal();
 
-        $res = ($this->controller)($request->reveal(), 'id');
+        $res = ($this->controller)($request->reveal());
 
         $this->assertInstanceOf(OkContent::class, $res);
         $this->assertInstanceOf(\stdClass::class, $res->getContent());
@@ -64,7 +69,7 @@ class GetTest extends TestCase
         $attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $request->attributes = $attributes->reveal();
 
-        $res = ($this->controller)($request->reveal(), 'id');
+        $res = ($this->controller)($request->reveal());
 
         $this->assertInstanceOf(NotFound::class, $res);
     }
@@ -84,7 +89,7 @@ class GetTest extends TestCase
 
         $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(false);
 
-        ($this->controller)($request->reveal(), 'id');
+        ($this->controller)($request->reveal());
     }
 
     public function testItCheckAccessAndSuccessIfAuthorized()
@@ -99,7 +104,7 @@ class GetTest extends TestCase
 
         $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(true);
 
-        $res = ($this->controller)($request->reveal(), 'id');
+        $res = ($this->controller)($request->reveal());
 
         $this->assertInstanceOf(OkContent::class, $res);
         $this->assertInstanceOf(\stdClass::class, $res->getContent());
