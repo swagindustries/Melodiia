@@ -4,6 +4,9 @@ services:
         arguments:
             $registry: '@doctrine'
 
+    melodiia.crud.id_resolver:
+        class: Biig\Melodiia\Crud\Tools\SimpleIdResolver
+
     melodiia.crud.filters.filter_collection_factory:
         class: Biig\Melodiia\Crud\FilterCollectionFactory
         arguments:
@@ -34,6 +37,7 @@ services:
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
             $checker: '@security.authorization_checker'
+            $idResolver: '@melodiia.crud.id_resolver'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get_all:
@@ -50,6 +54,7 @@ services:
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
+            $idResolver: '@melodiia.crud.id_resolver'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.delete:
@@ -58,4 +63,5 @@ services:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
             $dispatcher: '@event_dispatcher'
+            $idResolver: '@melodiia.crud.id_resolver'
         tags: [ controller.service_arguments ]
