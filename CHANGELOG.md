@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- CRUD controllers now use an id resolver (feel free to redefine it)
+- Melodiia now provides a convenient way to manage API collections with forms
+
+### Chaged
+- DataStore now uses a standard flush
+
 ## [0.5.1] - 2020-03-31
 ### Fixed
 - Update CRUD Controller was not working as expected anymore, this has been fixed, update asap
