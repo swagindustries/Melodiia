@@ -6,6 +6,7 @@ use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 class ReorderDataToMatchCollectionListener implements EventSubscriberInterface
@@ -18,7 +19,7 @@ class ReorderDataToMatchCollectionListener implements EventSubscriberInterface
         ];
     }
 
-    public function preSubmit(PreSubmitEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
         if (empty($data)) {

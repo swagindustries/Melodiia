@@ -54,7 +54,10 @@ final class Update extends BaseCrudController
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
         $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
-        $clearMissing = $request->attributes->getBoolean(self::FORM_CLEAR_MISSING, null);
+        $clearMissing = $request->attributes->has(self::FORM_CLEAR_MISSING)
+            ? $request->attributes->getBoolean(self::FORM_CLEAR_MISSING)
+            : null
+        ;
 
         try {
             $id = $this->idResolver->resolveId($request, $modelClass);

@@ -5,7 +5,7 @@ namespace Biig\Melodiia\Response\Listener;
 use Biig\Melodiia\Response\ApiResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -33,7 +33,7 @@ class SerializeOnKernelView implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView(ViewEvent $event)
     {
         $response = $event->getControllerResult();
         if (!$response instanceof ApiResponse) {

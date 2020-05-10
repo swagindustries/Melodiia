@@ -4,16 +4,17 @@ namespace Biig\Melodiia\Test\Error;
 
 use Biig\Melodiia\Error\OnError;
 use Biig\Melodiia\Exception\MelodiiaRuntimeIssueException;
-use PhpSpec\ObjectBehavior;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Symfony\Component\Debug\Exception\FlattenException;
+use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 
 class OnErrorTest extends TestCase
 {
-    /** @var SerializerInterface|ObjectBehavior */
+    /** @var SerializerInterface|ObjectProphecy */
     private $serializer;
 
     public function setUp()
@@ -24,7 +25,7 @@ class OnErrorTest extends TestCase
 
     public function testItReturnsAccurateErrors()
     {
-        $exception = $this->prophesize(FlattenException::class);
+        $exception = $this->prophesize(class_exists(FlattenException::class) ? FlattenException::class : LegacyFlattenException::class);
         $exception->getClass()->willReturn(MelodiiaRuntimeIssueException::class);
         $exception->getStatusCode()->willReturn(500);
         $exception->getHeaders()->willReturn([]);
@@ -38,7 +39,7 @@ class OnErrorTest extends TestCase
 
     public function testItBindsExceptionToErrorCode()
     {
-        $exception = $this->prophesize(FlattenException::class);
+        $exception = $this->prophesize(class_exists(FlattenException::class) ? FlattenException::class : LegacyFlattenException::class);
         $exception->getClass()->willReturn(MelodiiaRuntimeIssueException::class);
         $exception->getStatusCode()->willReturn(500);
         $exception->getHeaders()->willReturn([]);

@@ -11,14 +11,16 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryBuilder;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 
 class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
 {
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->factory = (new FormFactoryBuilder())->getFormFactory();
@@ -133,7 +135,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
 
     public function testItDoesNothingOnEmptyData()
     {
-        $event = $this->prophesize(PreSubmitEvent::class);
+        $event = $this->prophesize(FormEvent::class);
         $event->getData()->willReturn(null);
         $event->getForm()->shouldNotBeCalled();
         $this->subject->preSubmit($event->reveal());

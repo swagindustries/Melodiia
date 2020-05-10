@@ -9,7 +9,10 @@ use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -42,10 +45,13 @@ class SerializeOnKernelViewTest extends TestCase
             }
         };
         $this->serializer->serialize($response, Argument::cetera())->shouldBeCalled()->willReturn('"hello"');
-        $event = $this->prophesize(GetResponseForControllerResultEvent::class);
-        $event->getControllerResult()->willReturn($response);
-        $event->setResponse(Argument::type(JsonResponse::class), Argument::cetera())->shouldBeCalled();
+        $event = new ViewEvent(
+            $this->prophesize(HttpKernelInterface::class)->reveal(),
+            $this->prophesize(Request::class)->reveal(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $response
+        );
 
-        $this->listener->onKernelView($event->reveal());
+        $this->listener->onKernelView($event);
     }
 }

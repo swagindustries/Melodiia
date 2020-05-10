@@ -5,21 +5,36 @@ namespace Biig\Melodiia\Bridge\Symfony\EventListener;
 use Biig\Melodiia\MelodiiaConfigurationInterface;
 use Nekland\Tools\StringTools;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener as BaseExceptionListener;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 
-final class ExceptionListener extends BaseExceptionListener
+// BC Layer for Symfony 4
+// This class is removed in Symfony5 in favor of ErrorListener
+use Symfony\Component\HttpKernel\EventListener\ExceptionListener as LegacyExceptionListener;
+
+final class ExceptionListener
 {
     /** @var MelodiiaConfigurationInterface */
     private $config;
 
-    public function __construct(MelodiiaConfigurationInterface $config, $controller, LoggerInterface $logger = null, $debug = false, string $charset = null, $fileLinkFormat = null)
-    {
-        parent::__construct($controller, $logger, $debug, $charset, $fileLinkFormat);
+    /** @var ErrorListener|LegacyExceptionListener */
+    private $errorListener;
+
+    public function __construct(
+        MelodiiaConfigurationInterface $config,
+        $controller, LoggerInterface $logger = null,
+        $debug = false,
+        ErrorListener $errorListener = null // PHP will not fail if the class does not exist and null is passed here
+    ) {
+        // In Sf 4.3 errorListener will not be provide, it will in Sf > 4.3
+        // But we want to redefine it anyway.
+        $this->errorListener = $errorListener ?
+            new ErrorListener($controller, $logger, $debug) :
+            new LegacyExceptionListener($controller, $logger, $debug);
         $this->config = $config;
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         $request = $event->getRequest();
 
@@ -38,6 +53,7 @@ final class ExceptionListener extends BaseExceptionListener
             return;
         }
 
-        parent::onKernelException($event);
+        $this->errorListener->onKernelException($event);
     }
 }
+

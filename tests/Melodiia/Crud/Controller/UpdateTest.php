@@ -65,7 +65,8 @@ class UpdateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::MODEL_ATTRIBUTE)->willReturn(FakeMelodiiaModel::class);
         $this->attributes->get(CrudControllerInterface::FORM_ATTRIBUTE)->willReturn(FakeMelodiiaFormType::class);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
-        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, null)->willReturn(null);
+        $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(false);
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(false);
         $this->request->attributes = $this->attributes->reveal();
         $this->request->getMethod()->willReturn('POST');
         $this->request->getContent()->willReturn('{"awesome":"json"}');
@@ -108,6 +109,7 @@ class UpdateTest extends TestCase
         $this->form->isValid()->willReturn(true);
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Argument::type('string'));
 
         // Most important check
         $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
@@ -127,8 +129,10 @@ class UpdateTest extends TestCase
         $this->form->isSubmitted()->willReturn(true);
         $this->form->isValid()->willReturn(true);
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, null)->willReturn(true);
+        $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
+        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Argument::type('string'));
 
         // Most important check
         $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
@@ -186,7 +190,8 @@ class UpdateTest extends TestCase
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(true);
+        $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
+        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
         $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
         $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Update::EVENT_PRE_UPDATE)->shouldBeCalled();
         $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Update::EVENT_POST_UPDATE)->shouldBeCalled();

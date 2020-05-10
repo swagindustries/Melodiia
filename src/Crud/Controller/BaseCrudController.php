@@ -53,13 +53,6 @@ abstract class BaseCrudController implements CrudControllerInterface
 
     protected function dispatch($event, string $eventName)
     {
-        // LegacyEventDispatcherProxy exists in Symfony >= 4.3
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
-            // New Symfony 4.3 EventDispatcher signature
-            $this->dispatcher->dispatch($event, $eventName);
-        } else {
-            // Old EventDispatcher signature
-            $this->dispatcher->dispatch($eventName, $event);
-        }
+        $this->dispatcher->dispatch($event, $eventName);
     }
 }
