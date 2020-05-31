@@ -10,10 +10,6 @@ interface PaginationRequestFactoryInterface
 {
     /**
      * This method should extract needed information from the request to build a PaginationRequest.
-     *
-     * @param Request $request
-     *
-     * @return PaginationRequest
      */
     public function createPaginationRequest(Request $request): PaginationRequest;
 }

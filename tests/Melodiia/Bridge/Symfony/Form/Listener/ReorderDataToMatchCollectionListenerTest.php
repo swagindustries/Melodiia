@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryBuilder;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 
 class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
@@ -40,6 +39,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
         if (!empty($data)) {
             $options['compound'] = true;
         }
+
         return new FormBuilder($name, null, new EventDispatcher(), $this->factory, $options);
     }
 
@@ -54,13 +54,14 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
             ;
             $builder->add($name, $form);
         }
+
         return $builder->getForm();
     }
 
     public function testItReorderDataInputWithFormData()
     {
         $formData = [
-            new class extends \ArrayObject implements CrudableModelInterface {
+            new class() extends \ArrayObject implements CrudableModelInterface {
                 public function __construct()
                 {
                     parent::__construct(['hello' => 'yo', 'world' => 'ye']);
@@ -68,23 +69,26 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
 
                 public $hello = 'yo';
                 public $world = 'ye';
+
                 public function getId()
                 {
                     return 'foo';
                 }
             },
-            new class extends \ArrayObject  implements CrudableModelInterface {
+            new class() extends \ArrayObject implements CrudableModelInterface {
                 public function __construct()
                 {
                     parent::__construct(['hello' => 'yoh', 'world' => 'yeh']);
                 }
+
                 public $hello = 'yoh';
                 public $world = 'yeh';
+
                 public function getId()
                 {
                     return 'bar';
                 }
-            }
+            },
         ];
         $form = $this->factory->createNamed('', FormType::class, $formData)
             ->add(0, HelloWorldDummyType::class)
@@ -97,7 +101,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
         // The listener will remove ids
         // it will order known items and add new at the end
         $this->assertEquals(
-            [['hello' => 'foo'], ['hello' => 'bar'],['hello' => 'baz']],
+            [['hello' => 'foo'], ['hello' => 'bar'], ['hello' => 'baz']],
             $event->getData()
         );
     }
@@ -105,7 +109,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
     public function testItRemovesDataThatDoesNotExistsAnymore()
     {
         $formData = [
-            new class extends \ArrayObject implements CrudableModelInterface {
+            new class() extends \ArrayObject implements CrudableModelInterface {
                 public function __construct()
                 {
                     parent::__construct(['hello' => 'yo', 'world' => 'ye']);
@@ -113,6 +117,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
 
                 public $hello = 'yo';
                 public $world = 'ye';
+
                 public function getId()
                 {
                     return 'foo';

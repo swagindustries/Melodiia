@@ -5,7 +5,6 @@ namespace Biig\Melodiia\Bridge\Symfony\Form\Listener;
 use Biig\Melodiia\Crud\CrudableModelInterface;
 use Biig\Melodiia\Exception\MelodiiaLogicException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -36,10 +35,7 @@ class ReorderDataToMatchCollectionListener implements EventSubscriberInterface
             $lastCollectionIndex = $name;
             $item = $child->getData();
             if (!$item instanceof CrudableModelInterface) {
-                throw new MelodiiaLogicException(sprintf(
-                    'Impossible manage the model of type "%s" inside Melodiia because it does not implement CrudableModelInterface.',
-                    get_class($item)
-                ));
+                throw new MelodiiaLogicException(sprintf('Impossible manage the model of type "%s" inside Melodiia because it does not implement CrudableModelInterface.', get_class($item)));
             }
             $itemId = (string) $item->getId();
             foreach ($data as $inputItem) {
@@ -56,7 +52,7 @@ class ReorderDataToMatchCollectionListener implements EventSubscriberInterface
         // Add "new" items (without id) to the data ordered
         foreach ($data as $inputItem) {
             if (!isset($inputItem['id'])) {
-                $lastCollectionIndex++;
+                ++$lastCollectionIndex;
                 $dataOrdered[$lastCollectionIndex] = $inputItem;
             }
         }

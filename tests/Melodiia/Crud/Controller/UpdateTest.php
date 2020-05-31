@@ -75,7 +75,6 @@ class UpdateTest extends TestCase
 
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass());
 
-
         $idResolver = $this->prophesize(IdResolverInterface::class);
         $idResolver->resolveId(Argument::type(Request::class), Argument::type('string'))->willReturn('id');
 
@@ -100,7 +99,7 @@ class UpdateTest extends TestCase
     }
 
     /**
-     * Issue #54
+     * Issue #54.
      */
     public function testItClearMissingWhileNullGivenAndMethodPatch()
     {
@@ -144,7 +143,7 @@ class UpdateTest extends TestCase
     }
 
     /**
-     * Issue #28
+     * Issue #28.
      */
     public function testItReturnProperlyOnWrongInput()
     {

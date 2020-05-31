@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Biig\Melodiia\Crud\Controller;
@@ -10,6 +11,7 @@ trait CrudControllerTrait
 {
     /**
      * @param string $modelClass FQCN of the model class
+     *
      * @throws MelodiiaLogicException if the model class don't match Melodiia requirements
      */
     public function assertModelClassInvalid(string $modelClass): void

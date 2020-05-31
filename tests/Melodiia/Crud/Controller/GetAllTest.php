@@ -97,7 +97,7 @@ class GetAllTest extends TestCase
     {
         $this->dataStore->getPaginated(FakeMelodiiaModel::class, 1, $this->filtersCollection->reveal(), 250)->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
 
-        $res = ($this->controller)( $this->request->reveal());
+        $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(OkContent::class, $res);
         $this->assertTrue($res->isCollection());

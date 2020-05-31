@@ -6,13 +6,12 @@ use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\Response\ApiResponse;
 use Biig\Melodiia\Response\WrongDataInput;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Zend\Json\Exception\RuntimeException;
 use Zend\Json\Json;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 abstract class BaseCrudController implements CrudControllerInterface
 {

@@ -47,7 +47,7 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
 
         try {
             $id = $this->idResolver->resolveId($request, $modelClass);
-        } catch(IdMissingException $e) {
+        } catch (IdMissingException $e) {
             throw new NotFoundHttpException('No id found', $e);
         }
 
@@ -60,15 +60,12 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
         }
 
         if ($securityCheck && !$this->checker->isGranted($securityCheck, $data)) {
-            throw new AccessDeniedException(\sprintf('You can\'t perform a delete operation of the resource item "%s" with id "%s"',
-                $modelClass,
-                $id
-            ));
+            throw new AccessDeniedException(\sprintf('You can\'t perform a delete operation of the resource item "%s" with id "%s"', $modelClass, $id));
         }
 
         $this->dispatch(new CrudEvent($data), self::EVENT_PRE_DELETE);
         $this->dataStore->remove($data);
-        $this->dispatch($event = new CustomResponseEvent($data),self::EVENT_POST_DELETE);
+        $this->dispatch($event = new CustomResponseEvent($data), self::EVENT_POST_DELETE);
 
         if ($event->hasCustomResponse()) {
             return $event->getResponse();

@@ -7,10 +7,10 @@ use Biig\Melodiia\Exception\MelodiiaRuntimeIssueException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 
 class OnErrorTest extends TestCase
 {

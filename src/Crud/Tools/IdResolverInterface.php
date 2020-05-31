@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Crud\Tools;
 
-
 use Symfony\Component\HttpFoundation\Request;
 
 interface IdResolverInterface

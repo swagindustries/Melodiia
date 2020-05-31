@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Bridge\Symfony;
 
-use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -62,10 +61,6 @@ final class MelodiiaConfiguration implements MelodiiaConfigurationInterface
     /**
      * If the given request is under a route handle by melodiia, find the first api with it "base_path" that match request path info.
      * Otherwise it return null.
-     *
-     * @param Request $request
-     *
-     * @return array|null
      */
     public function getApiConfigFor(Request $request): ?array
     {

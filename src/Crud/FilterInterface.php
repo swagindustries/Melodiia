@@ -16,17 +16,11 @@ interface FilterInterface
 
     /**
      * The filter support the class/entity/resource or not.
-     *
-     * @param string $class
-     *
-     * @return bool
      */
     public function supports(string $class): bool;
 
     /**
      * Adds its data to the form.
-     *
-     * @param FormBuilderInterface $formBuilder
      */
     public function buildForm(FormBuilderInterface $formBuilder): void;
 }

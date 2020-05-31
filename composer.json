@@ -2,6 +2,9 @@
     "name": "biig/melodiia",
     "description": "Library that helps you build APIs",
     "type": "library",
+    "scripts": {
+        "phpcs": "php-cs-fixer fix --using-cache=false"
+    },
     "require": {
         "php": ">=7.2",
         "zircote/swagger-php": "^3.0.3",

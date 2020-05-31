@@ -30,11 +30,10 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
     /**
      * @param OkContent $object
      * @param string    $format
-     * @param array     $context
      *
      * @return array|bool|float|int|string
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         $groups = $object->getSerializationContext()->getGroups();
         if (!empty($context['groups'])) {

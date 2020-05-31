@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Response;
 
-use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
 use Biig\Melodiia\Response\Model\UserDataError;
 
 class ErrorResponse extends AbstractUserDataErrorResponse

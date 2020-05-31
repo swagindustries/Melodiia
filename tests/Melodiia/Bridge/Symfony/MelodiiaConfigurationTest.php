@@ -3,12 +3,9 @@
 namespace Biig\Melodiia\Test\Bridge\Symfony;
 
 use Biig\Melodiia\Bridge\Symfony\MelodiiaConfiguration;
-use Biig\Melodiia\Crud\CrudControllerInterface;
 use Biig\Melodiia\MelodiiaConfigurationInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
 class MelodiiaConfigurationTest extends TestCase

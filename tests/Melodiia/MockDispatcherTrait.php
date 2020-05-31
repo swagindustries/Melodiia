@@ -2,7 +2,6 @@
 
 namespace Biig\Melodiia\Test;
 
-
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
 

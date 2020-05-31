@@ -2,10 +2,10 @@
 
 namespace Biig\Melodiia\Serialization\Json;
 
+use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 
 final class ExceptionNormalizer implements NormalizerInterface
 {

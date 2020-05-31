@@ -7,7 +7,6 @@ use Nekland\Tools\StringTools;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
-
 // BC Layer for Symfony 4
 // This class is removed in Symfony5 in favor of ErrorListener
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener as LegacyExceptionListener;
@@ -56,4 +55,3 @@ final class ExceptionListener
         $this->errorListener->onKernelException($event);
     }
 }
-

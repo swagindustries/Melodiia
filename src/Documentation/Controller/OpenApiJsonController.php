@@ -27,8 +27,7 @@ class OpenApiJsonController
     /**
      * DocumentationController constructor.
      *
-     * @param string|string[]               $paths   list of path where controller may be located
-     * @param DocumentationFactoryInterface $factory
+     * @param string|string[] $paths list of path where controller may be located
      *
      * @throws ConfigException
      */
@@ -50,8 +49,6 @@ class OpenApiJsonController
     }
 
     /**
-     * @param array $paths
-     *
      * @throws ConfigException
      */
     private function setPaths(array $paths)
