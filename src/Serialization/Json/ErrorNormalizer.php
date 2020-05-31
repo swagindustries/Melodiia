@@ -10,11 +10,10 @@ class ErrorNormalizer implements NormalizerInterface
     /**
      * @param AbstractUserDataErrorResponse $object
      * @param null                          $format
-     * @param array                         $context
      *
      * @return array|bool|float|int|string
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         $res = ['violations' => []];
 

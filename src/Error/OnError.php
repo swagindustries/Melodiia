@@ -2,7 +2,8 @@
 
 namespace Biig\Melodiia\Error;
 
-use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -20,7 +21,12 @@ final class OnError
         $this->exceptionToStatus = $exceptionToStatus;
     }
 
-    public function __invoke(FlattenException $exception): Response
+    /**
+     * Converts an exception to a JSON response.
+     *
+     * @param FlattenException|LegacyFlattenException $exception
+     */
+    public function __invoke($exception): Response
     {
         $exceptionClass = $exception->getClass();
         $statusCode = $exception->getStatusCode();

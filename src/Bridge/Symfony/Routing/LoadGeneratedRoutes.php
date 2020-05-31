@@ -21,9 +21,7 @@ class LoadGeneratedRoutes
     public function loadRoutes(): RouteCollection
     {
         if (true === $this->isLoaded) {
-            throw new MelodiiaRuntimeIssueException(
-                'The application tried to load routing 2 times; which is not allowed and could result from an infinite loop'
-            );
+            throw new MelodiiaRuntimeIssueException('The application tried to load routing 2 times; which is not allowed and could result from an infinite loop');
         }
         $routes = new RouteCollection();
 

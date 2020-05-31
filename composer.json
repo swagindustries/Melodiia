@@ -2,12 +2,15 @@
     "name": "biig/melodiia",
     "description": "Library that helps you build APIs",
     "type": "library",
+    "scripts": {
+        "phpcs": "php-cs-fixer fix --using-cache=false"
+    },
     "require": {
         "php": ">=7.2",
         "zircote/swagger-php": "^3.0.3",
         "nekland/tools": "^2.5.1",
         "zendframework/zend-json": "^3.0",
-        "symfony/event-dispatcher": "^4.0 || ^5.0",
+        "symfony/event-dispatcher": "^4.3 || ^5.0",
         "pagerfanta/pagerfanta": "^2.0.1"
     },
     "require-dev": {
@@ -15,7 +18,7 @@
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpspec/prophecy": "^1.8",
         "twig/twig": "^2.5",
-        "symfony/symfony": "^4.2 || ^5.0",
+        "symfony/symfony": "^4.3 || ^5.0",
         "doctrine/orm": "^2.6",
         "justinrainbow/json-schema": "^5.2",
         "doctrine/annotations": "^1.8"

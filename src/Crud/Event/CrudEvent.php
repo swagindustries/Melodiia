@@ -2,7 +2,7 @@
 
 namespace Biig\Melodiia\Crud\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CrudEvent extends Event
 {

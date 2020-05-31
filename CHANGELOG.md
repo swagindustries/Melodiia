@@ -8,9 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - CRUD controllers now use an id resolver (feel free to redefine it)
 - Melodiia now provides a convenient way to manage API collections with forms
+- Complete support of Sf 5.0 
 
-### Chaged
+### Changed
 - DataStore now uses a standard flush
+
+### Removed
+- Support for Sf 4.2
 
 ## [0.5.1] - 2020-03-31
 ### Fixed

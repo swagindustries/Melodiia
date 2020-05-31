@@ -18,17 +18,11 @@ class PaginationRequest
         $this->maxPerPage = $maxPerPage;
     }
 
-    /**
-     * @return int
-     */
     public function getPage(): int
     {
         return $this->page;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxPerPage(): int
     {
         return $this->maxPerPage;

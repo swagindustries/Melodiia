@@ -17,7 +17,6 @@ class UserDataError
     /**
      * ApiError constructor.
      *
-     * @param string   $propertyPath
      * @param string[] $errors
      */
     public function __construct(string $propertyPath, array $errors)
@@ -26,9 +25,6 @@ class UserDataError
         $this->errors = $errors;
     }
 
-    /**
-     * @return string
-     */
     public function getPropertyPath(): string
     {
         return $this->propertyPath;
@@ -42,9 +38,6 @@ class UserDataError
         return $this->errors;
     }
 
-    /**
-     * @param string $error
-     */
     public function addError(string $error): void
     {
         $this->errors[] = $error;

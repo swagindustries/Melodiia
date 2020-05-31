@@ -2,7 +2,8 @@
 
 namespace Biig\Melodiia\Serialization\Json;
 
-use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -32,7 +33,12 @@ final class ExceptionNormalizer implements NormalizerInterface
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Exception || $data instanceof FlattenException;
+        if (class_exists(FlattenException::class)) {
+            return $data instanceof \Exception || $data instanceof FlattenException;
+        }
+
+        // BC Layer for Sf 4.x
+        return $data instanceof \Exception || $data instanceof LegacyFlattenException;
     }
 
     /**

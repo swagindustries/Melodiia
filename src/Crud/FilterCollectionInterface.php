@@ -23,8 +23,6 @@ interface FilterCollectionInterface
 
     /**
      * Creates the filter form.
-     *
-     * @return FormInterface
      */
     public function getForm(): FormInterface;
 }

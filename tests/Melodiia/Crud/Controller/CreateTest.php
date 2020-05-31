@@ -102,7 +102,7 @@ class CreateTest extends TestCase
     }
 
     /**
-     * Issue #28
+     * Issue #28.
      */
     public function testItReturnProperlyOnWrongInput()
     {

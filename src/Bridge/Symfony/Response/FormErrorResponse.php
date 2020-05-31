@@ -84,8 +84,6 @@ class FormErrorResponse extends AbstractUserDataErrorResponse
     /**
      * Feel free to extend this class and override this method.
      *
-     * @param FormError $formError
-     *
      * @return array [$message, $propertyPath]
      */
     protected function getCause(FormError $formError): array
