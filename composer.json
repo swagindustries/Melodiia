@@ -3,7 +3,8 @@
     "description": "Library that helps you build APIs",
     "type": "library",
     "scripts": {
-        "phpcs": "php-cs-fixer fix --using-cache=false"
+        "phpcs": "php-cs-fixer fix --using-cache=false",
+        "post-install-cmd": "make hooks.install"
     },
     "require": {
         "php": ">=7.2",

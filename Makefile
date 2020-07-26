@@ -38,7 +38,7 @@ test.phpunit: ## Run PHPUnit tests
 	php vendor/bin/phpunit
 
 hooks.install: ## Install git hooks
-	@cp -vp resources/githooks/pre-commit.sh .git/hooks/pre-commit
+	@cp -vp resources/git/pre-commit.sh .git/hooks/pre-commit
 
 #
 ### OTHERS
