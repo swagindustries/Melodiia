@@ -4,6 +4,7 @@
     "type": "symfony-bundle",
     "scripts": {
         "phpcs": "php-cs-fixer fix --using-cache=false",
+        "test-app": "@php -S localhost:8000 -t tests/TestApplication/public",
         "post-install-cmd": "make hooks.install"
     },
     "require": {
@@ -22,7 +23,11 @@
         "symfony/symfony": "^4.3 || ^5.0",
         "doctrine/orm": "^2.6",
         "justinrainbow/json-schema": "^5.2",
-        "doctrine/annotations": "^1.8"
+        "doctrine/annotations": "^1.8",
+        "doctrine/doctrine-bundle": "^2.1",
+        "behat/behat": "^3.7",
+        "friends-of-behat/symfony-extension": "^2.1",
+        "fzaninotto/faker": "^1.9"
     },
     "autoload": {
         "psr-4": {
@@ -31,7 +36,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SwagIndustries\\Melodiia\\Test\\": "tests/Melodiia/"
+            "SwagIndustries\\Melodiia\\Test\\": "tests/Melodiia/",
+            "TestApplication\\": "tests/TestApplication/src/",
+            "SwagIndustries\\Melodiia\\Tests\\Behat\\": "tests/Behat/"
         }
     },
     "license": "MIT",

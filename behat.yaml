@@ -1,0 +1,11 @@
+default:
+  suites:
+    default:
+      contexts:
+        - SwagIndustries\Melodiia\Tests\Behat\Context\BasicsContext
+        - SwagIndustries\Melodiia\Tests\Behat\Context\TodoContext
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/TestApplication/config/bootstrap.php
+      kernel:
+        class: TestApplication\Kernel
