@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Test\Response\Model;
 
-use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Response\Model\UserDataError;
 
 class UserDataErrorTest extends TestCase
 {

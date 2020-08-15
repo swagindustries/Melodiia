@@ -2,10 +2,10 @@
 
 namespace SwagIndustries\Melodiia\Test\Crud\Event;
 
+use PHPUnit\Framework\TestCase;
 use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
 use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
 use SwagIndustries\Melodiia\Response\ApiResponse;
-use PHPUnit\Framework\TestCase;
 
 class CustomResponseEventTest extends TestCase
 {

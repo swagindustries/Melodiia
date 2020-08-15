@@ -2,13 +2,13 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Doctrine;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Exception\ImpossibleToPaginateWithDoctrineRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 
 class DoctrineDataStore implements DataStoreInterface
 {

@@ -2,12 +2,12 @@
 
 namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
+use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\FilterCollection;
 use SwagIndustries\Melodiia\Crud\FilterCollectionFactory;
 use SwagIndustries\Melodiia\Crud\FilterCollectionFactoryInterface;
 use SwagIndustries\Melodiia\Crud\FilterInterface;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

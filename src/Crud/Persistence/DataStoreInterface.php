@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Crud\Persistence;
 
-use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
 use Pagerfanta\Pagerfanta;
+use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
 
 interface DataStoreInterface
 {

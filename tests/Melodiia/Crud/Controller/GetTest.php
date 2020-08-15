@@ -2,6 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\Controller\Get;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
@@ -9,9 +12,6 @@ use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
 use SwagIndustries\Melodiia\Response\NotFound;
 use SwagIndustries\Melodiia\Response\OkContent;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

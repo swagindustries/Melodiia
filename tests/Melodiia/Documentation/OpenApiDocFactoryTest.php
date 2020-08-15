@@ -2,11 +2,11 @@
 
 namespace SwagIndustries\Melodiia\Test\Documentation;
 
-use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
-use SwagIndustries\Melodiia\Documentation\OpenApiDocFactory;
 use OpenApi\Analysis;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
+use SwagIndustries\Melodiia\Documentation\OpenApiDocFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 

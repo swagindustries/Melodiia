@@ -2,6 +2,11 @@
 
 namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Crud\Controller\GetAll;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
@@ -12,11 +17,6 @@ use SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Response\OkContent;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;

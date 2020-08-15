@@ -2,6 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\Controller\Delete;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
 use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
@@ -12,9 +15,6 @@ use SwagIndustries\Melodiia\Response\ApiResponse;
 use SwagIndustries\Melodiia\Response\Ok;
 use SwagIndustries\Melodiia\Test\MockDispatcherTrait;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;

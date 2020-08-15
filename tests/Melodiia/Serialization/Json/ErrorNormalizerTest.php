@@ -2,10 +2,10 @@
 
 namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
+use PHPUnit\Framework\TestCase;
 use SwagIndustries\Melodiia\Response\AbstractUserDataErrorResponse;
 use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use SwagIndustries\Melodiia\Serialization\Json\ErrorNormalizer;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ErrorNormalizerTest extends TestCase

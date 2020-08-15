@@ -2,10 +2,10 @@
 
 namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\EventListener;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\EventListener\ExceptionListener;
-use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Bridge\Symfony\EventListener\ExceptionListener;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;

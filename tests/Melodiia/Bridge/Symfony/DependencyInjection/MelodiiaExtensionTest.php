@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\DependencyInjection;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection\MelodiiaExtension;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection\MelodiiaExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class MelodiiaExtensionTest extends TestCase

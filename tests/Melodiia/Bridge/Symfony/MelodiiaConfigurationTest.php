@@ -2,9 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\Bridge\Symfony;
 
+use PHPUnit\Framework\TestCase;
 use SwagIndustries\Melodiia\Bridge\Symfony\MelodiiaConfiguration;
 use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 

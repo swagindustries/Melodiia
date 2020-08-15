@@ -2,9 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Symfony\EventListener;
 
-use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Nekland\Tools\StringTools;
 use Psr\Log\LoggerInterface;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 // BC Layer for Symfony 4

@@ -2,10 +2,10 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Symfony\Response;
 
+use Nekland\Tools\StringTools;
 use SwagIndustries\Melodiia\Exception\InvalidResponseException;
 use SwagIndustries\Melodiia\Response\AbstractUserDataErrorResponse;
 use SwagIndustries\Melodiia\Response\Model\UserDataError;
-use Nekland\Tools\StringTools;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 

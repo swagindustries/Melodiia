@@ -2,9 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\Response;
 
+use PHPUnit\Framework\TestCase;
 use SwagIndustries\Melodiia\Response\AbstractUserDataErrorResponse;
 use SwagIndustries\Melodiia\Response\ErrorResponse;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class ErrorResponseTest extends TestCase

@@ -2,9 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
+use PHPUnit\Framework\TestCase;
 use SwagIndustries\Melodiia\Response\Created;
 use SwagIndustries\Melodiia\Serialization\Json\CreatedNormalizer;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CreatedNormalizerTest extends TestCase

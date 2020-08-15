@@ -2,10 +2,10 @@
 
 namespace SwagIndustries\Melodiia\Test\Documentation\Controller;
 
-use SwagIndustries\Melodiia\Documentation\Controller\OpenApiController;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Documentation\Controller\OpenApiController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;

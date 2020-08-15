@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Symfony\Response;
 
-use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

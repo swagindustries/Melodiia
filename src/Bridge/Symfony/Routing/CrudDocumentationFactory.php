@@ -2,8 +2,6 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Symfony\Routing;
 
-use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
-use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
 use Nekland\Tools\StringTools;
 use OpenApi\Analysis;
 use OpenApi\Annotations\Get;
@@ -11,6 +9,8 @@ use OpenApi\Annotations\Parameter;
 use OpenApi\Annotations\Post;
 use OpenApi\Annotations\Response;
 use OpenApi\Annotations\Schema;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Router;
 

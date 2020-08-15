@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Serialization\Json;
 
-use SwagIndustries\Melodiia\Response\OkContent;
 use Pagerfanta\Pagerfanta;
+use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;

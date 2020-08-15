@@ -2,13 +2,13 @@
 
 namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
-use SwagIndustries\Melodiia\Response\OkContent;
-use SwagIndustries\Melodiia\Serialization\Json\OkContentNormalizer;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Serialization\Json\OkContentNormalizer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

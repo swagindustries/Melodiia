@@ -2,11 +2,11 @@
 
 namespace SwagIndustries\Melodiia\Test\Error;
 
-use SwagIndustries\Melodiia\Error\OnError;
-use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeIssueException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Error\OnError;
+use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeIssueException;
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;

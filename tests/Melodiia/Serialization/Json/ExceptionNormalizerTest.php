@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
-use SwagIndustries\Melodiia\Serialization\Json\ExceptionNormalizer;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Serialization\Json\ExceptionNormalizer;
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 

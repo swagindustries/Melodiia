@@ -2,6 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Crud\Controller\Create;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
@@ -13,9 +16,6 @@ use SwagIndustries\Melodiia\Response\Created;
 use SwagIndustries\Melodiia\Test\MockDispatcherTrait;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaFormType;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

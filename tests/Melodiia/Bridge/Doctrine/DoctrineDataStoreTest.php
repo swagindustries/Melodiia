@@ -2,16 +2,16 @@
 
 namespace SwagIndustries\Melodiia\Test\Bridge\Doctrine;
 
-use Doctrine\Persistence\ManagerRegistry;
-use SwagIndustries\Melodiia\Bridge\Doctrine\DoctrineDataStore;
-use SwagIndustries\Melodiia\Crud\FilterCollection;
-use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use SwagIndustries\Melodiia\Bridge\Doctrine\DoctrineDataStore;
+use SwagIndustries\Melodiia\Crud\FilterCollection;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 
 class DoctrineDataStoreTest extends TestCase
 {
