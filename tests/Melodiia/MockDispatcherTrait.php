@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Test;
+namespace SwagIndustries\Melodiia\Test;
 
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;

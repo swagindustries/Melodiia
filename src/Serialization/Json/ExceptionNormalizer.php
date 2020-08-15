@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Serialization\Json;
+namespace SwagIndustries\Melodiia\Serialization\Json;
 
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;

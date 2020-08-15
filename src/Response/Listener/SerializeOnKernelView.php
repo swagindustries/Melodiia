@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Response\Listener;
+namespace SwagIndustries\Melodiia\Response\Listener;
 
-use Biig\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\ApiResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ViewEvent;

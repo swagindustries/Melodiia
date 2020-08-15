@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Test\Error;
+namespace SwagIndustries\Melodiia\Test\Error;
 
-use Biig\Melodiia\Error\OnError;
-use Biig\Melodiia\Exception\MelodiiaRuntimeIssueException;
+use SwagIndustries\Melodiia\Error\OnError;
+use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeIssueException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;

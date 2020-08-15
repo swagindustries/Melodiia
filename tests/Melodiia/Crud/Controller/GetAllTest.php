@@ -1,17 +1,17 @@
 <?php
 
-namespace Biig\Melodiia\Test\Crud\Controller;
+namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
-use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\Controller\GetAll;
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Crud\FilterCollection;
-use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
-use Biig\Melodiia\Crud\Pagination\PaginationRequest;
-use Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Response\OkContent;
-use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
+use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
+use SwagIndustries\Melodiia\Crud\Controller\GetAll;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Crud\FilterCollection;
+use SwagIndustries\Melodiia\Crud\FilterCollectionFactoryInterface;
+use SwagIndustries\Melodiia\Crud\Pagination\PaginationRequest;
+use SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;

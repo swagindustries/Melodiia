@@ -1,13 +1,13 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\DependencyInjection;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection;
 
-use Biig\Melodiia\Bridge\Symfony\Exception\ConfigException;
-use Biig\Melodiia\Bridge\Symfony\Routing\CrudDocumentationFactory;
-use Biig\Melodiia\Crud\FilterInterface;
-use Biig\Melodiia\Documentation\Controller\OpenApiController;
-use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
-use Biig\Melodiia\Documentation\OpenApiDocFactory;
+use SwagIndustries\Melodiia\Bridge\Symfony\Exception\ConfigException;
+use SwagIndustries\Melodiia\Bridge\Symfony\Routing\CrudDocumentationFactory;
+use SwagIndustries\Melodiia\Crud\FilterInterface;
+use SwagIndustries\Melodiia\Documentation\Controller\OpenApiController;
+use SwagIndustries\Melodiia\Documentation\Controller\OpenApiJsonController;
+use SwagIndustries\Melodiia\Documentation\OpenApiDocFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

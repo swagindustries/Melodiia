@@ -1,16 +1,16 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Controller;
+namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Crud\Event\CrudEvent;
-use Biig\Melodiia\Crud\Event\CustomResponseEvent;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Crud\Tools\IdResolverInterface;
-use Biig\Melodiia\Crud\Tools\SimpleIdResolver;
-use Biig\Melodiia\Exception\IdMissingException;
-use Biig\Melodiia\Exception\MelodiiaLogicException;
-use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
+use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
+use SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver;
+use SwagIndustries\Melodiia\Exception\IdMissingException;
+use SwagIndustries\Melodiia\Exception\MelodiiaLogicException;
+use SwagIndustries\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;

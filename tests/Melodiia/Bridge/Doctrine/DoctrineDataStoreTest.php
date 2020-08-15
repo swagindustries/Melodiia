@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Melodiia\Test\Bridge\Doctrine;
+namespace SwagIndustries\Melodiia\Test\Bridge\Doctrine;
 
-use Biig\Melodiia\Bridge\Doctrine\DoctrineDataStore;
-use Biig\Melodiia\Crud\FilterCollection;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Bridge\Doctrine\DoctrineDataStore;
+use SwagIndustries\Melodiia\Crud\FilterCollection;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;

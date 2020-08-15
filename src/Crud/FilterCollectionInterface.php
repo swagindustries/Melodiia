@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Biig\Melodiia\Crud;
+namespace SwagIndustries\Melodiia\Crud;
 
 use Symfony\Component\Form\FormInterface;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Test\Serialization\Json;
+namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
-use Biig\Melodiia\Response\OkContent;
-use Biig\Melodiia\Serialization\Json\OkContentNormalizer;
+use SwagIndustries\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Serialization\Json\OkContentNormalizer;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;

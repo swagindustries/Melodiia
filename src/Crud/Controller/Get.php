@@ -1,15 +1,15 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Controller;
+namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Crud\Tools\IdResolverInterface;
-use Biig\Melodiia\Crud\Tools\SimpleIdResolver;
-use Biig\Melodiia\Exception\IdMissingException;
-use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\NotFound;
-use Biig\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
+use SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver;
+use SwagIndustries\Melodiia\Exception\IdMissingException;
+use SwagIndustries\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\NotFound;
+use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

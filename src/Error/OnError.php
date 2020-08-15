@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Error;
+namespace SwagIndustries\Melodiia\Error;
 
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;

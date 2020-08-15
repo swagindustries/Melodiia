@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Response;
+namespace SwagIndustries\Melodiia\Response;
 
-use Biig\Melodiia\Response\Model\UserDataError;
+use SwagIndustries\Melodiia\Response\Model\UserDataError;
 
 class ErrorResponse extends AbstractUserDataErrorResponse
 {

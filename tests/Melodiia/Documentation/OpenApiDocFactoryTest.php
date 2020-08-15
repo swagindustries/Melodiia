@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Test\Documentation;
+namespace SwagIndustries\Melodiia\Test\Documentation;
 
-use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
-use Biig\Melodiia\Documentation\OpenApiDocFactory;
+use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
+use SwagIndustries\Melodiia\Documentation\OpenApiDocFactory;
 use OpenApi\Analysis;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;

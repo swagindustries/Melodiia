@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form\Listener;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Listener;
 
-use Biig\Melodiia\Crud\CrudableModelInterface;
-use Biig\Melodiia\Exception\MelodiiaLogicException;
+use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Exception\MelodiiaLogicException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

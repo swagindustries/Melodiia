@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form\Type;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Type;
 
-use Biig\Melodiia\Bridge\Symfony\Form\Listener\ReorderDataToMatchCollectionListener;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\Listener\ReorderDataToMatchCollectionListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

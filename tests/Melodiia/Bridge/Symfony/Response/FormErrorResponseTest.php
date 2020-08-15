@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Response;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Response;
 
-use Biig\Melodiia\Response\Model\UserDataError;
+use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -36,7 +36,7 @@ class FormErrorResponseTest extends TestCase
     }
 
     /**
-     * @expectedException \Biig\Melodiia\Exception\InvalidResponseException
+     * @expectedException \SwagIndustries\Melodiia\Exception\InvalidResponseException
      */
     public function testItFailsIfFormNotSubmitted()
     {
@@ -45,7 +45,7 @@ class FormErrorResponseTest extends TestCase
     }
 
     /**
-     * @expectedException \Biig\Melodiia\Exception\InvalidResponseException
+     * @expectedException \SwagIndustries\Melodiia\Exception\InvalidResponseException
      */
     public function testItFailsIfFormHasNoError()
     {

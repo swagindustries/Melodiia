@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia;
+namespace SwagIndustries\Melodiia;
 
 use Symfony\Component\HttpFoundation\Request;
 

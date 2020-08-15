@@ -1,14 +1,14 @@
 <?php
 
-namespace Biig\Melodiia\Test\Crud\Controller;
+namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
-use Biig\Melodiia\Crud\Controller\Get;
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Crud\Tools\IdResolverInterface;
-use Biig\Melodiia\Response\NotFound;
-use Biig\Melodiia\Response\OkContent;
-use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
+use SwagIndustries\Melodiia\Crud\Controller\Get;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
+use SwagIndustries\Melodiia\Response\NotFound;
+use SwagIndustries\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;

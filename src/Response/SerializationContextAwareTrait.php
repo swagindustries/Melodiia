@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Response;
+namespace SwagIndustries\Melodiia\Response;
 
-use Biig\Melodiia\Response\Model\SerializationContext;
+use SwagIndustries\Melodiia\Response\Model\SerializationContext;
 
 trait SerializationContextAwareTrait
 {

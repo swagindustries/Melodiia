@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form;
 
 use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
 use Symfony\Component\Form\FormInterface;

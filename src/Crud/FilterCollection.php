@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Crud;
+namespace SwagIndustries\Melodiia\Crud;
 
-use Biig\Melodiia\Exception\NoFormFilterCreatedException;
+use SwagIndustries\Melodiia\Exception\NoFormFilterCreatedException;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

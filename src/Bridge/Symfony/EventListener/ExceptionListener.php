@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\EventListener;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\EventListener;
 
-use Biig\Melodiia\MelodiiaConfigurationInterface;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Nekland\Tools\StringTools;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;

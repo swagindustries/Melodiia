@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Routing;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Routing;
 
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
 use Nekland\Tools\StringTools;
 use OpenApi\Analysis;
 use OpenApi\Annotations\Get;

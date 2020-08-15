@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Huge BC Break on namespaces. You need to rename all classes used to SwagIndustries instead of Biig
+
 ## [0.6.0] 2020-06-01
 ### Added
 - CRUD controllers now use an id resolver (feel free to redefine it)

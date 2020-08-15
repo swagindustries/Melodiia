@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Documentation\Controller;
+namespace SwagIndustries\Melodiia\Documentation\Controller;
 
-use Biig\Melodiia\Bridge\Symfony\Exception\ConfigException;
-use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
+use SwagIndustries\Melodiia\Bridge\Symfony\Exception\ConfigException;
+use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

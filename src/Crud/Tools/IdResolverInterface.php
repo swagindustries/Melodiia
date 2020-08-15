@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Tools;
+namespace SwagIndustries\Melodiia\Crud\Tools;
 
 use Symfony\Component\HttpFoundation\Request;
 

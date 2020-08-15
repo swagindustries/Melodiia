@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Serialization\Json;
+namespace SwagIndustries\Melodiia\Serialization\Json;
 
-use Biig\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Response\OkContent;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

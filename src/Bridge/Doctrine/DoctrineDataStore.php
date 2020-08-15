@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Doctrine;
+namespace SwagIndustries\Melodiia\Bridge\Doctrine;
 
-use Biig\Melodiia\Crud\FilterCollectionInterface;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Exception\ImpossibleToPaginateWithDoctrineRepository;
+use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Exception\ImpossibleToPaginateWithDoctrineRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;

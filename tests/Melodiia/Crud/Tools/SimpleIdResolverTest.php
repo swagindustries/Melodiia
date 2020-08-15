@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Melodiia\Test\Crud\Tools;
+namespace SwagIndustries\Melodiia\Test\Crud\Tools;
 
-use Biig\Melodiia\Crud\Tools\IdResolverInterface;
-use Biig\Melodiia\Crud\Tools\SimpleIdResolver;
-use Biig\Melodiia\Exception\IdMissingException;
+use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
+use SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver;
+use SwagIndustries\Melodiia\Exception\IdMissingException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,12 +1,12 @@
 services:
     melodiia.routing_loader:
-        class: Biig\Melodiia\Bridge\Symfony\Routing\LoadGeneratedRoutes
+        class: SwagIndustries\Melodiia\Bridge\Symfony\Routing\LoadGeneratedRoutes
         public: true
         arguments:
             $config: '@melodiia.configuration'
 
     melodiia.configuration:
-        class: Biig\Melodiia\Bridge\Symfony\MelodiiaConfiguration
+        class: SwagIndustries\Melodiia\Bridge\Symfony\MelodiiaConfiguration
         arguments:
             $config: '%melodiia.config%'
             $router: '@router.default'
@@ -15,24 +15,24 @@ services:
     # Priority -1 is DX. It allow the user to implement its own normalizers
     # that will take over those.
     melodiia.serialization.created_normalizer:
-        class: Biig\Melodiia\Serialization\Json\CreatedNormalizer
+        class: SwagIndustries\Melodiia\Serialization\Json\CreatedNormalizer
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
     melodiia.serialization.error_normalizer:
-        class: Biig\Melodiia\Serialization\Json\ErrorNormalizer
+        class: SwagIndustries\Melodiia\Serialization\Json\ErrorNormalizer
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
     melodiia.serialization.ok_content_normalizer:
-        class: Biig\Melodiia\Serialization\Json\OkContentNormalizer
+        class: SwagIndustries\Melodiia\Serialization\Json\OkContentNormalizer
         autoconfigure: true
         arguments:
             $requestStack: '@request_stack'
         tags: [{ name: 'serializer.normalizer', priority: -1 }]
 
-    Biig\Melodiia\MelodiiaConfigurationInterface: '@melodiia.configuration'
+    SwagIndustries\Melodiia\MelodiiaConfigurationInterface: '@melodiia.configuration'
 
     melodiia.response_listener:
-        class: Biig\Melodiia\Response\Listener\SerializeOnKernelView
+        class: SwagIndustries\Melodiia\Response\Listener\SerializeOnKernelView
         autoconfigure: true
         autowire: true
 

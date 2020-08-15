@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Test\Bridge\Symfony\DependencyInjection;
+namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\DependencyInjection;
 
-use Biig\Melodiia\Bridge\Symfony\DependencyInjection\MelodiiaExtension;
+use SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection\MelodiiaExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

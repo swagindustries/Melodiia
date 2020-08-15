@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Test\TestFixtures;
+namespace SwagIndustries\Melodiia\Test\TestFixtures;
 
-use Biig\Melodiia\Bridge\Symfony\Form\AbstractType;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\AbstractType;
 
 class FakeMelodiiaFormType extends AbstractType
 {

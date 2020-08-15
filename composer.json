@@ -1,7 +1,7 @@
 {
-    "name": "biig/melodiia",
+    "name": "swag-industries/melodiia",
     "description": "Library that helps you build APIs",
-    "type": "library",
+    "type": "symfony-bundle",
     "scripts": {
         "phpcs": "php-cs-fixer fix --using-cache=false",
         "post-install-cmd": "make hooks.install"
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Biig\\Melodiia\\": "src/"
+            "SwagIndustries\\Melodiia\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Biig\\Melodiia\\Test\\": "tests/Melodiia/"
+            "SwagIndustries\\Melodiia\\Test\\": "tests/Melodiia/"
         }
     },
     "license": "MIT",

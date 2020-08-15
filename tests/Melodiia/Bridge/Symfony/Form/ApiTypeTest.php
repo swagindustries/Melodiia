@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Test\Bridge\Symfony\Form;
+namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\Form;
 
-use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
-use Biig\Melodiia\Bridge\Symfony\Form\Type\ApiType;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
@@ -83,7 +83,7 @@ class FakeModel
     }
 }
 
-class FakeTypeUsingApiType extends \Biig\Melodiia\Bridge\Symfony\Form\AbstractType
+class FakeTypeUsingApiType extends \SwagIndustries\Melodiia\Bridge\Symfony\Form\AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Test\TestFixtures;
+namespace SwagIndustries\Melodiia\Test\TestFixtures;
 
-use Biig\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
 
 class FakeMelodiiaModel implements CrudableModelInterface
 {

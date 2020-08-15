@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Event;
+namespace SwagIndustries\Melodiia\Crud\Event;
 
-use Biig\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\ApiResponse;
 
 class CustomResponseEvent extends CrudEvent
 {

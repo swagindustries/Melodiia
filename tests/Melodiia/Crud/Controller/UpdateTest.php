@@ -1,19 +1,19 @@
 <?php
 
-namespace Biig\Melodiia\Test\Crud\Controller;
+namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
-use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\Controller\Update;
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Crud\Event\CrudEvent;
-use Biig\Melodiia\Crud\Event\CustomResponseEvent;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Crud\Tools\IdResolverInterface;
-use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\OkContent;
-use Biig\Melodiia\Test\MockDispatcherTrait;
-use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaFormType;
-use Biig\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
+use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
+use SwagIndustries\Melodiia\Crud\Controller\Update;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
+use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
+use SwagIndustries\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Test\MockDispatcherTrait;
+use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaFormType;
+use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Test\Bridge\Symfony;
+namespace SwagIndustries\Melodiia\Test\Bridge\Symfony;
 
-use Biig\Melodiia\Bridge\Symfony\MelodiiaConfiguration;
-use Biig\Melodiia\MelodiiaConfigurationInterface;
+use SwagIndustries\Melodiia\Bridge\Symfony\MelodiiaConfiguration;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
