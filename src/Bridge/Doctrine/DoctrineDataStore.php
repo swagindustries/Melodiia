@@ -2,10 +2,10 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Doctrine;
 
+use Doctrine\Persistence\ManagerRegistry;
 use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Exception\ImpossibleToPaginateWithDoctrineRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
