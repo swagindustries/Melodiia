@@ -1,6 +1,8 @@
 Melodiia
 ========
 
+![badge](https://action-badges.now.sh/swagindustries/Melodiia)
+
 Finally some competitor to ApiPlatform.
 
 Features
