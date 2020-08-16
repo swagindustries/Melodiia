@@ -1,28 +1,28 @@
 services:
     melodiia.doctrine.data_provider:
-        class: Biig\Melodiia\Bridge\Doctrine\DoctrineDataStore
+        class: SwagIndustries\Melodiia\Bridge\Doctrine\DoctrineDataStore
         arguments:
             $registry: '@doctrine'
 
     melodiia.crud.id_resolver:
-        class: Biig\Melodiia\Crud\Tools\SimpleIdResolver
+        class: SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver
 
     melodiia.crud.filters.filter_collection_factory:
-        class: Biig\Melodiia\Crud\FilterCollectionFactory
+        class: SwagIndustries\Melodiia\Crud\FilterCollectionFactory
         arguments:
             $formFactory: '@form.factory'
             $filters: !tagged melodiia.crud_filter
 
-    Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
+    SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
         alias: 'melodiia.crud.pagination.pages_request_factory'
 
     melodiia.crud.pagination.pages_request_factory:
-        class: Biig\Melodiia\Crud\Pagination\PaginationRequestFactory
+        class: SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactory
         arguments:
             $configuration: '@melodiia.configuration'
 
     melodiia.crud.controller.create:
-        class: Biig\Melodiia\Crud\Controller\Create
+        class: SwagIndustries\Melodiia\Crud\Controller\Create
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $formFactory: '@form.factory'
@@ -31,7 +31,7 @@ services:
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.update:
-        class: Biig\Melodiia\Crud\Controller\Update
+        class: SwagIndustries\Melodiia\Crud\Controller\Update
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $formFactory: '@form.factory'
@@ -41,16 +41,16 @@ services:
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get_all:
-        class: Biig\Melodiia\Crud\Controller\GetAll
+        class: SwagIndustries\Melodiia\Crud\Controller\GetAll
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
             $collectionFactory: '@melodiia.crud.filters.filter_collection_factory'
-            $pagesRequestFactory: '@Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface'
+            $pagesRequestFactory: '@SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get:
-        class: Biig\Melodiia\Crud\Controller\Get
+        class: SwagIndustries\Melodiia\Crud\Controller\Get
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'
@@ -58,7 +58,7 @@ services:
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.delete:
-        class: Biig\Melodiia\Crud\Controller\Delete
+        class: SwagIndustries\Melodiia\Crud\Controller\Delete
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
             $checker: '@security.authorization_checker'

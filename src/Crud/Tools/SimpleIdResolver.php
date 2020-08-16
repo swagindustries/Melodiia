@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Tools;
+namespace SwagIndustries\Melodiia\Crud\Tools;
 
-use Biig\Melodiia\Exception\IdMissingException;
+use SwagIndustries\Melodiia\Exception\IdMissingException;
 use Symfony\Component\HttpFoundation\Request;
 
 class SimpleIdResolver implements IdResolverInterface

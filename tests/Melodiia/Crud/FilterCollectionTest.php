@@ -1,13 +1,13 @@
 <?php
 
-namespace Biig\Melodiia\Test\Crud\Controller;
+namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
-use Biig\Melodiia\Crud\FilterCollection;
-use Biig\Melodiia\Crud\FilterInterface;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Crud\FilterCollection;
+use SwagIndustries\Melodiia\Crud\FilterInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;

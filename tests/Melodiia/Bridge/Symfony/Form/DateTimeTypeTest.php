@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Test\Bridge\Symfony\Form;
+namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\Form;
 
-use Biig\Melodiia\Bridge\Symfony\Form\Type\DateTimeType;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\DateTimeType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class DateTimeTypeTest extends TypeTestCase

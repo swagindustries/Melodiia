@@ -1,15 +1,15 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Controller;
+namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Crud\Event\CrudEvent;
-use Biig\Melodiia\Crud\Event\CustomResponseEvent;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Crud\Tools\IdResolverInterface;
-use Biig\Melodiia\Crud\Tools\SimpleIdResolver;
-use Biig\Melodiia\Exception\IdMissingException;
-use Biig\Melodiia\Response\Ok;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
+use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
+use SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver;
+use SwagIndustries\Melodiia\Exception\IdMissingException;
+use SwagIndustries\Melodiia\Response\Ok;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

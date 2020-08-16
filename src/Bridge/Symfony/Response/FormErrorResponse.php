@@ -1,11 +1,11 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Response;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Response;
 
-use Biig\Melodiia\Exception\InvalidResponseException;
-use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
-use Biig\Melodiia\Response\Model\UserDataError;
 use Nekland\Tools\StringTools;
+use SwagIndustries\Melodiia\Exception\InvalidResponseException;
+use SwagIndustries\Melodiia\Response\AbstractUserDataErrorResponse;
+use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 

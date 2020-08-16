@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form\Type;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

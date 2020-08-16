@@ -1,13 +1,13 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Controller;
+namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\Crud\FilterCollectionFactoryInterface;
-use Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
-use Biig\Melodiia\Crud\Persistence\DataStoreInterface;
-use Biig\Melodiia\Response\OkContent;
+use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\Crud\FilterCollectionFactoryInterface;
+use SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
+use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Response\Model;
+namespace SwagIndustries\Melodiia\Response\Model;
 
 class UserDataError
 {

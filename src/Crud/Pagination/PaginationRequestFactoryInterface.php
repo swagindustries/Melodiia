@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Biig\Melodiia\Crud\Pagination;
+namespace SwagIndustries\Melodiia\Crud\Pagination;
 
 use Symfony\Component\HttpFoundation\Request;
 

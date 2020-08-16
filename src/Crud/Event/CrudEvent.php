@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Event;
+namespace SwagIndustries\Melodiia\Crud\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 

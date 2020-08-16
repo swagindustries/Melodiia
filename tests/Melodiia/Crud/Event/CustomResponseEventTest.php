@@ -1,11 +1,11 @@
 <?php
 
-namespace Biig\Melodiia\Test\Crud\Event;
+namespace SwagIndustries\Melodiia\Test\Crud\Event;
 
-use Biig\Melodiia\Crud\Event\CrudEvent;
-use Biig\Melodiia\Crud\Event\CustomResponseEvent;
-use Biig\Melodiia\Response\ApiResponse;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
+use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
+use SwagIndustries\Melodiia\Response\ApiResponse;
 
 class CustomResponseEventTest extends TestCase
 {

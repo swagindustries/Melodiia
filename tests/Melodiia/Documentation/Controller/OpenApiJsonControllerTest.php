@@ -1,13 +1,13 @@
 <?php
 
-namespace Biig\Melodiia\Test\Documentation\Controller;
+namespace SwagIndustries\Melodiia\Test\Documentation\Controller;
 
-use Biig\Melodiia\Documentation\Controller\OpenApiJsonController;
-use Biig\Melodiia\Documentation\DocumentationFactoryInterface;
 use OpenApi\Analysis;
 use OpenApi\Annotations\Info;
 use OpenApi\Annotations\OpenApi;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Documentation\Controller\OpenApiJsonController;
+use SwagIndustries\Melodiia\Documentation\DocumentationFactoryInterface;
 
 class OpenApiJsonControllerTest extends TestCase
 {

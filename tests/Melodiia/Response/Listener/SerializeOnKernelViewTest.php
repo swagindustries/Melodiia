@@ -1,12 +1,12 @@
 <?php
 
-namespace Biig\Melodiia\Test\Response\Listener;
+namespace SwagIndustries\Melodiia\Test\Response\Listener;
 
-use Biig\Melodiia\Response\ApiResponse;
-use Biig\Melodiia\Response\Listener\SerializeOnKernelView;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\Listener\SerializeOnKernelView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;

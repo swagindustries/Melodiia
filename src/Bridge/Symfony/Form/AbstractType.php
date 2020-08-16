@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form;
 
-use Biig\Melodiia\Bridge\Symfony\Form\Type\ApiType;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;
 use Symfony\Component\Form\AbstractType as BaseType;
 
 abstract class AbstractType extends BaseType

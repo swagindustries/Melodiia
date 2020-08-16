@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form\Extension;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

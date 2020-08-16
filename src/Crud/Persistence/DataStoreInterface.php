@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Persistence;
+namespace SwagIndustries\Melodiia\Crud\Persistence;
 
-use Biig\Melodiia\Crud\FilterCollectionInterface;
 use Pagerfanta\Pagerfanta;
+use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
 
 interface DataStoreInterface
 {

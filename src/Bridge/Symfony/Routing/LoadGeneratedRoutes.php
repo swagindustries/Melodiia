@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Routing;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Routing;
 
-use Biig\Melodiia\Exception\MelodiiaRuntimeIssueException;
-use Biig\Melodiia\MelodiiaConfigurationInterface;
 use Nekland\Tools\StringTools;
+use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeIssueException;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 

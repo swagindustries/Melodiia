@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Melodiia\Test\Serialization\Json;
+namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
-use Biig\Melodiia\Response\Created;
-use Biig\Melodiia\Serialization\Json\CreatedNormalizer;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Response\Created;
+use SwagIndustries\Melodiia\Serialization\Json\CreatedNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CreatedNormalizerTest extends TestCase

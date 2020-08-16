@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Biig\Melodiia\Crud\Pagination;
+namespace SwagIndustries\Melodiia\Crud\Pagination;
 
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\MelodiiaConfigurationInterface;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaginationRequestFactory implements PaginationRequestFactoryInterface

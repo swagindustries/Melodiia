@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Biig\Melodiia\Crud\Controller;
+namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use Biig\Melodiia\Crud\CrudableModelInterface;
-use Biig\Melodiia\Exception\MelodiiaLogicException;
+use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Exception\MelodiiaLogicException;
 
 trait CrudControllerTrait
 {

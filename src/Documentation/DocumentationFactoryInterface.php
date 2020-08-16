@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Documentation;
+namespace SwagIndustries\Melodiia\Documentation;
 
 use OpenApi\Analysis;
 

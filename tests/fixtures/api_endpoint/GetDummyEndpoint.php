@@ -2,7 +2,7 @@
 
 namespace App\Tests\fixtures\api_endpoint;
 
-use Biig\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class GetDummyEndpoint

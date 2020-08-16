@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Exception;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Exception;
 
-use Biig\Melodiia\Exception\MelodiiaLogicException;
+use SwagIndustries\Melodiia\Exception\MelodiiaLogicException;
 
 class ConfigException extends MelodiiaLogicException
 {

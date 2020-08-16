@@ -14,7 +14,7 @@ Install
 -------
 
 ```bash
-composer require biig/melodiia
+composer require swag-industries/melodiia
 ```
 
 ### Symfony setup

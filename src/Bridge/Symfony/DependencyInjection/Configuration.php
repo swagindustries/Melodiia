@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\DependencyInjection;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

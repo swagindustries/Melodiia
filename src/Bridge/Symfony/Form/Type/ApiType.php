@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony\Form\Type;
+namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Type;
 
-use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectDataMapperInterface;
-use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\DomainObjectDataMapperInterface;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;

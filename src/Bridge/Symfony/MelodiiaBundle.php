@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony;
+namespace SwagIndustries\Melodiia\Bridge\Symfony;
 
-use Biig\Melodiia\Bridge\Symfony\DependencyInjection\MelodiiaExtension;
+use SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection\MelodiiaExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class MelodiiaBundle extends Bundle

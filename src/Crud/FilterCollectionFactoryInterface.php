@@ -1,6 +1,6 @@
 <?php
 
-namespace Biig\Melodiia\Crud;
+namespace SwagIndustries\Melodiia\Crud;
 
 interface FilterCollectionFactoryInterface
 {

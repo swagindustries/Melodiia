@@ -1,10 +1,10 @@
 <?php
 
-namespace Biig\Melodiia\Test\Response;
+namespace SwagIndustries\Melodiia\Test\Response;
 
-use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
-use Biig\Melodiia\Response\ErrorResponse;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Response\AbstractUserDataErrorResponse;
+use SwagIndustries\Melodiia\Response\ErrorResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class ErrorResponseTest extends TestCase

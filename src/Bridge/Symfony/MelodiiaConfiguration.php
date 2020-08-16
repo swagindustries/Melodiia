@@ -1,8 +1,8 @@
 <?php
 
-namespace Biig\Melodiia\Bridge\Symfony;
+namespace SwagIndustries\Melodiia\Bridge\Symfony;
 
-use Biig\Melodiia\MelodiiaConfigurationInterface;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;

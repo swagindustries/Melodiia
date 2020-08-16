@@ -1,12 +1,12 @@
 <?php
 
-namespace Biig\Melodiia\Crud\Pagination;
+namespace SwagIndustries\Melodiia\Crud\Pagination;
 
-use Biig\Melodiia\Crud\CrudControllerInterface;
-use Biig\Melodiia\MelodiiaConfigurationInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 

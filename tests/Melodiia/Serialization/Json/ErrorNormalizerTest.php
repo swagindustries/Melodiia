@@ -1,11 +1,11 @@
 <?php
 
-namespace Biig\Melodiia\Test\Serialization\Json;
+namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
-use Biig\Melodiia\Response\AbstractUserDataErrorResponse;
-use Biig\Melodiia\Response\Model\UserDataError;
-use Biig\Melodiia\Serialization\Json\ErrorNormalizer;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Response\AbstractUserDataErrorResponse;
+use SwagIndustries\Melodiia\Response\Model\UserDataError;
+use SwagIndustries\Melodiia\Serialization\Json\ErrorNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ErrorNormalizerTest extends TestCase

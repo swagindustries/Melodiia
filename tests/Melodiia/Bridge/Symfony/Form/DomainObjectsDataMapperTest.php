@@ -1,9 +1,9 @@
 <?php
 
-namespace Biig\Melodiia\Test\Bridge\Symfony\Form;
+namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\Form;
 
-use Biig\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
