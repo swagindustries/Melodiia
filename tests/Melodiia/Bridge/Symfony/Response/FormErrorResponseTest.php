@@ -10,6 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -101,6 +104,42 @@ class FormErrorResponseTest extends TestCase
         $errors = $formErrorResponse->getErrors();
         $this->assertCount(1, $errors['foo']->getErrors());
         $this->assertCount(1, $errors['bar.baz']->getErrors());
+    }
+
+    public function testItSupportsNullReason()
+    {
+        $form = $this->formFactory
+            ->createNamedBuilder('')
+            ->add('foo', TextType::class)
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $event->getForm()->get('foo')->addError(new FormError('some error'));
+            })
+            ->getForm()
+        ;
+        $form->submit(['foo' => '']);
+
+        $formErrorResponse = new FormErrorResponse($form);
+        $errors = $formErrorResponse->getErrors();
+        $this->assertCount(1, $errors['foo']->getErrors());
+        $this->assertEquals('some error', $errors['foo']->getErrors()[0]);
+    }
+
+    public function testItSupportsStringReason()
+    {
+        $form = $this->formFactory
+            ->createNamedBuilder('')
+            ->add('foo', TextType::class)
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $event->getForm()->get('foo')->addError(new FormError('some error', null, [], null, 'Cause'));
+            })
+            ->getForm()
+        ;
+        $form->submit(['foo' => '']);
+
+        $formErrorResponse = new FormErrorResponse($form);
+        $errors = $formErrorResponse->getErrors();
+        $this->assertCount(1, $errors['foo']->getErrors());
+        $this->assertEquals('Cause', $errors['foo']->getErrors()[0]);
     }
 
     public function testCollectionFormErrors()
