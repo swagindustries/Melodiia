@@ -1,6 +1,18 @@
 CRUDs with Melodiia
 ===================
 
+Requirements
+------------
+
+The CRUD of Melodiia is based on the following components of Symfony. This means you need to use install & enable them:
+- **The Serializer Component**
+  
+  Melodiia uses the serializer of Symfony to render responses.
+- **The Form Component**
+  
+  Melodiia uses the form component to manage input.
+
+
 Register your first CRUD
 ------------------------
 
@@ -36,7 +48,6 @@ acme_article_get:
     defaults:
         melodiia_model: App\Entity\Article
         melodiia_security_check: 'some content runnable in AuthorizationChecker class'
-
 ```
 
 #### Collection

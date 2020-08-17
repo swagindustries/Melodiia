@@ -10,7 +10,6 @@ use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GetAll implements CrudControllerInterface
 {
@@ -30,9 +29,9 @@ class GetAll implements CrudControllerInterface
 
     public function __construct(
         DataStoreInterface $dataStore,
-        AuthorizationCheckerInterface $checker,
         FilterCollectionFactoryInterface $collectionFactory,
-        PaginationRequestFactoryInterface $pagesRequestFactory
+        PaginationRequestFactoryInterface $pagesRequestFactory,
+        AuthorizationCheckerInterface $checker = null
     ) {
         $this->dataStore = $dataStore;
         $this->checker = $checker;
@@ -44,14 +43,10 @@ class GetAll implements CrudControllerInterface
     {
         // Metadata you can specify in routing definition
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
-        $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
         $groups = $request->attributes->get(self::SERIALIZATION_GROUP, []);
 
         $this->assertModelClassInvalid($modelClass);
-
-        if ($securityCheck && !$this->checker->isGranted($securityCheck)) {
-            throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));
-        }
+        $this->assertResourceRights($request);
 
         $filters = $this->filterCollectionFactory->createCollection($modelClass);
         $form = $filters->getForm();
