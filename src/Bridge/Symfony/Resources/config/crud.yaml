@@ -27,7 +27,7 @@ services:
             $dataStore: '@melodiia.doctrine.data_provider'
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
-            $checker: '@security.authorization_checker'
+            $checker: '@?security.authorization_checker'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.update:
@@ -36,32 +36,32 @@ services:
             $dataStore: '@melodiia.doctrine.data_provider'
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
-            $checker: '@security.authorization_checker'
             $idResolver: '@melodiia.crud.id_resolver'
+            $checker: '@?security.authorization_checker'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get_all:
         class: SwagIndustries\Melodiia\Crud\Controller\GetAll
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
-            $checker: '@security.authorization_checker'
             $collectionFactory: '@melodiia.crud.filters.filter_collection_factory'
             $pagesRequestFactory: '@SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface'
+            $checker: '@?security.authorization_checker'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.get:
         class: SwagIndustries\Melodiia\Crud\Controller\Get
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
-            $checker: '@security.authorization_checker'
             $idResolver: '@melodiia.crud.id_resolver'
+            $checker: '@?security.authorization_checker'
         tags: [ controller.service_arguments ]
 
     melodiia.crud.controller.delete:
         class: SwagIndustries\Melodiia\Crud\Controller\Delete
         arguments:
             $dataStore: '@melodiia.doctrine.data_provider'
-            $checker: '@security.authorization_checker'
             $dispatcher: '@event_dispatcher'
             $idResolver: '@melodiia.crud.id_resolver'
+            $checker: '@?security.authorization_checker'
         tags: [ controller.service_arguments ]

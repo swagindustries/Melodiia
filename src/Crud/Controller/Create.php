@@ -12,7 +12,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Crud controller that create data model with the data from the request using a form.
@@ -30,10 +29,10 @@ final class Create extends BaseCrudController
     /** @var FormFactoryInterface */
     private $formFactory;
 
-    /** @var AuthorizationCheckerInterface */
+    /** @var AuthorizationCheckerInterface|null */
     private $checker;
 
-    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker)
+    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
@@ -46,14 +45,11 @@ final class Create extends BaseCrudController
         // Metadata you can specify in routing definition
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
-        $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
         $clearMissing = $request->attributes->getBoolean(self::FORM_CLEAR_MISSING, true);
 
         $this->assertModelClassInvalid($modelClass);
 
-        if ($securityCheck && !$this->checker->isGranted($securityCheck)) {
-            throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));
-        }
+        $this->assertResourceRights($request);
 
         if (empty($form) || !class_exists($form)) {
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');

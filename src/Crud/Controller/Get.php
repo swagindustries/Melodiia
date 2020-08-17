@@ -13,7 +13,6 @@ use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class Get implements CrudControllerInterface
 {
@@ -22,24 +21,23 @@ final class Get implements CrudControllerInterface
     /** @var DataStoreInterface */
     private $dataStore;
 
-    /** @var AuthorizationCheckerInterface */
+    /** @var AuthorizationCheckerInterface|null */
     private $checker;
 
     /** @var IdResolverInterface */
     private $idResolver;
 
-    public function __construct(DataStoreInterface $dataStore, AuthorizationCheckerInterface $checker, IdResolverInterface $idResolver = null)
+    public function __construct(DataStoreInterface $dataStore, IdResolverInterface $idResolver = null, AuthorizationCheckerInterface $checker = null)
     {
         $this->dataStore = $dataStore;
-        $this->checker = $checker;
         $this->idResolver = $idResolver ?? new SimpleIdResolver();
+        $this->checker = $checker;
     }
 
     public function __invoke(Request $request): ApiResponse
     {
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $groups = $request->attributes->get(self::SERIALIZATION_GROUP, []);
-        $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
         try {
             $id = $this->idResolver->resolveId($request, $modelClass);
         } catch (IdMissingException $e) {
@@ -52,9 +50,7 @@ final class Get implements CrudControllerInterface
             return new NotFound();
         }
 
-        if ($securityCheck && !$this->checker->isGranted($securityCheck, $data)) {
-            throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', get_class($data)));
-        }
+        $this->assertResourceRights($request, $data);
 
         return new OkContent($data, $groups);
     }

@@ -82,9 +82,9 @@ class GetAllTest extends TestCase
 
         $this->controller = new GetAll(
             $this->dataStore->reveal(),
-            $this->authorizationChecker->reveal(),
             $this->filtersFactory->reveal(),
-            $paginationFactory->reveal()
+            $paginationFactory->reveal(),
+            $this->authorizationChecker->reveal()
         );
     }
 

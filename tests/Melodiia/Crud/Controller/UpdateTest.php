@@ -82,8 +82,8 @@ class UpdateTest extends TestCase
             $this->dataStore->reveal(),
             $this->formFactory->reveal(),
             $this->dispatcher->reveal(),
-            $this->checker->reveal(),
-            $idResolver->reveal()
+            $idResolver->reveal(),
+            $this->checker->reveal()
         );
     }
 

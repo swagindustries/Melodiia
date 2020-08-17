@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Crud controller that update data model with the data from the request using a form.
@@ -40,7 +39,7 @@ final class Update extends BaseCrudController
     /** @var IdResolverInterface */
     private $idResolver;
 
-    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker, IdResolverInterface $idResolver = null)
+    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, IdResolverInterface $idResolver = null, AuthorizationCheckerInterface $checker = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
@@ -53,7 +52,6 @@ final class Update extends BaseCrudController
     {
         $modelClass = $request->attributes->get(self::MODEL_ATTRIBUTE);
         $form = $request->attributes->get(self::FORM_ATTRIBUTE);
-        $securityCheck = $request->attributes->get(self::SECURITY_CHECK, null);
         $clearMissing = $request->attributes->has(self::FORM_CLEAR_MISSING)
             ? $request->attributes->getBoolean(self::FORM_CLEAR_MISSING)
             : null
@@ -69,9 +67,7 @@ final class Update extends BaseCrudController
 
         $data = $this->dataStore->find($modelClass, $id);
 
-        if ($securityCheck && !$this->checker->isGranted($securityCheck, $data)) {
-            throw new AccessDeniedException(\sprintf('Access denied to data of type "%s".', $modelClass));
-        }
+        $this->assertResourceRights($request, $data);
 
         if (empty($form) || !class_exists($form)) {
             throw new MelodiiaLogicException('If you use melodiia CRUD classes, you need to specify a model.');

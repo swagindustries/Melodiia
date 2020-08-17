@@ -35,7 +35,7 @@ class GetTest extends TestCase
         $idResolver = $this->prophesize(IdResolverInterface::class);
         $idResolver->resolveId(Argument::type(Request::class), Argument::type('string'))->willReturn('id');
 
-        $this->controller = new Get($this->dataStore->reveal(), $this->authorizationChecker->reveal(), $idResolver->reveal());
+        $this->controller = new Get($this->dataStore->reveal(), $idResolver->reveal(), $this->authorizationChecker->reveal());
     }
 
     public function testItIsIntanceOfMelodiiaController()

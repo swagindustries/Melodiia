@@ -59,9 +59,9 @@ class DeleteTest extends TestCase
 
         $this->controller = new Delete(
             $this->dataStore->reveal(),
-            $this->checker->reveal(),
             $this->dispatcher->reveal(),
-            $idResolver->reveal()
+            $idResolver->reveal(),
+            $this->checker->reveal()
         );
     }
 
