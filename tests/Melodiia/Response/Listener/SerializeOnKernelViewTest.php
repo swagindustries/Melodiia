@@ -9,6 +9,7 @@ use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Response\ApiResponse;
 use SwagIndustries\Melodiia\Response\Listener\SerializeOnKernelView;
+use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderChainInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -21,13 +22,25 @@ class SerializeOnKernelViewTest extends TestCase
     /** @var SerializerInterface|ObjectProphecy */
     private $serializer;
 
+    /** @var ContextBuilderChainInterface|ObjectProphecy */
+    private $contextChain;
+
     /** @var SerializeOnKernelView */
     private $listener;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->serializer = $this->prophesize(SerializerInterface::class);
-        $this->listener = new SerializeOnKernelView($this->serializer->reveal());
+        $this->contextChain = $this->prophesize(ContextBuilderChainInterface::class);
+        $this->contextChain->buildContext(Argument::cetera())->willReturn([]);
+        $this->listener = new SerializeOnKernelView($this->serializer->reveal(), $this->contextChain->reveal());
+    }
+
+    public function tearDown(): void
+    {
+        $this->serializer = null;
+        $this->contextChain = null;
+        $this->listener = null;
     }
 
     public function testItSubscribeOnKernelView()
