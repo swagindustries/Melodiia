@@ -32,6 +32,12 @@ class DomainObjectsDataMapper extends PropertyPathMapper implements DomainObject
         }
 
         $ref = new \ReflectionClass($dataClass);
+
+        $constructor = $ref->getConstructor();
+        if (null === $constructor) {
+            return new $dataClass();
+        }
+
         $constructorParameters = $ref->getConstructor()->getParameters();
 
         // Case of anemic object, we have nothing to do here.
