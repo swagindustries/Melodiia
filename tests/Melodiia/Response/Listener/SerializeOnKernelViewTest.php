@@ -11,6 +11,7 @@ use SwagIndustries\Melodiia\Response\ApiResponse;
 use SwagIndustries\Melodiia\Response\Listener\SerializeOnKernelView;
 use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderChainInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -56,6 +57,11 @@ class SerializeOnKernelViewTest extends TestCase
             {
                 return 200;
             }
+
+            public function headers(): array
+            {
+                return [];
+            }
         };
         $this->serializer->serialize($response, Argument::cetera())->shouldBeCalled()->willReturn('"hello"');
         $event = new ViewEvent(
@@ -66,5 +72,7 @@ class SerializeOnKernelViewTest extends TestCase
         );
 
         $this->listener->onKernelView($event);
+
+        $this->assertInstanceOf(JsonResponse::class, $event->getResponse());
     }
 }
