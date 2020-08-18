@@ -2,7 +2,7 @@
 
 namespace SwagIndustries\Melodiia\Crud;
 
-interface CrudableModelInterface
+interface MelodiiaModel
 {
     /**
      * @return string|object that have a __toString() method

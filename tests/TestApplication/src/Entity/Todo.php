@@ -3,12 +3,12 @@
 namespace TestApplication\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Crud\MelodiiaModel;
 
 /**
  * @ORM\Entity()
  */
-class Todo implements CrudableModelInterface
+class Todo implements MelodiiaModel
 {
     /**
      * @ORM\Id
