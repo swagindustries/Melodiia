@@ -3,6 +3,7 @@
 namespace SwagIndustries\Melodiia\Serialization\Json;
 
 use Pagerfanta\Pagerfanta;
+use SwagIndustries\Melodiia\Response\Model\Collection;
 use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -77,6 +78,21 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
                 'next' => $nextPage,
                 'last' => \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri),
                 'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri),
+            ];
+        }
+        if ($content instanceof Collection) {
+            $uri = $this->requestStack->getMasterRequest()->getUri();
+            $result['meta'] = [
+                'totalPages' => 1,
+                'totalResults' => count($content),
+                'currentPage' => 1,
+                'maxPerPage' => count($content),
+            ];
+            $result['links'] = [
+                'prev' => null,
+                'next' => null,
+                'last' => $uri,
+                'first' => $uri,
             ];
         }
 

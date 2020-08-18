@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support of more kind of FormError
 - Removed the requirement to have CSRF protection enabled #25
 - Behat test suite. Melodiia is officially battle tested!
+- Add Collection model to render easily standard output with collections #12
 
 ### Changed
 - New PHP minimum requirement is PHP 7.3

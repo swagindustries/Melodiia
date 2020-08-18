@@ -7,6 +7,7 @@ use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use SwagIndustries\Melodiia\Response\Model\Collection;
 use SwagIndustries\Melodiia\Response\OkContent;
 use SwagIndustries\Melodiia\Serialization\Json\OkContentNormalizer;
 use Symfony\Component\HttpFoundation\Request;
@@ -128,6 +129,35 @@ class OkContentNormalizerTest extends TestCase
                 'next' => 'http://foo.com/bar?page=3',
                 'last' => 'http://foo.com/bar?page=3',
                 'first' => 'http://foo.com/bar?page=1',
+            ],
+        ], $res);
+    }
+
+    public function testItSerializeCollection()
+    {
+        $collection = new Collection([['acme' => 'foo'], ['acme' => 'bar']]);
+        $this->mainNormalizer->normalize(['acme' => 'foo'], Argument::cetera())->willReturn(['acme' => 'foo'])->shouldBeCalled();
+        $this->mainNormalizer->normalize(['acme' => 'bar'], Argument::cetera())->willReturn(['acme' => 'bar'])->shouldBeCalled();
+        $this->request->getUri()->willReturn('http://foo.com/bar');
+
+        $res = $this->okContentNormalizer->normalize(new OkContent($collection));
+
+        $this->assertEquals([
+            'data' => [
+                ['acme' => 'foo'],
+                ['acme' => 'bar'],
+            ],
+            'meta' => [
+                'totalPages' => 1,
+                'totalResults' => 2,
+                'currentPage' => 1,
+                'maxPerPage' => 2,
+            ],
+            'links' => [
+                'prev' => null,
+                'next' => null,
+                'last' => 'http://foo.com/bar',
+                'first' => 'http://foo.com/bar',
             ],
         ], $res);
     }

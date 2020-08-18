@@ -5,6 +5,11 @@ get_todos:
   defaults:
     melodiia_model: TestApplication\Entity\Todo
 
+get_todo_contains:
+  path: /todos/contains/{word}
+  methods: GET
+  controller: 'TestApplication\Controller\TodoContainsAction'
+
 get_todo:
   path: /todos/{id}
   controller: 'melodiia.crud.controller.get'
