@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Test\Bridge\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;

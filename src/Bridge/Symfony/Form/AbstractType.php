@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Bridge\Symfony\Form;
 
 use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;

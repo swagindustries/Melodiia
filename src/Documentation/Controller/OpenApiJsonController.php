@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Documentation\Controller;
 
 use SwagIndustries\Melodiia\Bridge\Symfony\Exception\ConfigException;

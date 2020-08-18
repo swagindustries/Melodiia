@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Listener;
 
 use SwagIndustries\Melodiia\Crud\MelodiiaModel;

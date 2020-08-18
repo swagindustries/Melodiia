@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TestApplication;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;

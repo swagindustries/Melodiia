@@ -1,22 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Response;
 
 class Created implements ApiResponse
 {
-    /** @var string */
+    /** @var string|int */
     private $id;
 
     /** @var string|null */
     private $resourceId;
 
-    public function __construct(string $id, string $resourceId = null)
+    public function __construct($id, string $resourceId = null)
     {
         $this->id = $id;
         $this->resourceId = $resourceId;
     }
 
-    public function getId(): string
+    /**
+     * @return int|string
+     */
+    public function getId()
     {
         return $this->id;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Bridge\Symfony\DependencyInjection;
 
 use SwagIndustries\Melodiia\Bridge\Symfony\Exception\ConfigException;

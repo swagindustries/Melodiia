@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use TestApplication\Kernel;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Response;
 
 class WrongDataInput extends AbstractApiResponse

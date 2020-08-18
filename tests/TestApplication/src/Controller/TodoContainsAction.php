@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TestApplication\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
