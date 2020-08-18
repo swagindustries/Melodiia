@@ -32,3 +32,6 @@ services:
 
   SwagIndustries\Melodiia\Tests\Behat\:
     resource: '../../Behat/*'
+
+  TestApplication\Controller\TodoContainsAction:
+    tags: ['controller.service_arguments']
