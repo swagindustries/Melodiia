@@ -68,9 +68,7 @@ class UpdateTest extends TestCase
         $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(false);
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(false);
         $this->request->attributes = $this->attributes->reveal();
-        $this->request->getMethod()->willReturn('POST');
-        $this->request->getContent()->willReturn('{"awesome":"json"}');
-        $this->form->submit(['awesome' => 'json'], false)->willReturn();
+        $this->form->handleRequest($this->request)->willReturn();
         $this->formFactory->createNamed('', Argument::cetera())->willReturn($this->form);
 
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass());
@@ -85,74 +83,6 @@ class UpdateTest extends TestCase
             $idResolver->reveal(),
             $this->checker->reveal()
         );
-    }
-
-    public function testItReturn400OnNotSubmittedForm()
-    {
-        $this->form->isSubmitted()->willReturn(false);
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal());
-
-        $this->assertInstanceOf(ApiResponse::class, $res);
-        $this->assertEquals(400, $res->httpStatus());
-    }
-
-    /**
-     * Issue #54.
-     */
-    public function testItClearMissingWhileNullGivenAndMethodPatch()
-    {
-        // Mocking
-        $this->form->isSubmitted()->willReturn(true);
-        $this->form->isValid()->willReturn(true);
-        $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
-        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Argument::type('string'));
-
-        // Most important check
-        $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
-
-        $this->request->getMethod()->willReturn('PATCH');
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal());
-
-        $this->assertInstanceOf(ApiResponse::class, $res);
-        $this->assertEquals(200, $res->httpStatus());
-    }
-
-    public function testItClearMissingWhenEnforcedToTrue()
-    {
-        // Mocking
-        $this->form->isSubmitted()->willReturn(true);
-        $this->form->isValid()->willReturn(true);
-        $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
-        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
-        $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
-        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Argument::type('string'));
-
-        // Most important check
-        $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal());
-        $this->assertInstanceOf(ApiResponse::class, $res);
-        $this->assertEquals(200, $res->httpStatus());
-    }
-
-    /**
-     * Issue #28.
-     */
-    public function testItReturnProperlyOnWrongInput()
-    {
-        $this->request->getContent()->willReturn('{"awesome":json"}'); // Wrong JSON
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal());
-        $this->assertInstanceOf(ApiResponse::class, $res);
-        $this->assertEquals(400, $res->httpStatus());
     }
 
     public function testItReturn400OnInvalidForm()
@@ -173,25 +103,6 @@ class UpdateTest extends TestCase
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Update::EVENT_PRE_UPDATE)->shouldBeCalled();
-        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Update::EVENT_POST_UPDATE)->shouldBeCalled();
-        $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal());
-
-        $this->assertInstanceOf(OkContent::class, $res);
-    }
-
-    public function testICanChangeClearMissingOption()
-    {
-        $this->form->isSubmitted()->willReturn(true);
-        $this->form->isValid()->willReturn(true);
-
-        $this->form->getData()->willReturn(new FakeMelodiiaModel());
-        $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
-        $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(true);
-        $this->form->submit(['awesome' => 'json'], true)->willReturn()->shouldBeCalled();
         $this->mockDispatch($this->dispatcher, Argument::type(CrudEvent::class), Update::EVENT_PRE_UPDATE)->shouldBeCalled();
         $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Update::EVENT_POST_UPDATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
