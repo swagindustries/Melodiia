@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support of more kind of FormError
+- Removed requirement to have CSRF protection enabled #25
 
 ### Changed
 - Huge BC Break on namespaces. You need to rename all classes used to SwagIndustries instead of Biig
