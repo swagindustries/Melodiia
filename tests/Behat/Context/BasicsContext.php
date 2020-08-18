@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Tests\Behat\Context;
 
 use Behat\Gherkin\Node\PyStringNode;
@@ -29,7 +31,7 @@ class BasicsContext extends AbstractContext
         }
 
         // Just validate json
-        json_decode($content->getRaw(), true, 512, JSON_THROW_ON_ERROR);
+        json_decode($content = $content->getRaw(), true, 512, JSON_THROW_ON_ERROR);
 
         $client->request($verb, $uri, [], [], [], $content);
         $this->response = $client->getResponse();

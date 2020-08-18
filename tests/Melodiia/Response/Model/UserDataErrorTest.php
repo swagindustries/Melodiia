@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Test\Response\Model;
 
 use PHPUnit\Framework\TestCase;

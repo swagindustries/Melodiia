@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Crud\Controller;
 
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;

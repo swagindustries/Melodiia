@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TestApplication\Form;
 
 use SwagIndustries\Melodiia\Bridge\Symfony\Form\AbstractType;

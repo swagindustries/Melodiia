@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Error;
 
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;

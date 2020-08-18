@@ -48,7 +48,7 @@ Feature:
     And the last response contains:
     """
     {
-      "id": "1"
+      "id": 1
     }
     """
     When I make a GET request on "/todos/1"
