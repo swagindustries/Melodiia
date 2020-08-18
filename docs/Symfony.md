@@ -24,7 +24,7 @@ return [
     // Some other bundles already registered here
     // ...
     
-    Biig\Melodiia\Bridge\Symfony\MelodiiaBundle::class => ['all' => true],
+    SwagIndustries\Melodiia\Bridge\Symfony\MelodiiaBundle::class => ['all' => true],
 ];
 ```
 
@@ -57,11 +57,11 @@ III. Override Melodiia services
 -------------
 
 The below configuration override the default pagination request factory.
-So Melodiia will execute `Your\FQCN\YourClass` instead of `Biig\Melodiia\Crud\Pagination\PaginationRequestFactory` to create PaginationRequest object
+So Melodiia will execute `Your\FQCN\YourClass` instead of `SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactory` to create PaginationRequest object
 
 ```yaml
 #services.yaml
 
-Biig\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
+SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
     alias: Namespace\To\Your\Class
 ```
