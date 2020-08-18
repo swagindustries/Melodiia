@@ -10,6 +10,7 @@ use SwagIndustries\Melodiia\Crud\FilterInterface;
 use SwagIndustries\Melodiia\Documentation\Controller\OpenApiController;
 use SwagIndustries\Melodiia\Documentation\Controller\OpenApiJsonController;
 use SwagIndustries\Melodiia\Documentation\OpenApiDocFactory;
+use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -21,6 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class MelodiiaExtension extends Extension
 {
     const TAG_CRUD_FILTER = 'melodiia.crud_filter';
+    const TAG_CONTEXT_BUILDER = 'melodiia.context_builder';
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -42,6 +44,9 @@ class MelodiiaExtension extends Extension
 
         // Autoconf
         $container->registerForAutoconfiguration(FilterInterface::class)->addTag(self::TAG_CRUD_FILTER);
+        $container
+            ->registerForAutoconfiguration(ContextBuilderInterface::class)
+            ->addTag(self::TAG_CONTEXT_BUILDER);
     }
 
     private function configureApi(string $name, array $apiConf, ContainerBuilder $container)

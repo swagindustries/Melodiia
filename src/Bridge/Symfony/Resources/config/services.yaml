@@ -35,6 +35,13 @@ services:
         class: SwagIndustries\Melodiia\Response\Listener\SerializeOnKernelView
         autoconfigure: true
         autowire: true
+        arguments:
+            $contextBuilderChain: '@melodiia.context_builder_chain'
+
+    melodiia.context_builder_chain:
+        class: SwagIndustries\Melodiia\Serialization\Context\ContextBuilderChain
+        arguments:
+            $builders: !tagged_iterator melodiia.context_builder
 
 imports:
     - 'crud.yaml'
