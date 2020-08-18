@@ -66,8 +66,7 @@ class CreateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, true)->willReturn(true);
         $this->request->attributes = $this->attributes->reveal();
-        $this->request->getContent()->willReturn('{"awesome":"json"}');
-        $this->form->submit(['awesome' => 'json'], true)->willReturn();
+        $this->form->handleRequest($this->request)->willReturn();
         $this->formFactory->createNamed('', Argument::cetera())->willReturn($this->form);
 
         $this->controller = new Create(
@@ -76,17 +75,6 @@ class CreateTest extends TestCase
             $this->dispatcher->reveal(),
             $this->checker->reveal()
         );
-    }
-
-    public function testItReturn400OnNotSubmittedForm()
-    {
-        $this->form->isSubmitted()->willReturn(false);
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal());
-
-        $this->assertInstanceOf(ApiResponse::class, $res);
-        $this->assertEquals(400, $res->httpStatus());
     }
 
     public function testItReturn400OnInvalidForm()
@@ -101,22 +89,8 @@ class CreateTest extends TestCase
         $this->assertEquals(400, $res->httpStatus());
     }
 
-    /**
-     * Issue #28.
-     */
-    public function testItReturnProperlyOnWrongInput()
-    {
-        $this->request->getContent()->willReturn('{"awesome":json"}'); // Wrong JSON
-
-        /** @var ApiResponse $res */
-        $res = ($this->controller)($this->request->reveal(), 'id');
-        $this->assertInstanceOf(ApiResponse::class, $res);
-        $this->assertEquals(400, $res->httpStatus());
-    }
-
     public function testItCreateMelodiiaObject()
     {
-        $this->form->isSubmitted()->willReturn(true);
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
@@ -133,7 +107,6 @@ class CreateTest extends TestCase
 
     public function testICanChangeTheClearSubmitParam()
     {
-        $this->form->isSubmitted()->willReturn(true);
         $this->form->isValid()->willReturn(true);
 
         $this->form->getData()->willReturn(new FakeMelodiiaModel());
@@ -141,7 +114,7 @@ class CreateTest extends TestCase
         $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Create::EVENT_POST_CREATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, true)->willReturn(false);
-        $this->form->submit(['awesome' => 'json'], false)->willReturn()->shouldBeCalled();
+        $this->form->handleRequest($this->request)->willReturn()->shouldBeCalled();
         /** @var ApiResponse $res */
         $res = ($this->controller)($this->request->reveal());
 

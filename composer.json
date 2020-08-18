@@ -8,7 +8,7 @@
         "post-install-cmd": "make hooks.install"
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "zircote/swagger-php": "^3.0.3",
         "nekland/tools": "^2.5.1",
         "zendframework/zend-json": "^3.0",

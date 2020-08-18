@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BC Break: on CRUD classes. It's big changes time. So we made the security optional for crud controllers, this has a
   consequence on their constructor
 - BC Break: `CrudableModelInterface` is now `MelodiiaModel`
+- The ApiType now uses a custom request handler. It makes handling api request easier and removes some code
+  in controllers. You should now use `handleRequest($request)` on your form. Here is a list of other changes:
+    - An api form cannot be "not submitted" anymore after a call to `handleRequest`
+    - In case the input data is invalid, a form error is add to the form
+    - There is a new optional option on the ApiType: `clear_missing` but its value is automatically guessed by default
+      to follow HTTP verbs.
 
 ## [0.6.0] 2020-06-01
 ### Added

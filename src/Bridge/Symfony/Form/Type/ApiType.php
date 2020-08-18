@@ -4,6 +4,7 @@ namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Type;
 
 use SwagIndustries\Melodiia\Bridge\Symfony\Form\DomainObjectDataMapperInterface;
 use SwagIndustries\Melodiia\Bridge\Symfony\Form\DomainObjectsDataMapper;
+use SwagIndustries\Melodiia\Form\ApiRequestHandler;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ApiType extends AbstractType
 {
+    public const CLEAR_MISSING_OPTION = 'clear_missing';
+
     /** @var DataMapperInterface */
     private $dataMapper;
 
@@ -31,6 +34,8 @@ class ApiType extends AbstractType
         if ($options['value_object']) {
             $builder->setDataMapper($dataMapper);
         }
+
+        $builder->setRequestHandler(new ApiRequestHandler());
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -39,6 +44,10 @@ class ApiType extends AbstractType
             'csrf_protection' => false,
             'value_object' => false,
             'melodiiaDataMapper' => null,
+
+            // If set to false, all fields will be required, in the request, otherwise some may be removed.
+            // By default is null, but it will be automatically guess by the request handler.
+            self::CLEAR_MISSING_OPTION => null,
 
             /*
              * Creates data object just like standard form would do
