@@ -1,50 +1,63 @@
 name: Test suite
 
 on:
-    push:
-        branches: [ master ]
-    pull_request:
-      branches: [ master ]
-    schedule:
-        - cron:  '0 0 * * *'
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron:  '0 0 * * *'
 
 jobs:
-    unit-test:
-        runs-on: ubuntu-latest
+  unit-test:
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                php: [7.4]
+    strategy:
+      matrix:
+        php: [7.4]
 
-        steps:
-            - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-            - uses: actions/cache@v2
-              id: cache-composer
-              with:
-                  path: ~/.composer/cache
-                  key: composer-php-${{ matrix.php }}-${{ github.sha }}
-                  restore-keys: composer-php-${{ matrix.php }}-
+      - uses: actions/cache@v2
+        id: cache-composer
+        with:
+            path: ~/.composer/cache
+            key: composer-php-${{ matrix.php }}-${{ github.sha }}
+            restore-keys: composer-php-${{ matrix.php }}-
 
-            - name: Valid composer.json
-              run: make test.composer
+      - name: Valid composer.json
+        run: make test.composer
 
-            - name: Install dependencies
-              run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-            - name: Run PHP CS Fixer
-              run: make test.phpcs
+      - name: Run PHP CS Fixer
+        run: make test.phpcs
 
-            - name: Run PHPUnit tests
-              run: make test.phpunit
+      - name: Run PHPUnit tests
+        run: make test.phpunit
 
-    functional-test:
-        runs-on: ubuntu-latest
+  functional-test:
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                php: [7.4]
+    strategy:
+      matrix:
+        php: [7.4]
 
-        steps:
-            - name: Run Behat tests
-              run: make test.behat
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        id: cache-composer
+        with:
+          path: ~/.composer/cache
+          key: composer-php-${{ matrix.php }}-${{ github.sha }}
+          restore-keys: composer-php-${{ matrix.php }}-
+
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run Behat tests
+        run: make test.behat
