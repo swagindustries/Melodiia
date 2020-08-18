@@ -24,7 +24,7 @@ composer require swag-industries/melodiia
 Add the bundle to your bundle list:
 
 ```php
-Biig\Melodiia\Bridge\Symfony\MelodiiaBundle::class => ['all' => true]
+SwagIndustries\Melodiia\Bridge\Symfony\MelodiiaBundle::class => ['all' => true]
 ```
 
 Setup the configuration:
@@ -52,7 +52,7 @@ admin_routes:
  - [Integration with Symfony ](./docs/Symfony.md)
  - [Presentation of Melodiia @Biig-io](https://docs.google.com/presentation/d/1dtxUOzZFGRq7Ar5YV5aZ6AN60RhDbf_0OcXKj5iiDS8/edit?usp=sharing)
 
-Feel free to open an issue, if you encounter problems implementing Melodiia
+Feel free to open an issue, if you encounter problems implementing Melodiia.
 
 FAQ
 ---
