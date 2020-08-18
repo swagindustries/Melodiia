@@ -2,9 +2,9 @@
 
 namespace SwagIndustries\Melodiia\Test\TestFixtures;
 
-use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Crud\MelodiiaModel;
 
-class FakeMelodiiaModel implements CrudableModelInterface
+class FakeMelodiiaModel implements MelodiiaModel
 {
     public function getId()
     {

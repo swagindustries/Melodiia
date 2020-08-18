@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Huge BC Break on namespaces. You need to rename all classes used to SwagIndustries instead of Biig
-- BC Break on CRUD classes. It's big changes time. So we made the security optional for crud controllers, this has a
+- BC Break: on CRUD classes. It's big changes time. So we made the security optional for crud controllers, this has a
   consequence on their constructor
+- BC Break: `CrudableModelInterface` is now `MelodiiaModel`
 
 ## [0.6.0] 2020-06-01
 ### Added

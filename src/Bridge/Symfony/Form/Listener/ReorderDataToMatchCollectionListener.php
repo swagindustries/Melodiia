@@ -2,7 +2,7 @@
 
 namespace SwagIndustries\Melodiia\Bridge\Symfony\Form\Listener;
 
-use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Crud\MelodiiaModel;
 use SwagIndustries\Melodiia\Exception\MelodiiaLogicException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -34,8 +34,8 @@ class ReorderDataToMatchCollectionListener implements EventSubscriberInterface
         foreach ($form as $name => $child) {
             $lastCollectionIndex = $name;
             $item = $child->getData();
-            if (!$item instanceof CrudableModelInterface) {
-                throw new MelodiiaLogicException(sprintf('Impossible manage the model of type "%s" inside Melodiia because it does not implement CrudableModelInterface.', get_class($item)));
+            if (!$item instanceof MelodiiaModel) {
+                throw new MelodiiaLogicException(sprintf('Impossible manage the model of type "%s" inside Melodiia because it does not implement MelodiiaModel.', get_class($item)));
             }
             $itemId = (string) $item->getId();
             foreach ($data as $inputItem) {

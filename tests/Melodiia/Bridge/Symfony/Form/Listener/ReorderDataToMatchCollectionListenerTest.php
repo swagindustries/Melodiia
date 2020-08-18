@@ -3,7 +3,7 @@
 namespace SwagIndustries\Melodiia\Test\Bridge\Symfony\Form\Listener;
 
 use SwagIndustries\Melodiia\Bridge\Symfony\Form\Listener\ReorderDataToMatchCollectionListener;
-use SwagIndustries\Melodiia\Crud\CrudableModelInterface;
+use SwagIndustries\Melodiia\Crud\MelodiiaModel;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PreSubmitEvent;
@@ -61,7 +61,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
     public function testItReorderDataInputWithFormData()
     {
         $formData = [
-            new class() extends \ArrayObject implements CrudableModelInterface {
+            new class() extends \ArrayObject implements MelodiiaModel {
                 public function __construct()
                 {
                     parent::__construct(['hello' => 'yo', 'world' => 'ye']);
@@ -75,7 +75,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
                     return 'foo';
                 }
             },
-            new class() extends \ArrayObject implements CrudableModelInterface {
+            new class() extends \ArrayObject implements MelodiiaModel {
                 public function __construct()
                 {
                     parent::__construct(['hello' => 'yoh', 'world' => 'yeh']);
@@ -109,7 +109,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
     public function testItRemovesDataThatDoesNotExistsAnymore()
     {
         $formData = [
-            new class() extends \ArrayObject implements CrudableModelInterface {
+            new class() extends \ArrayObject implements MelodiiaModel {
                 public function __construct()
                 {
                     parent::__construct(['hello' => 'yo', 'world' => 'ye']);
