@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Behat test suite. Melodiia is officially battle tested!
 
 ### Changed
+- New PHP minimum requirement is PHP 7.3
 - Huge BC Break on namespaces. You need to rename all classes used to SwagIndustries instead of Biig
 - BC Break: the form option `customDataMapper` is now `melodiiaDataMapper`
 - BC Break: on CRUD classes. It's big changes time. So we made the security optional for crud controllers, this has a
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - In case the input data is invalid, a form error is add to the form
     - There is a new optional option on the ApiType: `clear_missing` but its value is automatically guessed by default
       to follow HTTP verbs.
+- Removal of the dependency to zend json (thanks to php 7.3 upgrade)
 
 ## [0.6.0] 2020-06-01
 ### Added
