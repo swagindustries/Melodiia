@@ -53,7 +53,7 @@ class ApiTypeTest extends FormIntegrationTestCase
             }
         };
         $form = $this->factory->createNamed('', FakeTypeUsingApiType::class, null, [
-            'customDataMapper' => $customDataMapper,
+            'melodiiaDataMapper' => $customDataMapper,
         ]);
         $form->submit(['foo' => 'some content']);
         $data = $form->getData();

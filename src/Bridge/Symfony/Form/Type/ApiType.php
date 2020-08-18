@@ -24,8 +24,8 @@ class ApiType extends AbstractType
     {
         $dataMapper = $this->dataMapper;
 
-        if (null !== $options['customDataMapper']) {
-            $dataMapper = $options['customDataMapper'];
+        if (null !== $options['melodiiaDataMapper']) {
+            $dataMapper = $options['melodiiaDataMapper'];
         }
 
         if ($options['value_object']) {
@@ -38,7 +38,7 @@ class ApiType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'value_object' => false,
-            'customDataMapper' => null,
+            'melodiiaDataMapper' => null,
 
             /*
              * Creates data object just like standard form would do
@@ -50,14 +50,14 @@ class ApiType extends AbstractType
              */
             'empty_data' => function (FormInterface $form) {
                 $dataMapper = $this->dataMapper;
-                if (null !== $form->getConfig()->getOption('customDataMapper')) {
-                    $dataMapper = $form->getConfig()->getOption('customDataMapper');
+                if (null !== $form->getConfig()->getOption('melodiiaDataMapper')) {
+                    $dataMapper = $form->getConfig()->getOption('melodiiaDataMapper');
                 }
 
                 return $dataMapper->createObject($form);
             },
         ]);
 
-        $resolver->setAllowedTypes('customDataMapper', ['null', DomainObjectDataMapperInterface::class]);
+        $resolver->setAllowedTypes('melodiiaDataMapper', ['null', DomainObjectDataMapperInterface::class]);
     }
 }
