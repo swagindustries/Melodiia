@@ -37,6 +37,9 @@ test.phpcs.fix: ## Run PHP CS Fixer and fix issues if possible
 test.phpunit: ## Run PHPUnit tests
 	php vendor/bin/phpunit
 
+test.behat: ## Run Behat tests
+	php vendor/bin/behat
+
 hooks.install: ## Install git hooks
 	@cp -vp resources/git/pre-commit.sh .git/hooks/pre-commit
 

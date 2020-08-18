@@ -1,49 +1,63 @@
 name: Test suite
 
 on:
-    push:
-        branches: [ master ]
-    pull_request:
-      branches: [ master ]
-    schedule:
-        - cron:  '0 0 * * *'
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron:  '0 0 * * *'
 
 jobs:
-    tests:
-        runs-on: ubuntu-latest
+  unit-test:
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                php: [7.4]
+    strategy:
+      matrix:
+        php: [7.4]
 
-        steps:
-            - name: Setup PHP
-              run: |
-                  sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
-                  echo "date.timezone=UTC" >> /tmp/timezone.ini
-                  sudo mv /tmp/timezone.ini /etc/php/${{ matrix.php }}/cli/conf.d/timezone.ini
-                  echo ${{ matrix.php }} > .php-version
+    steps:
+      - uses: actions/checkout@v2
 
-            - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        id: cache-composer
+        with:
+            path: ~/.composer/cache
+            key: composer-php-${{ matrix.php }}-${{ github.sha }}
+            restore-keys: composer-php-${{ matrix.php }}-
 
-            - uses: actions/cache@v1
-              id: cache-composer
-              with:
-                  path: /home/runner/.composer/cache
-                  key: composer-php:${{ matrix.php }}-${{ github.sha }}
-                  restore-keys: composer-php:${{ matrix.php }}-
+      - name: Valid composer.json
+        run: make test.composer
 
-            - run: mkdir -p /home/runner/.composer/cache
-              if: steps.cache-composer.outputs.cache-hit != 'true'
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-            - name: Valid composer.json
-              run: make test.composer
+      - name: Run PHP CS Fixer
+        run: make test.phpcs
 
-            - name: Install dependencies
-              run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Run PHPUnit tests
+        run: make test.phpunit
 
-            - name: Run PHP CS Fixer
-              run: make test.phpcs
+  functional-test:
+    runs-on: ubuntu-latest
 
-            - name: Run PHPUnit tests
-              run: make test.phpunit
+    strategy:
+      matrix:
+        php: [7.4]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        id: cache-composer
+        with:
+          path: ~/.composer/cache
+          key: composer-php-${{ matrix.php }}-${{ github.sha }}
+          restore-keys: composer-php-${{ matrix.php }}-
+
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run Behat tests
+        run: make test.behat

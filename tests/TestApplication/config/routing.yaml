@@ -1,0 +1,21 @@
+get_todos:
+  path: /todos
+  controller: 'melodiia.crud.controller.get_all'
+  methods: GET
+  defaults:
+    melodiia_model: TestApplication\Entity\Todo
+
+get_todo:
+  path: /todos/{id}
+  controller: 'melodiia.crud.controller.get'
+  methods: GET
+  defaults:
+    melodiia_model: TestApplication\Entity\Todo
+
+post_todos:
+  path: /todos
+  controller: 'melodiia.crud.controller.create'
+  methods: POST
+  defaults:
+    melodiia_model: TestApplication\Entity\Todo
+    melodiia_form: TestApplication\Form\TodoType
