@@ -2,8 +2,8 @@
 
 namespace SwagIndustries\Melodiia\Crud;
 
+use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;
 use SwagIndustries\Melodiia\Exception\NoFormFilterCreatedException;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -53,9 +53,8 @@ class FilterCollection implements FilterCollectionInterface
             return $this->form;
         }
 
-        $builder = $this->formFactory->createNamedBuilder('', FormType::class, null, [
+        $builder = $this->formFactory->createNamedBuilder('', ApiType::class, null, [
             'method' => 'GET',
-            'csrf_protection' => false,
             'allow_extra_fields' => true,
         ]);
 
