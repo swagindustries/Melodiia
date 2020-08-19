@@ -34,16 +34,8 @@ Setup the configuration:
 
 melodiia:
     apis:
-        # Choose the name of your api here
-        main: ~
-```
-
-Add melodiia routing:
-
-```yaml
-admin_routes:
-    resource: 'melodiia.routing_loader:loadRoutes'
-    type: service
+        main:
+            base_path: /
 ```
 
 ### Documentation 
