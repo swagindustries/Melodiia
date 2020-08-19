@@ -125,6 +125,8 @@ documentation:
         documentation_file_path: '%kernel.project_dir%/config/documentation.yaml'
 ```
 
+⚠️ The render of the documentation cannot work without Twig. Be sure twig is installed.
+
 Step 5: do what you want
 ------------------------
 

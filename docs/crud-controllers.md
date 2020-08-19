@@ -1,6 +1,9 @@
 About CRUD Controllers
 ======================
 
+⚠️ By default Melodiia provides a doctrine integration. But if you didn't install Doctrine, it will not register
+CRUD controllers. Be sure Doctrine is installed.
+
 Here are all the controllers for your CRUD.
 
 | CRUD action       | Service name                     |

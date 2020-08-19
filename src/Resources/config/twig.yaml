@@ -1,0 +1,6 @@
+services:
+    melodiia.documentation:
+        class: SwagIndustries\Melodiia\Documentation\Controller\SwaggerUiController
+        tags: ['controller.service_arguments']
+        arguments:
+            $templating: '@twig'
