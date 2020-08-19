@@ -1,26 +1,26 @@
 get_todos:
-  path: /todos
-  controller: 'melodiia.crud.controller.get_all'
-  methods: GET
-  defaults:
-    melodiia_model: TestApplication\Entity\Todo
+    path: /todos
+    controller: 'melodiia.crud.controller.get_all'
+    methods: GET
+    defaults:
+        melodiia_model: TestApplication\Entity\Todo
 
 get_todo_contains:
-  path: /todos/contains/{word}
-  methods: GET
-  controller: 'TestApplication\Controller\TodoContainsAction'
+    path: /todos/contains/{word}
+    methods: GET
+    controller: 'TestApplication\Controller\TodoContainsAction'
 
 get_todo:
-  path: /todos/{id}
-  controller: 'melodiia.crud.controller.get'
-  methods: GET
-  defaults:
-    melodiia_model: TestApplication\Entity\Todo
+    path: /todos/{id}
+    controller: 'melodiia.crud.controller.get'
+    methods: GET
+    defaults:
+        melodiia_model: TestApplication\Entity\Todo
 
 post_todos:
-  path: /todos
-  controller: 'melodiia.crud.controller.create'
-  methods: POST
-  defaults:
-    melodiia_model: TestApplication\Entity\Todo
-    melodiia_form: TestApplication\Form\TodoType
+    path: /todos
+    controller: 'melodiia.crud.controller.create'
+    methods: POST
+    defaults:
+        melodiia_model: TestApplication\Entity\Todo
+        melodiia_form: TestApplication\Form\TodoType

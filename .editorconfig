@@ -25,5 +25,8 @@ indent_style = tab
 max_line_length = off
 trim_trailing_whitespace = false
 
-[*.{yaml,yml,feature}]
+[*.feature]
+indent_size = 2
+
+[{ci.yml,behat.yaml}]
 indent_size = 2
