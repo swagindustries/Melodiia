@@ -9,10 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support of more kind of FormError
 - Removed the requirement to have CSRF protection enabled #25
-- Behat test suite. Melodiia is officially battle tested!
+- Behat test suite. Melodiia is officially battle tested! You can also use this as example!
 - Add Collection model to render easily standard output with collections #12
 - Add `ContextBuilderChain` class, you can now add many ContextBuilder to your code base. #32
   Be careful as it MAY break the BC of your application if you redefined the `SerializeOnKernelView` class
+- New Documentation controller, learn more in documentation or see the example in the test application
 
 ### Changed
 - New PHP minimum requirement is PHP 7.3
@@ -29,6 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       to follow HTTP verbs.
 - Removal of the dependency to zend json (thanks to php 7.3 upgrade)
 - BC Break: the ApiResponse now contains also headers. If you do not extends another response you will need to add the missing method
+
+## Removed
+- BC break: the documentation is no more automatically generated. This removes a lot of configuration for Melodiia.
 
 ## [0.6.0] 2020-06-01
 ### Added

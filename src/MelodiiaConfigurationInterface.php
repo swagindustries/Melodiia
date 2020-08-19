@@ -12,12 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 interface MelodiiaConfigurationInterface
 {
     /**
-     * Return [api_name => [base_path, path]]
-     * only for conf with doc enabled.
-     */
-    public function getDocumentationConfig(): array;
-
-    /**
      * Return all base path of Melodiia.
      */
     public function getApiEndpoints(): array;

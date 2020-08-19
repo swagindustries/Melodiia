@@ -22,6 +22,7 @@ class Kernel extends BaseKernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import('../config/routing.yaml');
+        $routes->import('../config/routing_dev.yaml');
     }
 
     public function getProjectDir()

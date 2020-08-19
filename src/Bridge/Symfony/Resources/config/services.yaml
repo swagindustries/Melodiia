@@ -1,9 +1,9 @@
 services:
-    melodiia.routing_loader:
-        class: SwagIndustries\Melodiia\Bridge\Symfony\Routing\LoadGeneratedRoutes
-        public: true
+    melodiia.documentation:
+        class: SwagIndustries\Melodiia\Documentation\Controller\SwaggerUiController
+        tags: ['controller.service_arguments']
         arguments:
-            $config: '@melodiia.configuration'
+            $templating: '@twig'
 
     melodiia.configuration:
         class: SwagIndustries\Melodiia\Bridge\Symfony\MelodiiaConfiguration

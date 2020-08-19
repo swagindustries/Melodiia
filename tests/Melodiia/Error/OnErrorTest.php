@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Error\OnError;
-use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeIssueException;
+use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeException;
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +28,7 @@ class OnErrorTest extends TestCase
     public function testItReturnsAccurateErrors()
     {
         $exception = $this->prophesize(class_exists(FlattenException::class) ? FlattenException::class : LegacyFlattenException::class);
-        $exception->getClass()->willReturn(MelodiiaRuntimeIssueException::class);
+        $exception->getClass()->willReturn(MelodiiaRuntimeException::class);
         $exception->getStatusCode()->willReturn(500);
         $exception->getHeaders()->willReturn([]);
 
@@ -42,11 +42,11 @@ class OnErrorTest extends TestCase
     public function testItBindsExceptionToErrorCode()
     {
         $exception = $this->prophesize(class_exists(FlattenException::class) ? FlattenException::class : LegacyFlattenException::class);
-        $exception->getClass()->willReturn(MelodiiaRuntimeIssueException::class);
+        $exception->getClass()->willReturn(MelodiiaRuntimeException::class);
         $exception->getStatusCode()->willReturn(500);
         $exception->getHeaders()->willReturn([]);
 
-        $response = (new OnError($this->serializer->reveal(), [MelodiiaRuntimeIssueException::class => 418]))($exception->reveal());
+        $response = (new OnError($this->serializer->reveal(), [MelodiiaRuntimeException::class => 418]))($exception->reveal());
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(418, $response->getStatusCode());

@@ -6,9 +6,11 @@ namespace SwagIndustries\Melodiia\Tests\Behat\Context;
 
 use Behat\Gherkin\Node\PyStringNode;
 use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Component\HttpFoundation\Response;
 
 class BasicsContext extends AbstractContext
 {
+    /** @var Response */
     private $response;
 
     /**
@@ -53,6 +55,17 @@ class BasicsContext extends AbstractContext
             }
 
             throw new \Exception('Expected request result does not match actual result.');
+        }
+    }
+
+    /**
+     * @Then the status code of last response should be :statusCode
+     */
+    public function theStatusCodeOfLastResponseShouldBe($statusCode)
+    {
+        $statusCode = (int) $statusCode;
+        if ($this->response->getStatusCode() !== $statusCode) {
+            throw new \Exception(sprintf('Expected status code "%s" but got "%s"', $statusCode, $this->response->getStatusCode()));
         }
     }
 
