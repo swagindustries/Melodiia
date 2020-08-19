@@ -1,0 +1,34 @@
+template:
+    url: https://github.com/Nek-/Template-Light
+
+github:
+    user: SwagIndustries
+    repo: Melodiia
+
+exclude:
+    - vendor
+    - %gitignore%
+cname: melodiia.swag.industries
+
+branch: gh-pages
+
+
+title: Melodiia Documentation
+subTitle: Take control of your API
+menu:
+    items:
+        home:
+            text: Home page
+            relativeUrl: index.html
+        getting_started:
+            text: Getting Started
+            relativeUrl: docs/getting-started.html
+        filters:
+            text: Using filters
+            relativeUrl: docs/filters.html
+        config:
+            text: Configuration Reference
+            relativeUrl: docs/config-reference.html
+        cruds:
+            text: CRUD Reference
+            relativeUrl: docs/crud-controllers.html
