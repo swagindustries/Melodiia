@@ -1,0 +1,6 @@
+# This routing will be included in test environment here but in real life it makes no sense to have it in test env.
+documentation:
+    path: /documentation
+    controller: 'melodiia.documentation'
+    defaults:
+        documentation_file_path: '%kernel.project_dir%/config/documentation.yaml'

@@ -37,12 +37,7 @@ melodiia:
         main:
             # All those options are used for documentation purpose.
             paths: ['%kernel.project_dir%/src'] # List of path where melodiia will look for documentation blocks
-            enable_doc: true
             base_path: /                        # Path to your API
-            title: Awesome API                  
-            description: |
-                This is an awesome API. Really.
-            version: 1.0.0
             pagination:
                 max_per_page_attribute: 'max_per_page'
         # Melodiia comes with some form extensions, it makes your life easier

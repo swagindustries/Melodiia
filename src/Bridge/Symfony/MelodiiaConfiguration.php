@@ -32,24 +32,6 @@ final class MelodiiaConfiguration implements MelodiiaConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getDocumentationConfig(): array
-    {
-        $docConf = [];
-        foreach ($this->getApis() as $name => $api) {
-            if ($api['enable_doc']) {
-                $docConf[$name] = [
-                    'paths' => $api['paths'],
-                    'base_path' => $api['base_path'],
-                ];
-            }
-        }
-
-        return $docConf;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getApiEndpoints(): array
     {
         $endpoints = [];
