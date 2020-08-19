@@ -6,8 +6,8 @@ namespace Melodiia\Form;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;
 use SwagIndustries\Melodiia\Form\ApiRequestHandler;
+use SwagIndustries\Melodiia\Form\Type\ApiType;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;

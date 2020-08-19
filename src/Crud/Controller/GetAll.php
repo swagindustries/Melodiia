@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
 use SwagIndustries\Melodiia\Crud\FilterCollectionFactoryInterface;
 use SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
+use SwagIndustries\Melodiia\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Response\OkContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

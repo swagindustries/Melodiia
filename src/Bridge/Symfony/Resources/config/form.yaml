@@ -1,6 +1,0 @@
-services:
-    melodiia.form.extension.datetime:
-        class: SwagIndustries\Melodiia\Bridge\Symfony\Form\Extension\DateTimeExtension
-        tags:
-            - { name: form.type_extension }
-

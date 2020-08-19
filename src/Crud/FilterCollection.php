@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Crud;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;
 use SwagIndustries\Melodiia\Exception\NoFormFilterCreatedException;
+use SwagIndustries\Melodiia\Form\Type\ApiType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 

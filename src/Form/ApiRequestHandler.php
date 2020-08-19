@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Form;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\Form\Type\ApiType;
+use SwagIndustries\Melodiia\Form\Type\ApiType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
