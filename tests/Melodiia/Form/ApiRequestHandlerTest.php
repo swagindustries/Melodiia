@@ -11,6 +11,7 @@ use SwagIndustries\Melodiia\Form\Type\ApiType;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 class ApiRequestHandlerTest extends TestCase
@@ -78,6 +79,16 @@ class ApiRequestHandlerTest extends TestCase
         $this->form->submit(['hello' => 'foo'], true)->shouldBeCalled();
         $this->formConfig->getOption(ApiType::CLEAR_MISSING_OPTION)->willReturn(true);
         $this->request->getContent()->willReturn('{"hello":"foo"}');
+
+        $this->subject->handleRequest($this->form->reveal(), $this->request->reveal());
+    }
+
+    public function testItSupportsGetRequests()
+    {
+        $query = new ParameterBag(['hello' => 'foo']);
+        $this->form->submit(['hello' => 'foo'])->shouldBeCalled();
+        $this->request->getMethod()->willReturn('GET');
+        $this->request->query = $query;
 
         $this->subject->handleRequest($this->form->reveal(), $this->request->reveal());
     }
