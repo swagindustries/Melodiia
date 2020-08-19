@@ -19,6 +19,12 @@ class ApiRequestHandler implements RequestHandlerInterface
             throw new UnexpectedTypeException($request, 'Symfony\Component\HttpFoundation\Request');
         }
 
+        if ('GET' === $request->getMethod()) {
+            $form->submit($request->query->all());
+
+            return;
+        }
+
         $clearMissing = $form->getConfig()->getOption(ApiType::CLEAR_MISSING_OPTION);
         if (null === $clearMissing) {
             $clearMissing = !in_array($request->getMethod(), ['POST', 'PUT']);

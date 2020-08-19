@@ -36,3 +36,6 @@ services:
 
     TestApplication\Controller\TodoContainsAction:
         tags: ['controller.service_arguments']
+
+    TestApplication\Filters\TodoContainFilter:
+        autoconfigure: true

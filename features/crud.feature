@@ -59,3 +59,34 @@ Feature:
       "content": "hello"
     }
     """
+
+  Scenario: filter todo
+    Given there are some todos
+    When I make a GET request on "/todos?q=ba"
+    Then the last response contains:
+    """
+    {
+      "meta": {
+        "totalPages": 1,
+        "totalResults": 2,
+        "currentPage": 1,
+        "maxPerPage": 30
+      },
+      "links": {
+        "prev": null,
+        "next": null,
+        "last": "http://localhost/todos?q=ba",
+        "first": "http://localhost/todos?q=ba"
+      },
+      "data": [
+        {
+          "id": 2,
+          "content": "bar"
+        },
+        {
+          "id": 3,
+          "content": "baz"
+        }
+      ]
+    }
+    """
