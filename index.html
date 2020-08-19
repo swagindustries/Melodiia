@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Melodiia Documentation</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Melodiia Documentation
+                <small class="hidden-xs hidden-sm">
+                    Take control of your API
+                </small>
+            </a>
+
+                            <a href="https://github.com/SwagIndustries/Melodiia">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/index.html">
+                                        Home page
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/getting-started.html">
+                                        Getting Started
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/filters.html">
+                                        Using filters
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/config-reference.html">
+                                        Configuration Reference
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/crud-controllers.html">
+                                        CRUD Reference
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="melodiia">Melodiia</h1>
+<p><img src="https://action-badges.now.sh/swagindustries/Melodiia" alt="badge" /></p>
+<p>Finally some competitor to ApiPlatform.</p>
+<p>Melodiia has been designed to do exactly what you want it does. No magic here. It's just a set of tools that
+work nicely with Symfony.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Adds a documentation endpoint with help of swagger</li>
+<li>Set of api responses</li>
+<li>Uses Symfony Form as input</li>
+<li>CRUD controllers</li>
+<li>Error management</li>
+<li>Output format as <a href="https://jsonapi.org/">json-api</a>, a format that has 1.x version</li>
+</ul>
+<h2 id="install">Install</h2>
+<pre><code class="language-bash">composer require swag-industries/melodiia</code></pre>
+<p>The recipe will automatically create the configuration file <code>melodiia.yaml</code>. If you decided to not execute this recipe,
+please refer to the
+<a href="https://github.com/symfony/recipes-contrib/tree/master/swagindustries/melodiia">recipe repository of Symfony</a>.</p>
+<h3 id="learn-more">Learn more</h3>
+<ul>
+<li><a href="./docs/getting-started.html">Getting Started</a></li>
+<li><a href="./docs/crud.html">Configure my first crud operations !</a></li>
+<li><a href="./docs/symfony.html">Integration with Symfony </a></li>
+<li><a href="https://docs.google.com/presentation/d/1dtxUOzZFGRq7Ar5YV5aZ6AN60RhDbf_0OcXKj5iiDS8/edit?usp=sharing">Presentation of Melodiia @Biig-io</a></li>
+</ul>
+<p>Feel free to open an issue, if you encounter problems while implementing Melodiia.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="blank-page-on-documentation">Blank page on documentation</h3>
+<p>You probably forget to install assets. <code>bin/console assets:install</code>.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

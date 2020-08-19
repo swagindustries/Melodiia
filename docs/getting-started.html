@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Melodiia Documentation</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Melodiia Documentation
+                <small class="hidden-xs hidden-sm">
+                    Take control of your API
+                </small>
+            </a>
+
+                            <a href="https://github.com/SwagIndustries/Melodiia">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/index.html">
+                                        Home page
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/getting-started.html">
+                                        Getting Started
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/filters.html">
+                                        Using filters
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/config-reference.html">
+                                        Configuration Reference
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/docs/crud-controllers.html">
+                                        CRUD Reference
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="getting-started">Getting Started</h1>
+<p><em>Notice: if you want to see a complete example, you can see the folder test/TestApplication that contains an app of test we
+use for functional testing</em></p>
+<h2 id="installation">Installation</h2>
+<p>Run the following command and you're all set:</p>
+<pre><code class="language-bash">composer require swag-industries/melodiia</code></pre>
+<h2 id="step-1-your-model">Step 1: your model</h2>
+<p>To work with Melodiia, your model must implement the interface <code>MelodiiaModel</code>.</p>
+<pre><code class="language-php">/**
+ * @ORM\Entity()
+ */
+class Todo implements MelodiiaModel
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+}</code></pre>
+<h2 id="step-2-crud">Step 2: CRUD</h2>
+<p>Because a lot of what you do is actually CRUD, Melodiia provides controllers to make a CRUD. You just have to use
+your routing to make it work.</p>
+<pre><code class="language-yaml"># routing.yaml
+get_todos:
+    path: /todos
+    controller: 'melodiia.crud.controller.get_all'
+    methods: GET
+    defaults:
+        melodiia_model: App\Entity\Todo</code></pre>
+<p>This will generate a paginated result. You may also want to add <a href="filters.html">filters</a> to the output.</p>
+<p>Learn more about CRUD controllers on <a href="crud-controllers.html">related documentation page</a>.</p>
+<h2 id="step-3-form">Step 3: Form</h2>
+<p>Melodiia uses form types for input data. That's how you manage your input validation and errors in the context of Melodiia.</p>
+<pre><code class="language-php">use SwagIndustries\Melodiia\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use App\Entity\Todo;
+
+class TodoType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder-&gt;add('content', TextType::class, ['constraints' =&gt; new NotBlank()]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver-&gt;setDefault('data_class', Todo::class);
+    }
+}</code></pre>
+<p>You can now use the <code>Create</code> controller from the CRUD controllers.</p>
+<p>By default Symfony Forms are not well designed for API. That's why we created a new <code>AbstractType</code> that you should
+extends. Melodiia also provide a set of type for APIs needs: <a href="https://github.com/swagindustries/Melodiia/tree/master/src/Form/Type">https://github.com/swagindustries/Melodiia/tree/master/src/Form/Type</a></p>
+<pre><code class="language-yaml"># routing.yaml
+post_todos:
+    path: /todos
+    controller: 'melodiia.crud.controller.create'
+    methods: POST
+    defaults:
+        melodiia_model: App\Entity\Todo
+        melodiia_form: App\Form\TodoType</code></pre>
+<h2 id="step-4-write-documentation">Step 4: write documentation</h2>
+<p><em>Disclaimer: Melodiia was originally generating the API documentation. I though this is an expected behavior from an API library.
+But I quickly figured out that even if it was generating valid documentation (unless some other frameworks), using docblocks
+to configure the OpenAPI documentation in a good way was a serious pain and was just making things complicated.</em></p>
+<p><strong>Melodiia doesn't generates automatically documentation.</strong></p>
+<p>But it comes with some help to build your documentation:</p>
+<ol>
+<li>Run <code>bin/console assets:insall</code></li>
+<li>Create a file <code>documentation.yml</code> (the <code>config</code> folder seems like a good location)</li>
+<li>Add the following routing to your configuration</li>
+</ol>
+<pre><code class="language-yaml"># The documentation should be available only in dev environment
+# routing_dev.yaml
+documentation:
+    path: /documentation
+    controller: 'melodiia.documentation'
+    defaults:
+        documentation_file_path: '%kernel.project_dir%/config/documentation.yaml'</code></pre>
+<h2 id="step-5-do-what-you-want">Step 5: do what you want</h2>
+<p>Just like the readme says. Melodiia is a set of tools. Feel free to make your own controllers, but if you want that
+Melodiia process your content (to ensure your API always answer with the same format), you must return a response
+that implements <code>SwagIndustries\Melodiia\Response\ApiResponse</code>.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
