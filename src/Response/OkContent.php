@@ -36,4 +36,9 @@ class OkContent implements ApiResponse, SerializationContextAwareInterface
     {
         return 200;
     }
+
+    public function headers(): array
+    {
+        return [];
+    }
 }

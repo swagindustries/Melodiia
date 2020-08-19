@@ -35,4 +35,9 @@ class Created implements ApiResponse
     {
         return 201;
     }
+
+    public function headers(): array
+    {
+        return [];
+    }
 }

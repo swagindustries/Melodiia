@@ -18,4 +18,9 @@ abstract class AbstractApiResponse implements ApiResponse
     {
         return $this->message;
     }
+
+    public function headers(): array
+    {
+        return [];
+    }
 }

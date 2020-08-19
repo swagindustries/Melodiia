@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - There is a new optional option on the ApiType: `clear_missing` but its value is automatically guessed by default
       to follow HTTP verbs.
 - Removal of the dependency to zend json (thanks to php 7.3 upgrade)
+- BC Break: the ApiResponse now contains also headers. If you do not extends another response you will need to add the missing method
 
 ## [0.6.0] 2020-06-01
 ### Added

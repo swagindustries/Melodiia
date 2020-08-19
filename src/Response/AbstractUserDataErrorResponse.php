@@ -17,4 +17,9 @@ abstract class AbstractUserDataErrorResponse implements ApiResponse
     {
         return 400;
     }
+
+    public function headers(): array
+    {
+        return [];
+    }
 }
