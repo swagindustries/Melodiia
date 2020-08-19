@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Test\TestFixtures;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\Form\AbstractType;
+use SwagIndustries\Melodiia\Form\AbstractType;
 
 class FakeMelodiiaFormType extends AbstractType
 {

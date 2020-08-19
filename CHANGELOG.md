@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       to follow HTTP verbs.
 - Removal of the dependency to zend json (thanks to php 7.3 upgrade)
 - BC Break: the ApiResponse now contains also headers. If you do not extends another response you will need to add the missing method
+- BC Break: many many many changes of namespaces because the Bridge do not exists anymore.
 
 ## Removed
 - BC break: the documentation is no more automatically generated. This removes a lot of configuration for Melodiia.

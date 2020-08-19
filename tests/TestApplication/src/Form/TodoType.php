@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TestApplication\Form;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\Form\AbstractType;
+use SwagIndustries\Melodiia\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

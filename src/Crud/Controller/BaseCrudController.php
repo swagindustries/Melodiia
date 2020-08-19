@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Crud\Controller;
 
-use SwagIndustries\Melodiia\Bridge\Symfony\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
 use SwagIndustries\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\FormErrorResponse;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
