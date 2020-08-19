@@ -1,15 +1,8 @@
 services:
-    melodiia.documentation:
-        class: SwagIndustries\Melodiia\Documentation\Controller\SwaggerUiController
-        tags: ['controller.service_arguments']
-        arguments:
-            $templating: '@twig'
-
     melodiia.configuration:
         class: SwagIndustries\Melodiia\MelodiiaConfiguration
         arguments:
             $config: '%melodiia.config%'
-
 
     # Priority -1 is DX. It allow the user to implement its own normalizers
     # that will take over those.
@@ -43,5 +36,4 @@ services:
             $builders: !tagged_iterator melodiia.context_builder
 
 imports:
-    - 'crud.yaml'
     - 'form.yaml'

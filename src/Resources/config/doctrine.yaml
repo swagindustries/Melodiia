@@ -1,0 +1,7 @@
+services:
+    melodiia.doctrine.data_provider:
+        class: SwagIndustries\Melodiia\Doctrine\DoctrineDataStore
+        arguments:
+            $registry: '@doctrine'
+
+    melodiia.data_provider: '@melodiia.doctrine.data_provider'

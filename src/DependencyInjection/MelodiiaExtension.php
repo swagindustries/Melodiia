@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\DependencyInjection;
 
+use Doctrine\Persistence\AbstractManagerRegistry;
 use SwagIndustries\Melodiia\Crud\FilterInterface;
 use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderInterface;
 use Symfony\Component\Config\FileLocator;
@@ -11,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Twig\Environment;
 
 class MelodiiaExtension extends Extension
 {
@@ -24,6 +26,16 @@ class MelodiiaExtension extends Extension
         $loader->load('services.yaml');
         $xmlLoader = new XmlFileLoader($container, $configFileLocator);
         $xmlLoader->load('error-management.xml');
+
+        if (class_exists(AbstractManagerRegistry::class)) {
+            $loader->load('doctrine.yaml');
+        }
+        if ($container->hasAlias('melodiia.data_provider')) {
+            $loader->load('crud.yaml');
+        }
+        if (class_exists(Environment::class)) {
+            $loader->load('twig.yaml');
+        }
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);

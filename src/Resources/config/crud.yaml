@@ -1,8 +1,4 @@
 services:
-    melodiia.doctrine.data_provider:
-        class: SwagIndustries\Melodiia\Doctrine\DoctrineDataStore
-        arguments:
-            $registry: '@doctrine'
 
     melodiia.crud.id_resolver:
         class: SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver
@@ -24,7 +20,7 @@ services:
     melodiia.crud.controller.create:
         class: SwagIndustries\Melodiia\Crud\Controller\Create
         arguments:
-            $dataStore: '@melodiia.doctrine.data_provider'
+            $dataStore: '@melodiia.data_provider'
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
             $checker: '@?security.authorization_checker'
@@ -33,7 +29,7 @@ services:
     melodiia.crud.controller.update:
         class: SwagIndustries\Melodiia\Crud\Controller\Update
         arguments:
-            $dataStore: '@melodiia.doctrine.data_provider'
+            $dataStore: '@melodiia.data_provider'
             $formFactory: '@form.factory'
             $dispatcher: '@event_dispatcher'
             $idResolver: '@melodiia.crud.id_resolver'
@@ -43,7 +39,7 @@ services:
     melodiia.crud.controller.get_all:
         class: SwagIndustries\Melodiia\Crud\Controller\GetAll
         arguments:
-            $dataStore: '@melodiia.doctrine.data_provider'
+            $dataStore: '@melodiia.data_provider'
             $collectionFactory: '@melodiia.crud.filters.filter_collection_factory'
             $pagesRequestFactory: '@SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface'
             $checker: '@?security.authorization_checker'
@@ -60,7 +56,7 @@ services:
     melodiia.crud.controller.delete:
         class: SwagIndustries\Melodiia\Crud\Controller\Delete
         arguments:
-            $dataStore: '@melodiia.doctrine.data_provider'
+            $dataStore: '@melodiia.data_provider'
             $dispatcher: '@event_dispatcher'
             $idResolver: '@melodiia.crud.id_resolver'
             $checker: '@?security.authorization_checker'
