@@ -18,6 +18,8 @@ Features
 - Error management
 - Output format as [json-api](https://jsonapi.org/), a format that has 1.x version
 
+Learn more in the [complete documentation](https://melodiia.swag.industries).
+
 Install
 -------
 
@@ -27,14 +29,15 @@ composer require swag-industries/melodiia
 
 The recipe will automatically create the configuration file `melodiia.yaml`. If you decided to not execute this recipe,
 please refer to the
-[recipe repository of Symfony](https://github.com/symfony/recipes-contrib/tree/master/swagindustries/melodiia).
+[recipe repository of Symfony](https://github.com/symfony/recipes-contrib/tree/master/swag-industries/melodiia).
 
-### Learn more 
 
-- [Getting Started](./docs/getting-started.md)
-- [Configure my first crud operations !](./docs/Crud.md)
-- [Integration with Symfony ](./docs/Symfony.md)
-- [Presentation of Melodiia @Biig-io](https://docs.google.com/presentation/d/1dtxUOzZFGRq7Ar5YV5aZ6AN60RhDbf_0OcXKj5iiDS8/edit?usp=sharing)
+You may want to read the [getting started doc](./docs/getting-started.md) at this point!
+
+One last thing
+--------------
+
+I ([Nek-](https://github.com/Nek-)) designed Melodiia while I was working at Biig in the mean time. This [presentation of Melodiia @Biig-io](https://docs.google.com/presentation/d/1dtxUOzZFGRq7Ar5YV5aZ6AN60RhDbf_0OcXKj5iiDS8/edit?usp=sharing) is related to an old version of Melodiia but can still helps you to understand what is melodiia and how it's different from API Platform (TL;DR: Melodiia does less).
 
 Feel free to open an issue, if you encounter problems while implementing Melodiia.
 
