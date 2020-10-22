@@ -5,6 +5,8 @@ Melodiia
 
 Finally some competitor to ApiPlatform.
 
+![Melodiia Logo](resources/logo_melodiia.png)
+
 Melodiia has been designed to do exactly what you want it does. No magic here. It's just a set of tools that
 work nicely with Symfony.
 
