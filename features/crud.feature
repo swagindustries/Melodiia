@@ -90,3 +90,11 @@ Feature:
       ]
     }
     """
+
+  Scenario: I can delete todo
+    Given there is one todo "hello Melodiia"
+    When I make a DELETE request on "/todos/1" with the content:
+    """
+    []
+    """
+    Then todo with content "hello Melodiia" should not exists
