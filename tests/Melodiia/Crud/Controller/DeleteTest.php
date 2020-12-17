@@ -6,20 +6,24 @@ namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Promise\CallbackPromise;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\Controller\Delete;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
 use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
 use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
+use SwagIndustries\Melodiia\Crud\Event\DeleteEvent;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
 use SwagIndustries\Melodiia\Response\ApiResponse;
+use SwagIndustries\Melodiia\Response\DeletionCancelResponse;
 use SwagIndustries\Melodiia\Response\Ok;
 use SwagIndustries\Melodiia\Test\MockDispatcherTrait;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteTest extends TestCase
@@ -100,5 +104,44 @@ class DeleteTest extends TestCase
         $res = ($this->controller)($this->request->reveal());
 
         $this->assertInstanceOf(Ok::class, $res);
+    }
+
+    public function testItReturnDeleteCancelResponseIfEventHasBeenCancelByStopDelete()
+    {
+        $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new FakeMelodiiaModel());
+        $this->dispatcher->dispatch(Argument::type(DeleteEvent::class), Delete::EVENT_PRE_DELETE)->will(new CallbackPromise(function ($args, $objectProphecy, $method) {
+            $event = $args[0];
+            $event->stopDelete('VENDDUUUUUU', Response::HTTP_I_AM_A_TEAPOT);
+
+            return $event;
+        }));
+
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Delete::EVENT_POST_DELETE)->shouldBeCalled();
+        $this->dataStore->remove(Argument::type(FakeMelodiiaModel::class))->shouldNotBeCalled();
+
+        /** @var DeletionCancelResponse $res */
+        $res = ($this->controller)($this->request->reveal());
+        $this->assertInstanceOf(DeletionCancelResponse::class, $res);
+        $this->assertEquals(Response::HTTP_I_AM_A_TEAPOT, $res->httpStatus());
+        $this->assertEquals('VENDDUUUUUU', $res->getMessage());
+    }
+
+    public function testItReturnDeleteCancelResponseIfEventHasBeenCancelWithStopDeleteWithResponse()
+    {
+        $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new FakeMelodiiaModel());
+        $this->dispatcher->dispatch(Argument::type(DeleteEvent::class), Delete::EVENT_PRE_DELETE)->will(new CallbackPromise(function ($args, $objectProphecy, $method) {
+            $event = $args[0];
+            $event->stopDeleteWithResponse(new DeletionCancelResponse(12, 'i_am_a_teapot'));
+
+            return $event;
+        }));
+        $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Delete::EVENT_POST_DELETE)->shouldBeCalled();
+        $this->dataStore->remove(Argument::type(FakeMelodiiaModel::class))->shouldNotBeCalled();
+
+        /** @var DeletionCancelResponse $res */
+        $res = ($this->controller)($this->request->reveal());
+        $this->assertInstanceOf(DeletionCancelResponse::class, $res);
+        $this->assertEquals(12, $res->httpStatus());
+        $this->assertEquals('i_am_a_teapot', $res->getMessage());
     }
 }

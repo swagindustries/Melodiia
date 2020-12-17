@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Crud\Controller;
 
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
-use SwagIndustries\Melodiia\Crud\Event\CrudEvent;
 use SwagIndustries\Melodiia\Crud\Event\CustomResponseEvent;
+use SwagIndustries\Melodiia\Crud\Event\DeleteEvent;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
 use SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver;
@@ -61,12 +61,20 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
 
         $this->assertResourceRights($request, $data);
 
-        $this->dispatch(new CrudEvent($data), self::EVENT_PRE_DELETE);
-        $this->dataStore->remove($data);
+        $this->dispatch($deleteEvent = new DeleteEvent($data), self::EVENT_PRE_DELETE);
+
+        if (!$deleteEvent->isStopped()) {
+            $this->dataStore->remove($data);
+        }
+
         $this->dispatch($event = new CustomResponseEvent($data), self::EVENT_POST_DELETE);
 
         if ($event->hasCustomResponse()) {
             return $event->getResponse();
+        }
+
+        if ($deleteEvent->isStopped()) {
+            return $deleteEvent->getDeleteResponse();
         }
 
         return new Ok('Deletion ok');

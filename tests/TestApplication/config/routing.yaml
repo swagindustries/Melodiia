@@ -17,6 +17,13 @@ get_todo:
     defaults:
         melodiia_model: TestApplication\Entity\Todo
 
+delete_todo:
+    path: /todos/{id}
+    controller: 'melodiia.crud.controller.delete'
+    methods: DELETE
+    defaults:
+        melodiia_model: TestApplication\Entity\Todo
+
 post_todos:
     path: /todos
     controller: 'melodiia.crud.controller.create'
