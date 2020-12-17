@@ -112,6 +112,7 @@ class DeleteTest extends TestCase
         $this->dispatcher->dispatch(Argument::type(DeleteEvent::class), Delete::EVENT_PRE_DELETE)->will(new CallbackPromise(function ($args, $objectProphecy, $method) {
             $event = $args[0];
             $event->stopDelete('VENDDUUUUUU', Response::HTTP_I_AM_A_TEAPOT);
+
             return $event;
         }));
 
@@ -131,6 +132,7 @@ class DeleteTest extends TestCase
         $this->dispatcher->dispatch(Argument::type(DeleteEvent::class), Delete::EVENT_PRE_DELETE)->will(new CallbackPromise(function ($args, $objectProphecy, $method) {
             $event = $args[0];
             $event->stopDeleteWithResponse(new DeletionCancelResponse(12, 'i_am_a_teapot'));
+
             return $event;
         }));
         $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Delete::EVENT_POST_DELETE)->shouldBeCalled();

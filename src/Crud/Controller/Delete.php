@@ -63,7 +63,7 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
 
         $this->dispatch($deleteEvent = new DeleteEvent($data), self::EVENT_PRE_DELETE);
 
-        if ($deleteEvent->isDeletionActive()) {
+        if (!$deleteEvent->isStopped()) {
             $this->dataStore->remove($data);
         }
 
@@ -73,7 +73,7 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
             return $event->getResponse();
         }
 
-        if (!$deleteEvent->isDeletionActive()) {
+        if ($deleteEvent->isStopped()) {
             return $deleteEvent->getDeleteResponse();
         }
 

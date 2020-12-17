@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Crud\Event;
 
 use SwagIndustries\Melodiia\Response\DeletionCancelResponse;
@@ -20,8 +22,8 @@ final class DeleteEvent extends CrudEvent
     }
 
     /**
-     * @param string|null $message this message will be returned in the response body.
-     * @param string|int $code this code will be the response http status code.
+     * @param string|null $message this message will be returned in the response body
+     * @param string|int  $code    this code will be the response http status code
      */
     public function stopDelete($message = null, $code = Response::HTTP_BAD_REQUEST): void
     {
@@ -35,19 +37,16 @@ final class DeleteEvent extends CrudEvent
         $this->deleteResponse = $deletionCancelResponse;
     }
 
-    public function isDeletionActive(): bool
+    public function isStopped(): bool
     {
-        return !$this->stopDelete;
+        return $this->stopDelete;
     }
 
     public function delete(): void
     {
-        $this->stopDelete = true;
+        $this->stopDelete = false;
     }
 
-    /**
-     * @return DeletionCancelResponse|null
-     */
     public function getDeleteResponse(): ?DeletionCancelResponse
     {
         return $this->deleteResponse;

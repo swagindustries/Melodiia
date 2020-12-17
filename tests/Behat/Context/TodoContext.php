@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Tests\Behat\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use TestApplication\Entity\Todo;
 use Webmozart\Assert\Assert;
 
@@ -62,5 +61,4 @@ class TodoContext extends AbstractContext
 
         return $entityManager->getRepository(Todo::class);
     }
-
 }
