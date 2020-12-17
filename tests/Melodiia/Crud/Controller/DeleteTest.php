@@ -24,7 +24,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DeleteTest extends TestCase
 {
@@ -71,21 +73,17 @@ class DeleteTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
     public function testItThrow404IfNonExistingItem()
     {
+        $this->expectException(NotFoundHttpException::class);
         $this->dataStore->find(Argument::any(), 'id')->willReturn(null);
 
         ($this->controller)($this->request->reveal());
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     */
     public function testItDoesNotAllowIllegalAccess()
     {
+        $this->expectException(AccessDeniedException::class);
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass());
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('edit');
         $this->checker->isGranted(Argument::cetera())->willReturn(false);

@@ -25,6 +25,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UpdateTest extends TestCase
 {
@@ -115,11 +116,9 @@ class UpdateTest extends TestCase
         $this->assertInstanceOf(OkContent::class, $res);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     */
     public function testItThrowAccessDeniedInCaseOfNonGrantedAccess()
     {
+        $this->expectException(AccessDeniedException::class);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('edit');
         $this->checker->isGranted(Argument::cetera())->willReturn(false);
 
