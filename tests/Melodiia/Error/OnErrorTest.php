@@ -19,7 +19,7 @@ class OnErrorTest extends TestCase
     /** @var SerializerInterface|ObjectProphecy */
     private $serializer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->serializer = $this->prophesize(SerializerInterface::class);
         $this->serializer->serialize(Argument::cetera())->willReturn('{}');

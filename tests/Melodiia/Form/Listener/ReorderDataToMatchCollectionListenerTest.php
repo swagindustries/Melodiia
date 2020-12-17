@@ -28,7 +28,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
         $this->subject = new ReorderDataToMatchCollectionListener();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         $this->factory = null;

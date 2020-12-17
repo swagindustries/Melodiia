@@ -54,7 +54,7 @@ class UpdateTest extends TestCase
     /** @var Update */
     private $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->formFactory = $this->prophesize(FormFactoryInterface::class);
         $this->form = $this->prophesize(FormInterface::class);

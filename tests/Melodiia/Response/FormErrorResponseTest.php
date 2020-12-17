@@ -32,7 +32,7 @@ class FormErrorResponseTest extends TestCase
      */
     private $formFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $validator = Validation::createValidator();
         $this->formFactory = Forms::createFormFactoryBuilder()

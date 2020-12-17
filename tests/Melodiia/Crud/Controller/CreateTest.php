@@ -53,7 +53,7 @@ class CreateTest extends TestCase
     /** @var Create */
     private $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->formFactory = $this->prophesize(FormFactoryInterface::class);
         $this->form = $this->prophesize(FormInterface::class);

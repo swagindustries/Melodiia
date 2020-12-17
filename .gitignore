@@ -3,3 +3,4 @@ vendor
 .php_cs.cache
 tests/TestApplication/var
 .couscous
+.phpunit.result.cache

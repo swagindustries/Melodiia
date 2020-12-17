@@ -48,7 +48,7 @@ class DeleteTest extends TestCase
     /** @var Delete */
     private $controller;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->request = $this->prophesize(Request::class);
         $this->dataStore = $this->prophesize(DataStoreInterface::class);

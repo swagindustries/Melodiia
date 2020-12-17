@@ -20,7 +20,7 @@ class FilterCollectionTest extends TestCase
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $formBuilder = $this->prophesize(FormBuilderInterface::class);
         $formBuilder->getForm()->willReturn($this->prophesize(FormInterface::class)->reveal());

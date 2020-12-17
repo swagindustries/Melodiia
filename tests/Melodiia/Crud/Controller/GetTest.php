@@ -29,7 +29,7 @@ class GetTest extends TestCase
     /** @var Get */
     private $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->dataStore = $this->prophesize(DataStoreInterface::class);
         $this->authorizationChecker = $this->prophesize(AuthorizationCheckerInterface::class);
