@@ -6,9 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3] 2020-12-18
+
+### Added
+- Compatibility to PHP 8
+
+### Fixed
+- Test suite for PHP 7.3/Symfony 4.4
+
 ## [0.7.2] 2020-08-19
 
-## Changed
+### Changed
 - Twig and Doctrine are now soft deps
 
 ## [0.7.1] 2020-08-19
