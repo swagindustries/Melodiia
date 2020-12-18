@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Test\Response;
 
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Exception\InvalidResponseException;
 use SwagIndustries\Melodiia\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Response\Model\UserDataError;
 use Symfony\Component\Form\AbstractType;
@@ -32,7 +33,7 @@ class FormErrorResponseTest extends TestCase
      */
     private $formFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $validator = Validation::createValidator();
         $this->formFactory = Forms::createFormFactoryBuilder()
@@ -41,20 +42,16 @@ class FormErrorResponseTest extends TestCase
         ;
     }
 
-    /**
-     * @expectedException \SwagIndustries\Melodiia\Exception\InvalidResponseException
-     */
     public function testItFailsIfFormNotSubmitted()
     {
+        $this->expectException(InvalidResponseException::class);
         $form = $this->formFactory->createNamedBuilder('')->add('foo')->getForm();
         new FormErrorResponse($form);
     }
 
-    /**
-     * @expectedException \SwagIndustries\Melodiia\Exception\InvalidResponseException
-     */
     public function testItFailsIfFormHasNoError()
     {
+        $this->expectException(InvalidResponseException::class);
         $form = $this->formFactory->createNamedBuilder('')->add('foo')->getForm();
         $form->submit(['foo' => 'hello']);
         new FormErrorResponse($form);

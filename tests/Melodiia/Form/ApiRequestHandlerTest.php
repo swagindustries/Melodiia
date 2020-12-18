@@ -40,7 +40,7 @@ class ApiRequestHandlerTest extends TestCase
         $this->request->getMethod()->willReturn('POST');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->subject = null;
         $this->form = null;

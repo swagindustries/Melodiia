@@ -21,7 +21,7 @@ class SwaggerUiControllerTest extends TestCase
     /** @var Environment|ObjectProphecy */
     private $templating;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->templating = $this->prophesize(Environment::class);
     }

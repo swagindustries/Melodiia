@@ -3,7 +3,7 @@
     "description": "Library that helps you build APIs",
     "type": "symfony-bundle",
     "scripts": {
-        "phpcs": "php-cs-fixer fix --using-cache=false",
+        "phpcs": "PHP_CS_FIXER_IGNORE_ENV=true php-cs-fixer fix --using-cache=false",
         "test-app": "@php -S localhost:8000 -t tests/TestApplication/public",
         "post-install-cmd": "make hooks.install"
     },
@@ -16,18 +16,18 @@
         "symfony/serializer": "^4.3 || ^5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
-        "friendsofphp/php-cs-fixer": "^2.13",
+        "phpunit/phpunit": "^8.5",
+        "friendsofphp/php-cs-fixer": "^2.17",
         "phpspec/prophecy": "^1.8",
         "twig/twig": "^2.5",
         "symfony/symfony": "^4.3 || ^5.0",
-        "doctrine/orm": "^2.6",
+        "doctrine/orm": "^v2.6.6",
         "justinrainbow/json-schema": "^5.2",
         "doctrine/annotations": "^1.8",
         "doctrine/doctrine-bundle": "^2.1",
         "behat/behat": "^3.7",
-        "friends-of-behat/symfony-extension": "^2.1",
-        "fzaninotto/faker": "^1.9"
+        "friends-of-behat/symfony-extension": "dev-master#c6c16503105ddd1852490884cdf4d2c1f253b7e6",
+        "fakerphp/faker": "^1.12.1"
     },
     "autoload": {
         "psr-4": {

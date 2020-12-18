@@ -31,7 +31,7 @@ class OkContentNormalizerTest extends TestCase
     /** @var OkContentNormalizer */
     private $okContentNormalizer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->mainNormalizer = $this->prophesize(Serializer::class);
         $this->requestStack = $this->prophesize(RequestStack::class);

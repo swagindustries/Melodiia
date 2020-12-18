@@ -28,5 +28,5 @@ trim_trailing_whitespace = false
 [*.feature]
 indent_size = 2
 
-[{ci.yml,behat.yaml}]
+[behat.yaml]
 indent_size = 2

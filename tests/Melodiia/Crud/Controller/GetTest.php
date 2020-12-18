@@ -17,6 +17,7 @@ use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GetTest extends TestCase
 {
@@ -29,7 +30,7 @@ class GetTest extends TestCase
     /** @var Get */
     private $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->dataStore = $this->prophesize(DataStoreInterface::class);
         $this->authorizationChecker = $this->prophesize(AuthorizationCheckerInterface::class);
@@ -76,11 +77,9 @@ class GetTest extends TestCase
         $this->assertInstanceOf(NotFound::class, $res);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     */
     public function testItCheckAccessToResourceIfSpecifiedInConfiguration()
     {
+        $this->expectException(AccessDeniedException::class);
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass())->shouldBeCalled();
         $request = $this->prophesize(Request::class);
         $attributes = $this->prophesize(ParameterBag::class);

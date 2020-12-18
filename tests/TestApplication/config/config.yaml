@@ -1,6 +1,9 @@
 parameters:
     router.request_context.host: 'localhost'
 
+    # BC Layer for Symfony 4.4
+    kernel.secret: 'SuperSecret'
+
 framework:
     serializer: ~
     form: ~

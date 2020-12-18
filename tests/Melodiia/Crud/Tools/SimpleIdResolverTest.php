@@ -15,12 +15,12 @@ class SimpleIdResolverTest extends TestCase
 {
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new SimpleIdResolver();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->subject = null;
     }

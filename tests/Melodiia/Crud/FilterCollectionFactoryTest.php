@@ -19,7 +19,7 @@ class FilterCollectionFactoryTest extends TestCase
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->formFactory = $this->prophesize(FormFactoryInterface::class);
     }

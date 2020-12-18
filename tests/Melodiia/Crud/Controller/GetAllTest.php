@@ -23,6 +23,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GetAllTest extends TestCase
 {
@@ -53,7 +54,7 @@ class GetAllTest extends TestCase
     /** @var GetAll */
     private $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->dataStore = $this->prophesize(DataStoreInterface::class);
         $this->authorizationChecker = $this->prophesize(AuthorizationCheckerInterface::class);
@@ -115,11 +116,9 @@ class GetAllTest extends TestCase
         $this->assertInstanceOf(OkContent::class, $res);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     */
     public function testItCheckAccessToResourceIfSpecifiedInConfiguration()
     {
+        $this->expectException(AccessDeniedException::class);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('view');
 
         $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(false);

@@ -29,7 +29,7 @@ class PaginationRequestFactoryTest extends TestCase
     /** @var PaginationRequestFactoryInterface */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->configuration = $this->prophesize(MelodiiaConfigurationInterface::class);
         $this->request = $this->prophesize(Request::class);

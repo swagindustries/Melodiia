@@ -18,7 +18,7 @@ class MelodiiaConfigurationTest extends TestCase
     /** @var MelodiiaConfiguration */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->router = $this->prophesize(RouterInterface::class);
         $this->subject = new MelodiiaConfiguration($this->provideConfig(), $this->router->reveal());

@@ -20,7 +20,7 @@ class FilterCollectionTest extends TestCase
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $formBuilder = $this->prophesize(FormBuilderInterface::class);
         $formBuilder->getForm()->willReturn($this->prophesize(FormInterface::class)->reveal());
@@ -38,19 +38,15 @@ class FilterCollectionTest extends TestCase
         $collection->filter($this->prophesize(QueryBuilder::class)->reveal());
     }
 
-    /**
-     * @expectedException \TypeError
-     */
     public function testItDoesNotAcceptSomethingElseThanFilter()
     {
+        $this->expectException(\TypeError::class);
         $collection = new FilterCollection($this->formFactory->reveal(), [new \stdClass()]);
     }
 
-    /**
-     * @expectedException \TypeError
-     */
     public function testItDoesNotAcceptSomethingElseThanFilterInAdd()
     {
+        $this->expectException(\TypeError::class);
         $collection = new FilterCollection($this->formFactory->reveal());
         $collection->add(new \stdClass());
     }
