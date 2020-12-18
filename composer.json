@@ -21,7 +21,7 @@
         "phpspec/prophecy": "^1.8",
         "twig/twig": "^2.5",
         "symfony/symfony": "^4.3 || ^5.0",
-        "doctrine/orm": "^2.6",
+        "doctrine/orm": "^v2.6.6",
         "justinrainbow/json-schema": "^5.2",
         "doctrine/annotations": "^1.8",
         "doctrine/doctrine-bundle": "^2.1",

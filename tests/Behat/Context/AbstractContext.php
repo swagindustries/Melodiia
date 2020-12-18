@@ -12,8 +12,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class AbstractContext implements Context
 {
-    private KernelInterface $kernel;
-    protected Generator $faker;
+    /** @var KernelInterface */
+    private $kernel;
+    /** @var Generator */
+    protected $faker;
 
     public function __construct(KernelInterface $kernel)
     {
