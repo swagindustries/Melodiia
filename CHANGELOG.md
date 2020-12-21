@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Compatibility to PHP 8
+- Ability to stop a deletion from events
 
 ### Fixed
 - Test suite for PHP 7.3/Symfony 4.4
