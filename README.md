@@ -1,7 +1,7 @@
 Melodiia
 ========
 
-![badge](https://action-badges.now.sh/swagindustries/Melodiia)
+![Tests](https://github.com/swagindustries/Melodiia/workflows/Test%20suite/badge.svg)
 
 Finally some competitor to ApiPlatform.
 
