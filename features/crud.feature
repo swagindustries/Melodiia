@@ -24,15 +24,18 @@ Feature:
       "data": [
         {
           "id": 1,
-          "content": "foo"
+          "content": "foo",
+          "publishDate":"2050-01-02T00:00:00+00:00"
         },
         {
           "id": 2,
-          "content": "bar"
+          "content": "bar",
+          "publishDate":"2050-01-02T00:00:00+00:00"
         },
         {
           "id": 3,
-          "content": "baz"
+          "content": "baz",
+          "publishDate":"2050-01-02T00:00:00+00:00"
         }
       ]
     }
@@ -42,7 +45,8 @@ Feature:
     Given I make a "POST" request on "/todos" with the content:
     """
     {
-      "content": "hello"
+      "content": "hello",
+      "publishDate":"2050-01-02T00:00:00+00:00"
     }
     """
     And the last response contains:
@@ -56,7 +60,8 @@ Feature:
     """
     {
       "id": 1,
-      "content": "hello"
+      "content": "hello",
+      "publishDate":"2050-01-02T00:00:00+00:00"
     }
     """
 
@@ -81,11 +86,13 @@ Feature:
       "data": [
         {
           "id": 2,
-          "content": "bar"
+          "content": "bar",
+          "publishDate":"2050-01-02T00:00:00+00:00"
         },
         {
           "id": 3,
-          "content": "baz"
+          "content": "baz",
+          "publishDate":"2050-01-02T00:00:00+00:00"
         }
       ]
     }

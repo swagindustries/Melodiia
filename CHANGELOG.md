@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Removed hard dependency to the form component (it is still required for many features)
 
+### Removed
+- Automatic extension of the Symfony DateTimeType. There's a good DateTimeType available, we do not need more.
+
 ## [0.7.3] 2020-12-18
 
 ### Added

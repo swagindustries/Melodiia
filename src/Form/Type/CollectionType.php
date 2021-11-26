@@ -9,11 +9,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MelodiiaCollectionType extends AbstractType
+class CollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -37,28 +35,11 @@ class MelodiiaCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars = array_replace($view->vars, [
-            'allow_add' => $options['allow_add'],
-            'allow_delete' => $options['allow_delete'],
-        ]);
-
-        if ($form->getConfig()->hasAttribute('prototype')) {
-            $prototype = $form->getConfig()->getAttribute('prototype');
-            $view->vars['prototype'] = $prototype->setParent($form)->createView($view);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'allow_add' => true,
             'allow_delete' => true,
-            'prototype' => true,
             'entry_type' => TextType::class,
             'entry_options' => [],
             'delete_empty' => false,
