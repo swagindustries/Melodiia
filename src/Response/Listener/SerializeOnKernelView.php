@@ -19,6 +19,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class SerializeOnKernelView implements EventSubscriberInterface
 {
+    public const CONTENT_TYPE = 'application/vnd.api+json';
+
     /**
      * @var SerializerInterface
      */
@@ -49,13 +51,15 @@ class SerializeOnKernelView implements EventSubscriberInterface
 
         $context = $this->contextBuilderChain->buildContext([], $response);
 
-        $event->setResponse(
-            new JsonResponse(
-                $this->serializer->serialize($response, 'json', $context),
-                $response->httpStatus(),
-                $response->headers(),
-                true
-            )
+        $jsonResponse = new JsonResponse(
+            $this->serializer->serialize($response, 'json', $context),
+            $response->httpStatus(),
+            $response->headers(),
+            true
         );
+
+        $jsonResponse->headers->set('Content-Type', self::CONTENT_TYPE);
+
+        $event->setResponse($jsonResponse);
     }
 }
