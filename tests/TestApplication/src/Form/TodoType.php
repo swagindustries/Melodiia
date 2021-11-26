@@ -20,7 +20,7 @@ class TodoType extends AbstractType
         $builder
             ->add('content', TextType::class, ['constraints' => new NotBlank()])
             ->add('publishDate', DateTimeType::class, [
-                'constraints' => [new GreaterThan(['today']), new NotBlank()],
+                'constraints' => [new GreaterThan('today'), new NotBlank()],
             ])
         ;
     }

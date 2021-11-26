@@ -33,8 +33,6 @@ class MelodiiaExtension extends Extension
         }
 
         if (class_exists(Form::class)) {
-            $loader->load('form.yaml');
-
             // The CRUD features requires forms as well as doctrine to be enabled
             if ($container->hasAlias('melodiia.data_provider')) {
                 $loader->load('crud.yaml');
@@ -49,7 +47,6 @@ class MelodiiaExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('melodiia.config', $config);
-        $this->disableFormExtensionIfNeeded($container, $config['form_extensions']);
 
         // Autoconf
         $container->registerForAutoconfiguration(FilterInterface::class)->addTag(self::TAG_CRUD_FILTER);

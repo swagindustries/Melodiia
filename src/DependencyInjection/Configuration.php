@@ -37,12 +37,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('form_extensions')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->booleanNode('datetime')->defaultTrue()->end()
-                    ->end()
-                ->end()
             ->end()
         ;
 
