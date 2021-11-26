@@ -87,8 +87,8 @@ class TodoType extends AbstractType
 
 You can now use the `Create` controller from the CRUD controllers.
 
-By default Symfony Forms are not well designed for API. That's why we created a new `AbstractType` that you should
-extends. Melodiia also provide a set of type for APIs needs: https://github.com/swagindustries/Melodiia/tree/master/src/Form/Type
+By default Symfony Forms are not well-designed for API. That's why we created a new `AbstractType` that you should
+extend. Melodiia also provide a set of [form types for APIs needs](form-types.md).
 
 ```yaml
 # routing.yaml

@@ -1,6 +1,8 @@
 Configuration Reference of Melodiia
 ===================================
 
+Here is the whole melodiia configuration commented:
+
 ```yaml
 melodiia:
     apis:
@@ -15,3 +17,4 @@ melodiia:
     form_extensions:
         datetime: true
 ```
+

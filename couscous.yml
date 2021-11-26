@@ -32,3 +32,6 @@ menu:
         cruds:
             text: CRUD Reference
             relativeUrl: docs/crud-controllers.html
+        forms:
+            text: Forms Reference
+            relativeUrl: docs/form-types.html
