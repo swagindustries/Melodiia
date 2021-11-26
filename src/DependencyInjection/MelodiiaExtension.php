@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Form\Form;
 use Twig\Environment;
 
 class MelodiiaExtension extends Extension
@@ -30,9 +31,16 @@ class MelodiiaExtension extends Extension
         if (class_exists(AbstractManagerRegistry::class)) {
             $loader->load('doctrine.yaml');
         }
-        if ($container->hasAlias('melodiia.data_provider')) {
-            $loader->load('crud.yaml');
+
+        if (class_exists(Form::class)) {
+            $loader->load('form.yaml');
+
+            // The CRUD features requires forms as well as doctrine to be enabled
+            if ($container->hasAlias('melodiia.data_provider')) {
+                $loader->load('crud.yaml');
+            }
         }
+
         if (class_exists(Environment::class)) {
             $loader->load('twig.yaml');
         }

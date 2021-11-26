@@ -35,5 +35,3 @@ services:
         arguments:
             $builders: !tagged_iterator melodiia.context_builder
 
-imports:
-    - 'form.yaml'
