@@ -23,7 +23,8 @@ Feature:
       "data": [
         {
           "id": 1,
-          "content": "foo"
+          "content": "foo",
+          "publishDate":"2050-01-02T00:00:00+00:00"
         }
       ]
     }

@@ -24,6 +24,11 @@ class Todo implements MelodiiaModel
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $publishDate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,5 +42,15 @@ class Todo implements MelodiiaModel
     public function setContent($content): void
     {
         $this->content = $content;
+    }
+
+    public function getPublishDate()
+    {
+        return $this->publishDate;
+    }
+
+    public function setPublishDate(?\DateTimeImmutable $publishDate): void
+    {
+        $this->publishDate = $publishDate;
     }
 }

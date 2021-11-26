@@ -18,10 +18,13 @@ class TodoContext extends AbstractContext
 
         $todo1 = new Todo();
         $todo1->setContent('foo');
+        $todo1->setPublishDate(new \DateTimeImmutable('2050-01-02'));
         $todo2 = new Todo();
         $todo2->setContent('bar');
+        $todo2->setPublishDate(new \DateTimeImmutable('2050-01-02'));
         $todo3 = new Todo();
         $todo3->setContent('baz');
+        $todo3->setPublishDate(new \DateTimeImmutable('2050-01-02'));
 
         $entityManager->persist($todo1);
         $entityManager->persist($todo2);
@@ -39,6 +42,7 @@ class TodoContext extends AbstractContext
 
         $todo = new Todo();
         $todo->setContent($content);
+        $todo->setPublishDate(new \DateTimeImmutable('2050-01-02'));
         $entityManager->persist($todo);
 
         $entityManager->flush();
