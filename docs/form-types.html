@@ -66,20 +66,26 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="configuration-reference-of-melodiia">Configuration Reference of Melodiia</h1>
-<p>Here is the whole melodiia configuration commented:</p>
-<pre><code class="language-yaml">melodiia:
-    apis:
-        # Define as much APIs you want here.
-        main:
-            base_path: /api/v1
-            pagination:
-                # Using this query attribute you can change the max per page
-                max_per_page_attribute: max_per_page
-    # Melodiia comes with some form types to help you build your application. You can enable them here.
-    # This is the default configuration
-    form_extensions:
-        datetime: true</code></pre>
+                    <h1 id="using-symfony-form-types-with-melodiia">Using Symfony form types with Melodiia</h1>
+<p>Melodiia provides an <code>AbstractType</code> that you should extends to define you own types.</p>
+<p>In addition, it provides some types that are very specific to API needs:</p>
+<ul>
+<li>BooleanType</li>
+<li>DateTimeType</li>
+<li>CollectionType</li>
+</ul>
+<p>Those types are simple and behave just like you can expect. Excepted for the CollectionType.</p>
+<h2 id="the-collectiontype">The CollectionType</h2>
+<p>This type is very similar to the CollectionType of Symfony but regardless the original one, it supports APIs.</p>
+<p>Here is a list of options you can use on it:</p>
+<ul>
+<li>
+</li>
+<li><code>allow_add</code> (default to <code>true</code>): Allow the user to add items to the collection</li>
+<li><code>allow_delete</code> (default to <code>true</code>): Allow the user to remove items from the collection</li>
+<li><code>entry_type</code> (default to <code>TextType::class</code>): A form type that represent a collection item</li>
+<li><code>entry_options</code> (default to <code>[]</code>): Options of the <code>entry_type</code></li>
+</ul>
                 </section>
 
             </div>
