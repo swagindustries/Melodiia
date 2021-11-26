@@ -9,6 +9,30 @@ on:
         - cron:  '0 0 * * *'
 
 jobs:
+    static-analyse:
+        name: Code style
+
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.0
+
+            -   uses: actions/cache@v2
+                id: cache-composer
+                with:
+                    path: ~/.composer/cache
+                    key: composer-php-8.0-${{ github.sha }}
+                    restore-keys: composer-php-8.0-
+
+            -   name: Install dependencies
+                run: composer update --prefer-dist --no-progress --no-suggest
+
+            -   name: Run PHP CS Fixer
+                run: make test.phpcs
+
     unit-test:
         name: Unit tests
         strategy:
@@ -44,9 +68,6 @@ jobs:
 
             -   name: Install dependencies
                 run: composer update --prefer-dist --no-progress --no-suggest ${{ matrix.composer-flag }}
-
-            -   name: Run PHP CS Fixer
-                run: make test.phpcs
 
             -   name: Run PHPUnit tests
                 run: make test.phpunit

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Removed hard dependency to the form component (it is still required for many features)
+
 ## [0.7.3] 2020-12-18
 
 ### Added

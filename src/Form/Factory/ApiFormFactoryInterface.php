@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Form\Factory;
+
 use SwagIndustries\Melodiia\Form\Type\ApiType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface as FormFactoryInterfaceBase;
