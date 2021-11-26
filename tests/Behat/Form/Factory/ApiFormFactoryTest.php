@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SwagIndustries\Melodiia\Tests\Behat\Form\Factory;
 
-use SwagIndustries\Melodiia\Form\Factory\ApiFormFactory;
 use PHPUnit\Framework\TestCase;
+use SwagIndustries\Melodiia\Form\Factory\ApiFormFactory;
 use SwagIndustries\Melodiia\Form\Type\ApiType;
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRegistry;
-use Symfony\Component\Form\FormRegistryInterface;
 use Symfony\Component\Form\ResolvedFormTypeFactory;
 
 class ApiFormFactoryTest extends TestCase
@@ -20,6 +20,7 @@ class ApiFormFactoryTest extends TestCase
         $this->assertInstanceOf(ApiType::class, $form->getConfig()->getType()->getInnerType());
         $this->assertEquals('', $form->getName());
     }
+
     public function testThatCreateApiBuilderReturnAFormBuilderWithoutNameAndApiTypeIsDefault()
     {
         $formFactory = new ApiFormFactory(new FormRegistry([], new ResolvedFormTypeFactory()));
