@@ -7,6 +7,7 @@ namespace SwagIndustries\Melodiia\Doctrine;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use SwagIndustries\Melodiia\Crud\FilterCollectionInterface;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
@@ -44,7 +45,12 @@ class DoctrineDataStore implements DataStoreInterface
         $qb = $doctrineRepository->createQueryBuilder('item');
         $filters->filter($qb);
 
-        $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
+        // Keep compatibility with pager fanta 2.X
+        if (class_exists(QueryAdapter::class)) {
+            $pager = new Pagerfanta(new QueryAdapter($qb));
+        } else {
+            $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
+        }
         $pager->setCurrentPage($page);
         $pager->setMaxPerPage($maxPerPage);
 
