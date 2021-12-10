@@ -50,7 +50,7 @@ class MelodiiaExtension extends Extension
             // This is just a helpful layer in case some dependency is missing, because twig is optional.
             foreach ($config['api'] as $endpoint) {
                 if (!empty($endpoint[MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH])) {
-                    throw new DependencyMissingException('You specified a documentation path but twig is not activated. Melodiia will not be able to render your documentation.');
+                    throw new DependencyMissingException('You specified a documentation path but twig is not installed. Melodiia will not be able to render your documentation.');
                 }
             }
         }
