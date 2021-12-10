@@ -10,6 +10,11 @@ get_todo_contains:
     methods: GET
     controller: 'TestApplication\Controller\TodoContainsAction'
 
+get_todo_error:
+    path: /todos/error
+    methods: GET
+    controller: 'TestApplication\Controller\SimulateExceptionAction'
+
 get_todo:
     path: /todos/{id}
     controller: 'melodiia.crud.controller.get'
