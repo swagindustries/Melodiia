@@ -7,7 +7,7 @@ namespace SwagIndustries\Melodiia;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @internal inheritance
+ * @internal for testing purpose, you should implement this interface
  */
 interface MelodiiaConfigurationInterface
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\DependencyInjection;
 
+use SwagIndustries\Melodiia\MelodiiaConfiguration;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -28,6 +29,7 @@ class Configuration implements ConfigurationInterface
                     ->arrayPrototype()
                         ->children()
                             ->scalarNode('base_path')->defaultValue('/')->end()
+                            ->scalarNode(MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH)->defaultNull()->end()
                             ->arrayNode('pagination')
                                 ->addDefaultsIfNotSet()
                                 ->children()
