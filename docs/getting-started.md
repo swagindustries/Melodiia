@@ -113,11 +113,23 @@ to configure the OpenAPI documentation in a good way was a serious pain and was 
 But it comes with some help to build your documentation:
 1. Run `bin/console assets:insall`
 2. Create a file `documentation.yml` (the `config` folder seems like a good location)
-2. Add the following routing to your configuration
+3. Add your documentation file in the global melodiia configuration and configure your documentation route
 
 ```yaml
-# The documentation should be available only in dev environment
-# routing_dev.yaml
+# /config/packages/melodiia.yaml
+melodiia:
+    apis:
+        main:
+            # Required all the time! Do not forget this!
+            base_path:    /api/v1
+            
+            # This is what we are looking for here:
+            openapi_path: /path/to/your/openapi/doc.yaml
+```
+
+```yaml
+# The documentation should be available only in dev environment in some cases
+# /config/routing_dev.yaml
 documentation:
     path: /documentation
     controller: 'melodiia.documentation'

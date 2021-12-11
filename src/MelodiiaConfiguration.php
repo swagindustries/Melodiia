@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class MelodiiaConfiguration implements MelodiiaConfigurationInterface
 {
     public const PREFIX_CONTROLLER = 'melodiia.crud.controller';
+    public const CONFIGURATION_OPENAPI_PATH = 'openapi_path';
 
     /**
      * @var array

@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Documentation\Controller\SwaggerUiController;
+use SwagIndustries\Melodiia\MelodiiaConfiguration;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,13 +30,19 @@ class SwaggerUiControllerTest extends TestCase
 
     public function testItGeneratesAResponseUsingTemplate()
     {
-        $attributes = new ParameterBag();
-        $attributes->set(SwaggerUiController::PATH_TO_OPEN_API_FILE_OPTION, __DIR__ . '/../../../fixtures/doc.yaml');
-        $this->templating->render(Argument::type('string'), ['json' => '{"openapi":"3.0.1"}'])->shouldBeCalled();
         $request = $this->prophesize(Request::class);
-        $request->attributes = $attributes;
-        $this->controller = new SwaggerUiController($this->templating->reveal());
+        $request->attributes = new ParameterBag();
+        $request = $request->reveal();
+        /** @var MelodiiaConfigurationInterface|ObjectProphecy $config */
+        $config = $this->prophesize(MelodiiaConfigurationInterface::class);
+        $config->getApiConfigFor($request)->willReturn([
+            MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH => __DIR__ . '/../../../fixtures/doc.yaml',
+        ]);
 
-        $this->assertInstanceOf(Response::class, $this->controller->__invoke($request->reveal()));
+        $this->templating->render(Argument::type('string'), ['json' => '{"openapi":"3.0.1"}'])->shouldBeCalled();
+
+        $this->controller = new SwaggerUiController($this->templating->reveal(), $config->reveal());
+
+        $this->assertInstanceOf(Response::class, $this->controller->__invoke($request));
     }
 }

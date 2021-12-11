@@ -1,3 +1,4 @@
 melodiia:
     apis:
-        main: ~
+        main:
+            openapi_path: '%kernel.project_dir%/config/documentation.yaml'

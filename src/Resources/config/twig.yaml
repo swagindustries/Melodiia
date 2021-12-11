@@ -4,3 +4,4 @@ services:
         tags: ['controller.service_arguments']
         arguments:
             $templating: '@twig'
+            $configuration: '@melodiia.configuration'

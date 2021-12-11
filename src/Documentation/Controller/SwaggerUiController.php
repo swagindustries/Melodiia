@@ -6,6 +6,8 @@ namespace SwagIndustries\Melodiia\Documentation\Controller;
 
 use SwagIndustries\Melodiia\Exception\MelodiiaLogicException;
 use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeException;
+use SwagIndustries\Melodiia\MelodiiaConfiguration;
+use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -14,21 +16,35 @@ use Twig\Environment;
 
 class SwaggerUiController
 {
+    /** @deprecated use melodiia configuration instead */
     public const PATH_TO_OPEN_API_FILE_OPTION = 'documentation_file_path';
+
     /**
      * @var Environment
      */
     private $templating;
 
-    public function __construct(Environment $templating)
+    /** @var MelodiiaConfigurationInterface */
+    private $configuration;
+
+    public function __construct(Environment $templating, MelodiiaConfigurationInterface $configuration)
     {
         $this->templating = $templating;
+        $this->configuration = $configuration;
     }
 
     public function __invoke(Request $request)
     {
         $response = new Response();
-        $path = $request->attributes->get(self::PATH_TO_OPEN_API_FILE_OPTION, null);
+
+        $path = $this->configuration->getApiConfigFor($request)[MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH] ?? null;
+
+        if (null === $path) {
+            $path = $request->attributes->get(self::PATH_TO_OPEN_API_FILE_OPTION, null);
+            if (null !== $path) {
+                @trigger_error('Using a route attribute to define the documentation path is deprecated since Melodiia 0.9.0 and will be removed in 1.0.0.', \E_USER_DEPRECATED);
+            }
+        }
 
         if (null === $path) {
             throw new MelodiiaLogicException(sprintf('The option %s is missing on the documentation route', self::PATH_TO_OPEN_API_FILE_OPTION));

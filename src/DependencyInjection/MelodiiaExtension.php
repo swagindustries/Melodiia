@@ -6,6 +6,8 @@ namespace SwagIndustries\Melodiia\DependencyInjection;
 
 use Doctrine\Persistence\AbstractManagerRegistry;
 use SwagIndustries\Melodiia\Crud\FilterInterface;
+use SwagIndustries\Melodiia\Exception\DependencyMissingException;
+use SwagIndustries\Melodiia\MelodiiaConfiguration;
 use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,6 +30,9 @@ class MelodiiaExtension extends Extension
         $xmlLoader = new XmlFileLoader($container, $configFileLocator);
         $xmlLoader->load('error-management.xml');
 
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
         if (class_exists(AbstractManagerRegistry::class)) {
             $loader->load('doctrine.yaml');
         }
@@ -41,10 +46,14 @@ class MelodiiaExtension extends Extension
 
         if (class_exists(Environment::class)) {
             $loader->load('twig.yaml');
+        } elseif ('dev' === $container->getParameter('kernel.environment')) {
+            // This is just a helpful layer in case some dependency is missing, because twig is optional.
+            foreach ($config['api'] as $endpoint) {
+                if (!empty($endpoint[MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH])) {
+                    throw new DependencyMissingException('You specified a documentation path but twig is not installed. Melodiia will not be able to render your documentation.');
+                }
+            }
         }
-
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('melodiia.config', $config);
 
