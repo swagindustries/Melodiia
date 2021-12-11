@@ -30,10 +30,6 @@ Feature:
     }
     """
 
-#    Scenario: In debug mode, when an exception occurred I should get a response with stacktrace
-#      When I make a GET request on "/todos/error"
-#      Then I should retrieve a stacktrace
-
-#    Scenario: In NOT debug mode, when an exception occurred I should get a response saying an error occured
-#      When I make a GET request on "/todos/error"
-#      Then I should retrieve an error response
+  Scenario: In debug mode, when an exception occurred I should get a response with stacktrace
+    When I make a GET request on "/error"
+    Then I should retrieve a stacktrace formatted in JSON

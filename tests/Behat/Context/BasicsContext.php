@@ -7,6 +7,7 @@ namespace SwagIndustries\Melodiia\Tests\Behat\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 class BasicsContext extends AbstractContext
 {
@@ -80,5 +81,18 @@ class BasicsContext extends AbstractContext
         $metadatas = $entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($entityManager);
         $schemaTool->createSchema($metadatas);
+    }
+
+    /**
+     * @Then I should retrieve a stacktrace formatted in JSON
+     */
+    public function iShouldRetrieveAStacktraceFormattedInJson()
+    {
+        $json = $this->response->getContent();
+        $content = \json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+
+        Assert::keyExists($content, 'title');
+        Assert::keyExists($content, 'detail');
+        Assert::keyExists($content, 'trace');
     }
 }
