@@ -10,24 +10,25 @@
     "require": {
         "php": ">=7.3",
         "nekland/tools": "^2.5.1",
-        "symfony/event-dispatcher": "^4.3 || ^5.0",
+        "symfony/event-dispatcher": "^5.3",
         "pagerfanta/pagerfanta": "^2.0.1 || ^3.0.0",
-        "symfony/yaml": "^4.3 || ^5.0",
-        "symfony/serializer": "^4.3 || ^5.0",
+        "symfony/yaml": "^5.3",
+        "symfony/serializer": "^5.3",
         "pagerfanta/doctrine-orm-adapter": "^3.5"
     },
     "require-dev": {
+        "psr/container": "^v1.1.1",
         "phpunit/phpunit": "^8.5",
         "friendsofphp/php-cs-fixer": "^2.17",
         "phpspec/prophecy": "^1.8",
         "twig/twig": "^2.5",
-        "symfony/symfony": "^4.4 || ^5.0",
+        "symfony/symfony": "^5.3",
         "doctrine/orm": "^v2.6.6",
         "justinrainbow/json-schema": "^5.2",
         "doctrine/annotations": "^1.8",
         "doctrine/doctrine-bundle": "^2.1",
-        "behat/behat": "^3.7",
-        "friends-of-behat/symfony-extension": "dev-master#c6c16503105ddd1852490884cdf4d2c1f253b7e6",
+        "behat/behat": "3.10.0",
+        "friends-of-behat/symfony-extension": "2.2.1",
         "fakerphp/faker": "^1.12.1"
     },
     "autoload": {
