@@ -6,12 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.9.0] 2021-12-10
+## [0.9.0] 2021-12-13
 ### Added
 - Compatibility with PHP 8.1
 
 ### Changed
 - Fix #54 to be able to build a melodiia application on any PAAS service
+
+### Fixed
+- The error listener is now working properly!
 
 ## [0.8.0] 2021-11-26
 ### Added
