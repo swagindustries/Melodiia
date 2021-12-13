@@ -4,34 +4,26 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\EventListener;
 
-use Nekland\Tools\StringTools;
-use Psr\Log\LoggerInterface;
+use SwagIndustries\Melodiia\Error\OnError;
 use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
-// BC Layer for Symfony 4
-// This class is removed in Symfony5 in favor of ErrorListener
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener as LegacyExceptionListener;
 
 final class ExceptionListener
 {
     /** @var MelodiiaConfigurationInterface */
     private $config;
 
-    /** @var ErrorListener|LegacyExceptionListener */
+    /** @var ErrorListener */
     private $errorListener;
 
     public function __construct(
         MelodiiaConfigurationInterface $config,
-        $controller, LoggerInterface $logger = null,
-        $debug = false,
-        ErrorListener $errorListener = null // PHP will not fail if the class does not exist and null is passed here
+        OnError $controller,
+        bool $debug,
+        ErrorListener $errorListener = null
     ) {
-        // In Sf 4.3 errorListener will not be provide, it will in Sf > 4.3
-        // But we want to redefine it anyway.
-        $this->errorListener = $errorListener ?
-            new ErrorListener($controller, $logger, $debug) :
-            new LegacyExceptionListener($controller, $logger, $debug);
+        $this->errorListener = $errorListener ?? new ErrorListener($controller, null, $debug);
         $this->config = $config;
     }
 
@@ -39,18 +31,7 @@ final class ExceptionListener
     {
         $request = $event->getRequest();
 
-        // Normalize exceptions only for routes managed by Melodiia
-        $endpoints = $this->config->getApiEndpoints();
-        $basePath = $request->getRequestUri();
-
-        $matchUrl = false;
-        foreach ($endpoints as $endpoint) {
-            if (StringTools::startsWith($basePath, $endpoint)) {
-                $matchUrl = true;
-            }
-        }
-
-        if (!$matchUrl) {
+        if (!$this->config->getApiConfigFor($request)) {
             return;
         }
 

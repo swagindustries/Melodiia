@@ -29,3 +29,7 @@ Feature:
       ]
     }
     """
+
+  Scenario: In debug mode, when an exception occurred I should get a response with stacktrace
+    When I make a GET request on "/error"
+    Then I should retrieve a stacktrace formatted in JSON

@@ -11,9 +11,10 @@
 
         <service id="melodiia.exception.listener" class="SwagIndustries\Melodiia\EventListener\ExceptionListener">
             <argument type="service" key="$config" id="melodiia.configuration" />
-            <argument type="service" key="$controller" id="melodiia.configuration" />
-            <argument key="$debug">false</argument>
-            <argument key="$errorListener" type="service" id="exception_listener" on-invalid="null" />
+            <argument type="service" key="$controller" id="melodiia.exception.controller" />
+            <argument key="$debug">%kernel.debug%</argument>
+
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" priority="-96"/>
         </service>
 
         <service id="melodiia.exception.normalizer" class="SwagIndustries\Melodiia\Serialization\Json\ExceptionNormalizer">
