@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - The error listener is now working properly!
 
+### Removed
+- Compatibility with Sf 4.x
+
 ## [0.8.0] 2021-11-26
 ### Added
 - Add json-api header in responses
