@@ -3,7 +3,7 @@
     "description": "Library that helps you build APIs",
     "type": "symfony-bundle",
     "scripts": {
-        "phpcs": "PHP_CS_FIXER_IGNORE_ENV=true php-cs-fixer fix --using-cache=false",
+        "phpcs": "PHP_CS_FIXER_IGNORE_ENV=true php-cs-fixer fix --using-cache=no",
         "test-app": "@php -S localhost:8000 -t tests/TestApplication/public",
         "post-install-cmd": "make hooks.install"
     },
@@ -19,7 +19,7 @@
     "require-dev": {
         "psr/container": "^v1.1.1 || ^2.0",
         "phpunit/phpunit": "^8.5",
-        "friendsofphp/php-cs-fixer": "^2.17",
+        "friendsofphp/php-cs-fixer": "^v3.3.2",
         "phpspec/prophecy": "^1.8",
         "twig/twig": "^2.5",
         "symfony/symfony": "^5.3",
