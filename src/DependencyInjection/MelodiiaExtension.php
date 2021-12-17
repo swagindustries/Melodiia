@@ -19,8 +19,8 @@ use Twig\Environment;
 
 class MelodiiaExtension extends Extension
 {
-    const TAG_CRUD_FILTER = 'melodiia.crud_filter';
-    const TAG_CONTEXT_BUILDER = 'melodiia.context_builder';
+    public const TAG_CRUD_FILTER = 'melodiia.crud_filter';
+    public const TAG_CONTEXT_BUILDER = 'melodiia.context_builder';
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -76,7 +76,7 @@ class MelodiiaExtension extends Extension
         return 'melodiia.' . $apiName . '.' . $serviceName;
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'melodiia';
     }

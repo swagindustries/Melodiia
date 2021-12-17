@@ -55,7 +55,7 @@ class FilterCollectionTest extends TestCase
     {
         /** @var FormBuilderInterface|ObjectProphecy $builder */
         $builder = $this->prophesize(FormBuilderInterface::class);
-        $builder->add('fake', TextType::class)->shouldBeCalled();
+        $builder->add('fake', TextType::class)->willReturn($builder->reveal())->shouldBeCalled();
         $builder->getForm()->willReturn($form = $this->prophesize(FormInterface::class)->reveal())->shouldBeCalled();
         $this->formFactory->createNamedBuilder(Argument::cetera())->willReturn($builder->reveal());
 
@@ -67,7 +67,7 @@ class FilterCollectionTest extends TestCase
     {
         /** @var FormBuilderInterface|ObjectProphecy $builder */
         $builder = $this->prophesize(FormBuilderInterface::class);
-        $builder->add('fake', TextType::class)->shouldNotBeCalled();
+        $builder->add('fake', TextType::class)->willReturn($builder->reveal())->shouldNotBeCalled();
         $builder->getForm()->willReturn($form = $this->prophesize(FormInterface::class)->reveal())->shouldBeCalled();
         $this->formFactory->createNamedBuilder(Argument::cetera())->willReturn($builder->reveal());
 

@@ -44,9 +44,10 @@ class ApiRequestHandler implements RequestHandlerInterface
 
     /**
      * Notice: this impacts allow_file_upload field.
-     * {@inheritdoc}
+     *
+     * @param mixed $data
      */
-    public function isFileUpload($data)
+    public function isFileUpload($data): bool
     {
         return false;
     }

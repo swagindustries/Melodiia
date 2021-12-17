@@ -27,7 +27,7 @@ class Kernel extends BaseKernel
         $routes->import('../config/routing_dev.yaml');
     }
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return dirname(__DIR__);
     }

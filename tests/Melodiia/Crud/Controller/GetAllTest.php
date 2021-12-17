@@ -51,6 +51,9 @@ class GetAllTest extends TestCase
     /** @var PaginationRequest|ObjectProphecy */
     private $paginationRequest;
 
+    /** @var FormInterface|ObjectProphecy */
+    private $form;
+
     /** @var GetAll */
     private $controller;
 
@@ -71,8 +74,11 @@ class GetAllTest extends TestCase
         $this->request->attributes = $this->attributes->reveal();
         $this->request->query = $this->queries->reveal();
 
+        $this->form = $this->prophesize(FormInterface::class);
+        $this->form->handleRequest(Argument::any())->willReturn($this->form->reveal());
+        $this->form->isSubmitted()->willReturn(false);
         $this->filtersCollection = $this->prophesize(FilterCollection::class);
-        $this->filtersCollection->getForm()->willReturn($this->prophesize(FormInterface::class)->reveal());
+        $this->filtersCollection->getForm()->willReturn($this->form->reveal());
         $this->filtersFactory = $this->prophesize(FilterCollectionFactoryInterface::class);
         $this->filtersFactory->createCollection(Argument::cetera())->willReturn($this->filtersCollection->reveal());
 
@@ -129,13 +135,10 @@ class GetAllTest extends TestCase
     public function testItReturnsErrorFromFilters()
     {
         $request = $this->request->reveal();
-        /** @var FormInterface|ObjectProphecy $form */
-        $form = $this->prophesize(FormInterface::class);
-        $form->handleRequest($request)->shouldBeCalled()->willReturn();
-        $form->isSubmitted()->willReturn(true);
-        $form->isValid()->willReturn(false);
+        $this->form->handleRequest($request)->shouldBeCalled()->willReturn($this->form->reveal());
+        $this->form->isSubmitted()->willReturn(true);
+        $this->form->isValid()->willReturn(false);
 
-        $this->filtersCollection->getForm()->willReturn($form->reveal());
         $this->dataStore->getPaginated(Argument::cetera())->shouldNotBeCalled();
 
         $res = ($this->controller)($request);

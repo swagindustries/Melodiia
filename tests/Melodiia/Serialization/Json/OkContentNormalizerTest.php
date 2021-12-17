@@ -36,7 +36,7 @@ class OkContentNormalizerTest extends TestCase
         $this->mainNormalizer = $this->prophesize(Serializer::class);
         $this->requestStack = $this->prophesize(RequestStack::class);
         $this->request = $this->prophesize(Request::class);
-        $this->requestStack->getMasterRequest()->willReturn($this->request->reveal());
+        $this->requestStack->getMainRequest()->willReturn($this->request->reveal());
 
         $this->okContentNormalizer = new OkContentNormalizer($this->requestStack->reveal());
         $this->okContentNormalizer->setSerializer($this->mainNormalizer->reveal());

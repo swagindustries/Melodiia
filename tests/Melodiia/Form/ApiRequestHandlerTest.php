@@ -50,7 +50,7 @@ class ApiRequestHandlerTest extends TestCase
 
     public function testItSubmitJsonData()
     {
-        $this->form->submit(['hello' => 'foo'], false)->shouldBeCalled();
+        $this->form->submit(['hello' => 'foo'], false)->willReturn($this->form->reveal())->shouldBeCalled();
         $this->request->getContent()->willReturn('{"hello":"foo"}');
 
         $this->subject->handleRequest($this->form->reveal(), $this->request->reveal());
@@ -58,8 +58,8 @@ class ApiRequestHandlerTest extends TestCase
 
     public function testItAddsAFormErrorInCaseOfWrongInput()
     {
-        $this->form->submit(null, false)->shouldBeCalled();
-        $this->form->addError(Argument::type(FormError::class))->shouldBeCalled();
+        $this->form->submit(null, false)->willReturn($this->form->reveal())->shouldBeCalled();
+        $this->form->addError(Argument::type(FormError::class))->willReturn($this->form->reveal())->shouldBeCalled();
         $this->request->getContent()->willReturn('{"hello":"foo}');
 
         $this->subject->handleRequest($this->form->reveal(), $this->request->reveal());
@@ -67,7 +67,7 @@ class ApiRequestHandlerTest extends TestCase
 
     public function testItClearsMissingOnPatchRequest()
     {
-        $this->form->submit(['hello' => 'foo'], true)->shouldBeCalled();
+        $this->form->submit(['hello' => 'foo'], true)->willReturn($this->form->reveal())->shouldBeCalled();
         $this->request->getContent()->willReturn('{"hello":"foo"}');
         $this->request->getMethod()->willReturn('PATCH');
 
@@ -76,7 +76,7 @@ class ApiRequestHandlerTest extends TestCase
 
     public function testICanChangeClearMissingOption()
     {
-        $this->form->submit(['hello' => 'foo'], true)->shouldBeCalled();
+        $this->form->submit(['hello' => 'foo'], true)->willReturn($this->form->reveal())->shouldBeCalled();
         $this->formConfig->getOption(ApiType::CLEAR_MISSING_OPTION)->willReturn(true);
         $this->request->getContent()->willReturn('{"hello":"foo"}');
 
@@ -86,7 +86,7 @@ class ApiRequestHandlerTest extends TestCase
     public function testItSupportsGetRequests()
     {
         $query = new ParameterBag(['hello' => 'foo']);
-        $this->form->submit(['hello' => 'foo'])->shouldBeCalled();
+        $this->form->submit(['hello' => 'foo'])->willReturn($this->form->reveal())->shouldBeCalled();
         $this->request->getMethod()->willReturn('GET');
         $this->request->query = $query;
 

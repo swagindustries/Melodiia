@@ -69,7 +69,7 @@ class CreateTest extends TestCase
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn(null);
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, true)->willReturn(true);
         $this->request->attributes = $this->attributes->reveal();
-        $this->form->handleRequest($this->request)->willReturn();
+        $this->form->handleRequest($this->request)->willReturn($this->form->reveal());
         $this->formFactory->createNamed('', Argument::cetera())->willReturn($this->form);
 
         $this->controller = new Create(
@@ -117,7 +117,7 @@ class CreateTest extends TestCase
         $this->mockDispatch($this->dispatcher, Argument::type(CustomResponseEvent::class), Create::EVENT_POST_CREATE)->shouldBeCalled();
         $this->dataStore->save(Argument::type(FakeMelodiiaModel::class))->shouldBeCalled();
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, true)->willReturn(false);
-        $this->form->handleRequest($this->request)->willReturn()->shouldBeCalled();
+        $this->form->handleRequest($this->request)->willReturn($this->form->reveal())->shouldBeCalled();
         /** @var ApiResponse $res */
         $res = ($this->controller)($this->request->reveal());
 

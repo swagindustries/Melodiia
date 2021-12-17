@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Form;
 
-use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
+use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Add support for objects that require constructor instantiation.
+ *
+ * @internal use DomainObjectsDataMapper instead
  */
-class DomainObjectsDataMapper extends PropertyPathMapper implements DomainObjectDataMapperInterface
+class DomainObjectsDataMapperBase extends DataMapper implements DomainObjectDataMapperInterface
 {
-    public function mapFormsToData($forms, &$data)
-    {
-        $data = $this->createObject($forms, !empty($data) && is_object($data) ? get_class($data) : null);
-        parent::mapFormsToData($forms, $data);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -67,5 +64,27 @@ class DomainObjectsDataMapper extends PropertyPathMapper implements DomainObject
         }
 
         return new $dataClass(...$constructorData);
+    }
+}
+
+if (version_compare(Kernel::VERSION, '6.0', '>=')) {
+    class DomainObjectsDataMapper extends DomainObjectsDataMapperBase
+    {
+        public function mapFormsToData(\Traversable $forms, mixed &$data): void
+        {
+            $data = $this->createObject($forms, !empty($data) && is_object($data) ? get_class($data) : null);
+            parent::mapFormsToData($forms, $data);
+        }
+    }
+} else {
+    // BC Layer for PHP 7.4
+    // Because mixed type is not supported!
+    class DomainObjectsDataMapper extends DomainObjectsDataMapperBase
+    {
+        public function mapFormsToData(iterable $forms, &$data): void
+        {
+            $data = $this->createObject($forms, !empty($data) && is_object($data) ? get_class($data) : null);
+            parent::mapFormsToData($forms, $data);
+        }
     }
 }
