@@ -50,11 +50,11 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
         $builder = $this->getBuilder($name, $data);
         foreach ($data as $name => $item) {
             $form = $this->getBuilder($name, $item)
-                ->add(0, TextType::class)
-                ->add(1, TextType::class)
+                ->add('0', TextType::class)
+                ->add('1', TextType::class)
                 ->getForm()
             ;
-            $builder->add($name, $form);
+            $builder->add($form);
         }
 
         return $builder->getForm();
@@ -93,8 +93,8 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
             },
         ];
         $form = $this->factory->createNamed('', FormType::class, $formData)
-            ->add(0, HelloWorldDummyType::class)
-            ->add(1, HelloWorldDummyType::class)
+            ->add('0', HelloWorldDummyType::class)
+            ->add('1', HelloWorldDummyType::class)
         ;
         $data = [['hello' => 'baz'], ['id' => 'bar', 'hello' => 'bar'], ['id' => 'foo', 'hello' => 'foo']];
         $event = new PreSubmitEvent($form, $data);
@@ -127,7 +127,7 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
             },
         ];
         $form = $this->factory->createNamed('', FormType::class, $formData)
-            ->add(0, HelloWorldDummyType::class)
+            ->add('0', HelloWorldDummyType::class)
         ;
         $data = [['hello' => 'bar']];
         $event = new PreSubmitEvent($form, $data);

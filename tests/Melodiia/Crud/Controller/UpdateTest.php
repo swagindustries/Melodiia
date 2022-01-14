@@ -71,7 +71,7 @@ class UpdateTest extends TestCase
         $this->attributes->has(CrudControllerInterface::FORM_CLEAR_MISSING)->willReturn(false);
         $this->attributes->getBoolean(CrudControllerInterface::FORM_CLEAR_MISSING, false)->willReturn(false);
         $this->request->attributes = $this->attributes->reveal();
-        $this->form->handleRequest($this->request)->willReturn();
+        $this->form->handleRequest($this->request)->willReturn($this->form->reveal());
         $this->formFactory->createNamed('', Argument::cetera())->willReturn($this->form);
 
         $this->dataStore->find(FakeMelodiiaModel::class, 'id')->willReturn(new \stdClass());

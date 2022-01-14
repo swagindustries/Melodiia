@@ -64,7 +64,7 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
                 'currentPage' => $content->getCurrentPage(),
                 'maxPerPage' => $content->getMaxPerPage(),
             ];
-            $uri = $this->requestStack->getMasterRequest()->getUri();
+            $uri = $this->requestStack->getMainRequest()->getUri();
             $previousPage = null;
             $nextPage = null;
 
@@ -83,7 +83,7 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
             ];
         }
         if ($content instanceof Collection) {
-            $uri = $this->requestStack->getMasterRequest()->getUri();
+            $uri = $this->requestStack->getMainRequest()->getUri();
             $result['meta'] = [
                 'totalPages' => 1,
                 'totalResults' => count($content),

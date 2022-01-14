@@ -1,6 +1,7 @@
 composer.lock
 vendor
 .php_cs.cache
+.php-cs-fixer.cache
 tests/TestApplication/var
 .couscous
 .phpunit.result.cache
