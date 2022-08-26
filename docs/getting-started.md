@@ -105,7 +105,7 @@ Step 4: write documentation
 ---------------------------
 
 _Disclaimer: Melodiia was originally generating the API documentation. I though this is an expected behavior from an API library.
-But I quickly figured out that even if it was generating valid documentation (unless some other frameworks), using docblocks
+But I quickly figured out that even if it was generating valid documentation (regardless some other frameworks), using docblocks
 to configure the OpenAPI documentation in a good way was a serious pain and was just making things complicated._
 
 **Melodiia doesn't generates automatically documentation.**
