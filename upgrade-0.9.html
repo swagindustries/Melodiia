@@ -71,17 +71,8 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="configuration-reference-of-melodiia">Configuration Reference of Melodiia</h1>
-<p>Here is the whole melodiia configuration commented:</p>
-<pre><code class="language-yaml">melodiia:
-    apis:
-        # Define as much APIs you want here.
-        main:
-            base_path: /api/v1
-            openapi_path: /path/to/your/openapi/doc.yaml
-            pagination:
-                # Using this query attribute you can change the max per page
-                max_per_page_attribute: max_per_page</code></pre>
+                    <h1 id="upgrade-guide-0809">Upgrade guide 0.8...0.9</h1>
+<p>Use the new configuration key <code>openapi_path</code> instead of <code>documentation_file_path</code> to configure your documentation routing.</p>
                 </section>
 
             </div>

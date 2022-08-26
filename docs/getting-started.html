@@ -142,22 +142,29 @@ post_todos:
         melodiia_form: App\Form\TodoType</code></pre>
 <h2 id="step-4-write-documentation">Step 4: write documentation</h2>
 <p><em>Disclaimer: Melodiia was originally generating the API documentation. I though this is an expected behavior from an API library.
-But I quickly figured out that even if it was generating valid documentation (unless some other frameworks), using docblocks
+But I quickly figured out that even if it was generating valid documentation (regardless some other frameworks), using docblocks
 to configure the OpenAPI documentation in a good way was a serious pain and was just making things complicated.</em></p>
 <p><strong>Melodiia doesn't generates automatically documentation.</strong></p>
 <p>But it comes with some help to build your documentation:</p>
 <ol>
 <li>Run <code>bin/console assets:insall</code></li>
 <li>Create a file <code>documentation.yml</code> (the <code>config</code> folder seems like a good location)</li>
-<li>Add the following routing to your configuration</li>
+<li>Add your documentation file in the global melodiia configuration and configure your documentation route</li>
 </ol>
-<pre><code class="language-yaml"># The documentation should be available only in dev environment
-# routing_dev.yaml
+<pre><code class="language-yaml"># /config/packages/melodiia.yaml
+melodiia:
+    apis:
+        main:
+            # Required all the time! Do not forget this!
+            base_path:    /api/v1
+
+            # This is what we are looking for here:
+            openapi_path: /path/to/your/openapi/doc.yaml</code></pre>
+<pre><code class="language-yaml"># The documentation should be available only in dev environment in some cases
+# /config/routing_dev.yaml
 documentation:
     path: /documentation
-    controller: 'melodiia.documentation'
-    defaults:
-        documentation_file_path: '%kernel.project_dir%/config/documentation.yaml'</code></pre>
+    controller: 'melodiia.documentation'</code></pre>
 <p>⚠️ The render of the documentation cannot work without Twig. Be sure twig is installed.</p>
 <h2 id="step-5-do-what-you-want">Step 5: do what you want</h2>
 <p>Just like the readme says. Melodiia is a set of tools. Feel free to make your own controllers, but if you want that
