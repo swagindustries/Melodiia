@@ -4,4 +4,4 @@ Feature:
 
   Scenario: access the documentation
     Given I make a GET request on "/documentation"
-    Then the status code of last response should be 200
+    Then the status code is 200
