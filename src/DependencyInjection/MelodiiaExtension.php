@@ -48,7 +48,8 @@ class MelodiiaExtension extends Extension
             $loader->load('twig.yaml');
         } elseif ('dev' === $container->getParameter('kernel.environment')) {
             // This is just a helpful layer in case some dependency is missing, because twig is optional.
-            foreach ($config['api'] as $endpoint) {
+            $endpoints = $config['apis'] ?? [];
+            foreach ($endpoints as $endpoint) {
                 if (!empty($endpoint[MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH])) {
                     throw new DependencyMissingException('You specified a documentation path but twig is not installed. Melodiia will not be able to render your documentation.');
                 }

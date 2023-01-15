@@ -38,6 +38,7 @@ abstract class AbstractContext implements Context
 
         if ('GET' === $verb) {
             $client->request($verb, $uri);
+
             return self::$response = $client->getResponse();
         }
 
@@ -47,6 +48,7 @@ abstract class AbstractContext implements Context
         json_decode($rawContent, true, 512, \JSON_THROW_ON_ERROR);
 
         $client->request($verb, $uri, [], [], [], $rawContent);
+
         return self::$response = $client->getResponse();
     }
 
@@ -58,7 +60,7 @@ abstract class AbstractContext implements Context
         }
     }
 
-    final static protected function getLastResponse(): Response
+    final protected static function getLastResponse(): Response
     {
         if (null === self::$response) {
             throw new \LogicException('It seems you didn\'t do any requests yet');
