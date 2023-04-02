@@ -109,7 +109,7 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return is_object($data) && $data instanceof OkContent;
     }

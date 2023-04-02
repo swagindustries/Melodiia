@@ -15,7 +15,7 @@ class ErrorNormalizer implements NormalizerInterface
      *
      * @return array|bool|float|int|string
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = []): array
     {
         $res = ['violations' => []];
 
@@ -26,7 +26,7 @@ class ErrorNormalizer implements NormalizerInterface
         return $res;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return is_object($data) && $data instanceof AbstractUserDataErrorResponse;
     }
