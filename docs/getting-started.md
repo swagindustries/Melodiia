@@ -111,7 +111,7 @@ to configure the OpenAPI documentation in a good way was a serious pain and was 
 **Melodiia doesn't generates automatically documentation.**
 
 But it comes with some help to build your documentation:
-1. Run `bin/console assets:insall`
+1. Run `bin/console assets:install`
 2. Create a file `documentation.yml` (the `config` folder seems like a good location)
 3. Add your documentation file in the global melodiia configuration and configure your documentation route
 
@@ -135,7 +135,7 @@ documentation:
     controller: 'melodiia.documentation'
 ```
 
-⚠️ The render of the documentation cannot work without Twig. Be sure twig is installed.
+⚠️ The render of the documentation cannot work without Twig. Be sure Twig is installed.
 
 Step 5: do what you want
 ------------------------
