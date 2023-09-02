@@ -19,7 +19,7 @@ final class ExceptionNormalizer implements NormalizerInterface
         $this->debug = $debug;
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = []): array
     {
         $data = [
             'title' => 'An error occurred',
@@ -33,7 +33,7 @@ final class ExceptionNormalizer implements NormalizerInterface
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         if (class_exists(FlattenException::class)) {
             return $data instanceof \Exception || $data instanceof FlattenException;
