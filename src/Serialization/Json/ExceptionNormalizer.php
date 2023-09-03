@@ -61,4 +61,11 @@ final class ExceptionNormalizer implements NormalizerInterface
 
         return $message;
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            FlattenException::class => true,
+        ];
+    }
 }
