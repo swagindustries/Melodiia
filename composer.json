@@ -30,7 +30,7 @@
         "behat/behat": "3.10.0",
         "friends-of-behat/symfony-extension": "^2.3.0",
         "fakerphp/faker": "^1.12.1",
-        "monolog/monolog": "^3.4",
+        "monolog/monolog": "^3.4 || ^2.9",
         "masterminds/html5": "^2.8"
     },
     "autoload": {
