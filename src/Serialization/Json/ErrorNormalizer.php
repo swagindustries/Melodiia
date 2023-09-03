@@ -30,4 +30,11 @@ class ErrorNormalizer implements NormalizerInterface
     {
         return is_object($data) && $data instanceof AbstractUserDataErrorResponse;
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            AbstractUserDataErrorResponse::class => true,
+        ];
+    }
 }

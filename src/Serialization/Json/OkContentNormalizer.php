@@ -113,4 +113,11 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
     {
         return is_object($data) && $data instanceof OkContent;
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            OkContent::class => true,
+        ];
+    }
 }

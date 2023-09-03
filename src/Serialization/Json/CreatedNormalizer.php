@@ -26,4 +26,11 @@ class CreatedNormalizer implements NormalizerInterface
     {
         return is_object($data) && $data instanceof Created;
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            Created::class => true,
+        ];
+    }
 }
