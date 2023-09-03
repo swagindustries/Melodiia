@@ -47,7 +47,7 @@ class SwaggerUiController
         }
 
         if (null === $path) {
-            throw new MelodiiaLogicException(sprintf('The option %s is missing on the documentation route', self::PATH_TO_OPEN_API_FILE_OPTION));
+            throw new MelodiiaLogicException(sprintf('Either you forgot to specify the option %s on your API endpoint configuration or this route is not under the path of you configuration', MelodiiaConfiguration::CONFIGURATION_OPENAPI_PATH));
         }
 
         if (!file_exists($path)) {

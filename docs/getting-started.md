@@ -129,10 +129,10 @@ melodiia:
 
 ```yaml
 # The documentation should be available only in dev environment in some cases
-# /config/routing_dev.yaml
-documentation:
-    path: /documentation
-    controller: 'melodiia.documentation'
+when@dev:
+    documentation:
+        path: /api/v1/documentation
+        controller: 'melodiia.documentation'
 ```
 
 ⚠️ The render of the documentation cannot work without Twig. Be sure Twig is installed.
