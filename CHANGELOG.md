@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Symfony 6.x compatibility - #66
+
+### Added
 - Improved Symfony 6.3 compatibility and prepare Symfony 7 - #70
+
+### Changed
+- Test suite now runs on PHP 8.2
 
 ## [0.10.1] 2023-01-15
 - Fix a bug in dependency requirement detection
