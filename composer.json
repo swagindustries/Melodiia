@@ -29,7 +29,9 @@
         "doctrine/doctrine-bundle": "^2.1",
         "behat/behat": "3.10.0",
         "friends-of-behat/symfony-extension": "^2.3.0",
-        "fakerphp/faker": "^1.12.1"
+        "fakerphp/faker": "^1.12.1",
+        "monolog/monolog": "^3.4",
+        "masterminds/html5": "^2.8"
     },
     "autoload": {
         "psr-4": {

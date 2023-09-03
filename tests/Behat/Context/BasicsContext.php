@@ -16,7 +16,7 @@ class BasicsContext extends AbstractContext
      */
     public function iMakeARequestOn($uri, $verb = 'GET', PyStringNode $content = null)
     {
-        $this->request($uri, $verb, $content);
+        $this->request($uri, $verb, (string) $content);
     }
 
     /**
