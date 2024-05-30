@@ -9,5 +9,5 @@ return [
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
     FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true],
-    \SwagIndustries\Melodiia\MelodiiaBundle::class => ['all' => true],
+    SwagIndustries\Melodiia\MelodiiaBundle::class => ['all' => true],
 ];

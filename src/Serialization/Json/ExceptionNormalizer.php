@@ -33,7 +33,7 @@ final class ExceptionNormalizer implements NormalizerInterface
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         if (class_exists(FlattenException::class)) {
             return $data instanceof \Exception || $data instanceof FlattenException;

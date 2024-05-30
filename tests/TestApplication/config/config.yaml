@@ -7,13 +7,28 @@ parameters:
 framework:
     serializer: ~
     form: ~
-    test: ~
-    annotations: ~
+    test: true
     assets: ~
+
+security:
+    providers:
+        in_memory:
+            memory: ~
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        test:
+            pattern: ^/
+            security: false
 
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        driver: 'pdo_sqlite'
+        charset: UTF8
 
     # IMPORTANT: You MUST configure your server version,
     # either here or in the DATABASE_URL env var (see .env file)
@@ -25,7 +40,6 @@ doctrine:
         mappings:
             TestApplication:
                 is_bundle: false
-                type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'TestApplication\Entity'
                 alias: App
@@ -43,3 +57,8 @@ services:
 
     TestApplication\Filters\TodoContainFilter:
         autoconfigure: true
+
+    test.client:
+        class: Symfony\Bundle\FrameworkBundle\KernelBrowser
+        arguments: ['@kernel']
+        public: true

@@ -34,7 +34,7 @@ class DoctrineDataStore implements DataStoreInterface
         return $this->getEntityManager()->getRepository($type)->find($id);
     }
 
-    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): PagerFanta
+    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): Pagerfanta
     {
         $doctrineRepository = $this->getEntityManager()->getRepository($type);
 

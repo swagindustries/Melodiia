@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Test\Serialization\Json;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Serialization\Json\ExceptionNormalizer;
 use Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 
 class ExceptionNormalizerTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testItSupportsExceptionAndFlattenException()
     {
         $normalizer = new ExceptionNormalizer();

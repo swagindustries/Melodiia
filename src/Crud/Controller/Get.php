@@ -29,7 +29,7 @@ final class Get implements CrudControllerInterface
     /** @var IdResolverInterface */
     private $idResolver;
 
-    public function __construct(DataStoreInterface $dataStore, IdResolverInterface $idResolver = null, AuthorizationCheckerInterface $checker = null)
+    public function __construct(DataStoreInterface $dataStore, ?IdResolverInterface $idResolver = null, ?AuthorizationCheckerInterface $checker = null)
     {
         $this->dataStore = $dataStore;
         $this->idResolver = $idResolver ?? new SimpleIdResolver();

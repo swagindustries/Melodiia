@@ -10,7 +10,6 @@ class OkContent implements ApiResponse, SerializationContextAwareInterface
 {
     use SerializationContextAwareTrait;
 
-    /** @var mixed */
     private $content;
 
     public function __construct($content, $serializationGroups = [])
@@ -19,9 +18,6 @@ class OkContent implements ApiResponse, SerializationContextAwareInterface
         $this->serializationContext = new SerializationContext($serializationGroups);
     }
 
-    /**
-     * @return mixed
-     */
     public function getContent()
     {
         return $this->content;

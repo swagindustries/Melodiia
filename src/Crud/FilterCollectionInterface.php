@@ -16,8 +16,6 @@ interface FilterCollectionInterface
 
     /**
      * Executes filters against a query.
-     *
-     * @param mixed $query
      */
     public function filter($query): void;
 

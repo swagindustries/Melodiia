@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Test\Form\Listener;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Crud\MelodiiaModel;
 use SwagIndustries\Melodiia\Form\Listener\ReorderDataToMatchCollectionListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -19,6 +20,8 @@ use Symfony\Component\Form\Test\FormIntegrationTestCase;
 
 class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
 {
+    use ProphecyTrait;
+
     private $subject;
 
     protected function setUp(): void
@@ -31,7 +34,6 @@ class ReorderDataToMatchCollectionListenerTest extends FormIntegrationTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        $this->factory = null;
         $this->subject = null;
     }
 

@@ -22,6 +22,11 @@ Features
 
 Learn more in the [complete documentation](https://melodiia.swag.industries).
 
+Requirements
+-------
+Melodiia requires PHP 8.0 or higher. For php 7.4 you can still use this tag
+https://github.com/swagindustries/Melodiia/releases/tag/0.10.2
+
 Install
 -------
 

@@ -6,16 +6,19 @@ namespace Melodiia\Form;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Form\ApiRequestHandler;
 use SwagIndustries\Melodiia\Form\Type\ApiType;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 
 class ApiRequestHandlerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ApiRequestHandler */
     private $subject;
 
@@ -85,7 +88,7 @@ class ApiRequestHandlerTest extends TestCase
 
     public function testItSupportsGetRequests()
     {
-        $query = new ParameterBag(['hello' => 'foo']);
+        $query = new InputBag(['hello' => 'foo']);
         $this->form->submit(['hello' => 'foo'])->willReturn($this->form->reveal())->shouldBeCalled();
         $this->request->getMethod()->willReturn('GET');
         $this->request->query = $query;

@@ -6,6 +6,7 @@ namespace SwagIndustries\Melodiia\Test\Response\Listener;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Response\ApiResponse;
 use SwagIndustries\Melodiia\Response\Listener\SerializeOnKernelView;
@@ -21,6 +22,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class SerializeOnKernelViewTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var SerializerInterface|ObjectProphecy */
     private $serializer;
 
@@ -72,7 +75,7 @@ class SerializeOnKernelViewTest extends TestCase
         $event = new ViewEvent(
             $this->prophesize(HttpKernelInterface::class)->reveal(),
             $this->prophesize(Request::class)->reveal(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $this->dummyResponse
         );
 
@@ -87,7 +90,7 @@ class SerializeOnKernelViewTest extends TestCase
         $event = new ViewEvent(
             $this->prophesize(HttpKernelInterface::class)->reveal(),
             $this->prophesize(Request::class)->reveal(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $response
         );
         $this->listener->onKernelView($event);
@@ -100,7 +103,7 @@ class SerializeOnKernelViewTest extends TestCase
         $event = new ViewEvent(
             $this->prophesize(HttpKernelInterface::class)->reveal(),
             $this->prophesize(Request::class)->reveal(),
-            HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $this->dummyResponse
         );
 

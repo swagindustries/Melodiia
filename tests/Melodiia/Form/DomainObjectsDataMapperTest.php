@@ -6,6 +6,7 @@ namespace SwagIndustries\Melodiia\Test\Form;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Form\DomainObjectsDataMapper;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\DataMapperInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\Form\FormConfigBuilder;
 
 class DomainObjectsDataMapperTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testItIsInstanceOfDataMapper()
     {
         $this->assertInstanceOf(DataMapperInterface::class, new DomainObjectsDataMapper());
@@ -48,9 +51,6 @@ class FakeValueObject
 
     /**
      * FakeValueObject constructor.
-     *
-     * @param $hello
-     * @param $foo
      */
     public function __construct($hello, $foo)
     {
@@ -58,17 +58,11 @@ class FakeValueObject
         $this->foo = $foo;
     }
 
-    /**
-     * @return mixed
-     */
     public function getHello()
     {
         return $this->hello;
     }
 
-    /**
-     * @return mixed
-     */
     public function getFoo()
     {
         return $this->foo;

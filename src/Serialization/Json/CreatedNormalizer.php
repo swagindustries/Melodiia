@@ -9,7 +9,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CreatedNormalizer implements NormalizerInterface
 {
-    public function normalize($object, string $format = null, array $context = []): array
+    public function normalize($object, ?string $format = null, array $context = []): array
     {
         $res = [];
         $resource = $object->getResourceId();
@@ -22,7 +22,7 @@ class CreatedNormalizer implements NormalizerInterface
         return $res;
     }
 
-    public function supportsNormalization($data, string $format = null): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return is_object($data) && $data instanceof Created;
     }

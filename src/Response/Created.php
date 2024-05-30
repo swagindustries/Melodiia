@@ -12,7 +12,7 @@ class Created implements ApiResponse
     /** @var string|null */
     private $resourceId;
 
-    public function __construct($id, string $resourceId = null)
+    public function __construct($id, ?string $resourceId = null)
     {
         $this->id = $id;
         $this->resourceId = $resourceId;

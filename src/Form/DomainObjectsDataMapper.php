@@ -15,10 +15,7 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 class DomainObjectsDataMapperBase extends DataMapper implements DomainObjectDataMapperInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function createObject(iterable $form, string $dataClass = null)
+    public function createObject(iterable $form, ?string $dataClass = null)
     {
         if (null === $dataClass && $form instanceof FormInterface) {
             $dataClass = $form->getConfig()->getOption('data_class');

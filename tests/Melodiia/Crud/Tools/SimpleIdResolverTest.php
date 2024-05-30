@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Test\Crud\Tools;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Crud\Tools\IdResolverInterface;
 use SwagIndustries\Melodiia\Crud\Tools\SimpleIdResolver;
 use SwagIndustries\Melodiia\Exception\IdMissingException;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SimpleIdResolverTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $subject;
 
     protected function setUp(): void

@@ -10,9 +10,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class MelodiiaBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getContainerExtension(): ?ExtensionInterface
     {
         return new MelodiiaExtension();

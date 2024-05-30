@@ -21,7 +21,7 @@ final class ExceptionListener
         MelodiiaConfigurationInterface $config,
         OnError $controller,
         bool $debug,
-        ErrorListener $errorListener = null
+        ?ErrorListener $errorListener = null
     ) {
         $this->errorListener = $errorListener ?? new ErrorListener($controller, null, $debug);
         $this->config = $config;

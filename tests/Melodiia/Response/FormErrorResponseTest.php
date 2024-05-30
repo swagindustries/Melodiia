@@ -211,18 +211,12 @@ class DummyData
     /** @var OtherDummy */
     private $bar;
 
-    /**
-     * @return string
-     */
     public function getFoo(): ?string
     {
         return $this->foo;
     }
 
-    /**
-     * @param string $foo
-     */
-    public function setFoo(string $foo = null): void
+    public function setFoo(?string $foo = null): void
     {
         $this->foo = $foo;
     }
@@ -235,10 +229,7 @@ class DummyData
         return $this->bar;
     }
 
-    /**
-     * @param OtherDummy $bar
-     */
-    public function setBar(OtherDummy $bar = null): void
+    public function setBar(?OtherDummy $bar = null): void
     {
         $this->bar = $bar;
     }
@@ -249,18 +240,12 @@ class OtherDummy
     /** @var string */
     private $baz;
 
-    /**
-     * @return string
-     */
     public function getBaz(): ?string
     {
         return $this->baz;
     }
 
-    /**
-     * @param string $baz
-     */
-    public function setBaz(string $baz = null): void
+    public function setBaz(?string $baz = null): void
     {
         $this->baz = $baz;
     }

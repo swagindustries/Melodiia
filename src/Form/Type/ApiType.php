@@ -20,7 +20,7 @@ class ApiType extends AbstractType
     /** @var DataMapperInterface */
     private $dataMapper;
 
-    public function __construct(DataMapperInterface $dataMapper = null)
+    public function __construct(?DataMapperInterface $dataMapper = null)
     {
         $this->dataMapper = $dataMapper ?? new DomainObjectsDataMapper();
     }

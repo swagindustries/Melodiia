@@ -34,7 +34,7 @@ final class Create extends BaseCrudController
     /** @var AuthorizationCheckerInterface|null */
     private $checker;
 
-    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, AuthorizationCheckerInterface $checker = null)
+    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, ?AuthorizationCheckerInterface $checker = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;
