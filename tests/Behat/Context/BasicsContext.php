@@ -12,9 +12,10 @@ class BasicsContext extends AbstractContext
 {
     /**
      * @When I make a GET request on :uri
+     *
      * @Given I make a :verb request on :uri with the content:
      */
-    public function iMakeARequestOn($uri, $verb = 'GET', PyStringNode $content = null)
+    public function iMakeARequestOn($uri, $verb = 'GET', ?PyStringNode $content = null)
     {
         $this->request($uri, $verb, (string) $content);
     }
@@ -29,6 +30,7 @@ class BasicsContext extends AbstractContext
 
     /**
      * @Then I should retrieve:
+     *
      * @Given the last response contains:
      */
     public function iShouldRetrieve(PyStringNode $string)

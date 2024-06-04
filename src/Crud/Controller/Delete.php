@@ -33,7 +33,7 @@ final class Delete extends BaseCrudController implements CrudControllerInterface
     /** @var IdResolverInterface */
     private $idResolver;
 
-    public function __construct(DataStoreInterface $dataStore, EventDispatcherInterface $dispatcher, IdResolverInterface $idResolver = null, AuthorizationCheckerInterface $checker = null)
+    public function __construct(DataStoreInterface $dataStore, EventDispatcherInterface $dispatcher, ?IdResolverInterface $idResolver = null, ?AuthorizationCheckerInterface $checker = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;

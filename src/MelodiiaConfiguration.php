@@ -21,9 +21,6 @@ final class MelodiiaConfiguration implements MelodiiaConfigurationInterface
         $this->config = $config;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getApiEndpoints(): array
     {
         $endpoints = [];

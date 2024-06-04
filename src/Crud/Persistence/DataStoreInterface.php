@@ -21,5 +21,5 @@ interface DataStoreInterface
     /**
      * @param int $maxPerPage
      */
-    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): PagerFanta;
+    public function getPaginated(string $type, int $page, FilterCollectionInterface $filters, $maxPerPage = 30): Pagerfanta;
 }

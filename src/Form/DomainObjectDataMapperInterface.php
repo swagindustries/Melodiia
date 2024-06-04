@@ -8,8 +8,5 @@ use Symfony\Component\Form\DataMapperInterface;
 
 interface DomainObjectDataMapperInterface extends DataMapperInterface
 {
-    /**
-     * @return mixed
-     */
-    public function createObject(iterable $form, string $dataClass = null);
+    public function createObject(iterable $form, ?string $dataClass = null);
 }

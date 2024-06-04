@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiRequestHandler implements RequestHandlerInterface
 {
-    public function handleRequest(FormInterface $form, $request = null)
+    public function handleRequest(FormInterface $form, $request = null): void
     {
         if (!$request instanceof Request) {
             throw new UnexpectedTypeException($request, 'Symfony\Component\HttpFoundation\Request');
@@ -44,8 +44,6 @@ class ApiRequestHandler implements RequestHandlerInterface
 
     /**
      * Notice: this impacts allow_file_upload field.
-     *
-     * @param mixed $data
      */
     public function isFileUpload($data): bool
     {

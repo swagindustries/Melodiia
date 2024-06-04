@@ -5,3 +5,4 @@ vendor
 tests/TestApplication/var
 .couscous
 .phpunit.result.cache
+.idea

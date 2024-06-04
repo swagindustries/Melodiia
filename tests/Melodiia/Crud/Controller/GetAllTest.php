@@ -8,6 +8,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\Controller\GetAll;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
@@ -20,6 +21,7 @@ use SwagIndustries\Melodiia\Response\FormErrorResponse;
 use SwagIndustries\Melodiia\Response\OkContent;
 use SwagIndustries\Melodiia\Test\TestFixtures\FakeMelodiiaModel;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -27,6 +29,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GetAllTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var DataStoreInterface|ObjectProphecy */
     private $dataStore;
 
@@ -68,11 +72,9 @@ class GetAllTest extends TestCase
         $this->attributes->get(CrudControllerInterface::MAX_PER_PAGE_ATTRIBUTE, 30)->willReturn(30);
         $this->attributes->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(30);
         $this->attributes->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(false);
-        $this->queries = $this->prophesize(ParameterBag::class);
-        $this->queries->getInt('page', Argument::cetera())->willReturn(1);
-        $this->request = $this->prophesize(Request::class);
+        $this->request = new Request();
         $this->request->attributes = $this->attributes->reveal();
-        $this->request->query = $this->queries->reveal();
+        $this->request->query = new InputBag(['page' => 1]);
 
         $this->form = $this->prophesize(FormInterface::class);
         $this->form->handleRequest(Argument::any())->willReturn($this->form->reveal());
@@ -87,7 +89,7 @@ class GetAllTest extends TestCase
         $this->paginationRequest->getPage()->willReturn(1);
 
         $paginationFactory = $this->prophesize(PaginationRequestFactoryInterface::class);
-        $paginationFactory->createPaginationRequest($this->request->reveal())->willReturn($this->paginationRequest->reveal());
+        $paginationFactory->createPaginationRequest($this->request)->willReturn($this->paginationRequest->reveal());
 
         $this->controller = new GetAll(
             $this->dataStore->reveal(),
@@ -106,7 +108,7 @@ class GetAllTest extends TestCase
     {
         $this->dataStore->getPaginated(FakeMelodiiaModel::class, 1, $this->filtersCollection->reveal(), 250)->willReturn(new Pagerfanta(new ArrayAdapter([new \stdClass()])))->shouldBeCalled();
 
-        $res = ($this->controller)($this->request->reveal());
+        $res = ($this->controller)($this->request);
 
         $this->assertInstanceOf(OkContent::class, $res);
         $this->assertTrue($res->isCollection());
@@ -117,31 +119,30 @@ class GetAllTest extends TestCase
     {
         $this->dataStore->getPaginated(FakeMelodiiaModel::class, 1, $this->filtersCollection->reveal(), 250)->willReturn(new Pagerfanta(new ArrayAdapter([])))->shouldBeCalled();
 
-        $res = ($this->controller)($this->request->reveal());
+        $res = ($this->controller)($this->request);
 
         $this->assertInstanceOf(OkContent::class, $res);
     }
 
-    public function testItCheckAccessToResourceIfSpecifiedInConfiguration()
+    public function testItCheckAccessToResourceIfSpecifiedInConfiguration(): void
     {
         $this->expectException(AccessDeniedException::class);
         $this->attributes->get(CrudControllerInterface::SECURITY_CHECK, null)->willReturn('view');
 
         $this->authorizationChecker->isGranted('view', Argument::any())->willReturn(false);
 
-        ($this->controller)($this->request->reveal(), 'id');
+        ($this->controller)($this->request, 'id');
     }
 
-    public function testItReturnsErrorFromFilters()
+    public function testItReturnsErrorFromFilters(): void
     {
-        $request = $this->request->reveal();
-        $this->form->handleRequest($request)->shouldBeCalled()->willReturn($this->form->reveal());
+        $this->form->handleRequest($this->request)->shouldBeCalled()->willReturn($this->form->reveal());
         $this->form->isSubmitted()->willReturn(true);
         $this->form->isValid()->willReturn(false);
 
         $this->dataStore->getPaginated(Argument::cetera())->shouldNotBeCalled();
 
-        $res = ($this->controller)($request);
+        $res = ($this->controller)($this->request);
 
         $this->assertInstanceOf(FormErrorResponse::class, $res);
     }

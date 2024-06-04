@@ -8,6 +8,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Response\Model\Collection;
 use SwagIndustries\Melodiia\Response\OkContent;
@@ -19,6 +20,8 @@ use Symfony\Component\Serializer\Serializer;
 
 class OkContentNormalizerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var NormalizerInterface|ObjectProphecy */
     private $mainNormalizer;
 

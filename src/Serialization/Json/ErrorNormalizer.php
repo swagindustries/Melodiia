@@ -26,7 +26,7 @@ class ErrorNormalizer implements NormalizerInterface
         return $res;
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         return is_object($data) && $data instanceof AbstractUserDataErrorResponse;
     }

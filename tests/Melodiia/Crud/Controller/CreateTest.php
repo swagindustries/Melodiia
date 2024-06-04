@@ -6,6 +6,7 @@ namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\Controller\Create;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
@@ -29,6 +30,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class CreateTest extends TestCase
 {
     use MockDispatcherTrait;
+    use ProphecyTrait;
 
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;

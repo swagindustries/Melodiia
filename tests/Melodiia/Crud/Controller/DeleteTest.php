@@ -6,6 +6,7 @@ namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Promise\CallbackPromise;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\Controller\Delete;
@@ -31,6 +32,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class DeleteTest extends TestCase
 {
     use MockDispatcherTrait;
+    use ProphecyTrait;
 
     /** @var Request|ObjectProphecy */
     private $request;

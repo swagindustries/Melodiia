@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Test;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\MelodiiaConfiguration;
 use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MelodiiaConfigurationTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var RouterInterface */
     private $router;
 

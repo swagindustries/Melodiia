@@ -41,7 +41,7 @@ final class Update extends BaseCrudController
     /** @var IdResolverInterface */
     private $idResolver;
 
-    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, IdResolverInterface $idResolver = null, AuthorizationCheckerInterface $checker = null)
+    public function __construct(DataStoreInterface $dataStore, FormFactoryInterface $formFactory, EventDispatcherInterface $dispatcher, ?IdResolverInterface $idResolver = null, ?AuthorizationCheckerInterface $checker = null)
     {
         parent::__construct($dispatcher);
         $this->dataStore = $dataStore;

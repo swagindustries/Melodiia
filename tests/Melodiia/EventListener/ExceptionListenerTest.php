@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Test\EventListener;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Error\OnError;
 use SwagIndustries\Melodiia\EventListener\ExceptionListener;
@@ -17,6 +18,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ExceptionListenerTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testItDoesNothingIfNotMelodiiaRoute()
     {
         /** @var Request|ObjectProphecy $request */
@@ -72,12 +75,12 @@ class ExceptionListenerTest extends TestCase
                 parent::__construct('');
             }
 
-            public function onKernelException($event)
+            public function onKernelException($event): void
             {
                 $this->isCalled = true;
             }
 
-            public function hasBeenCalled()
+            public function hasBeenCalled(): bool
             {
                 return $this->isCalled;
             }

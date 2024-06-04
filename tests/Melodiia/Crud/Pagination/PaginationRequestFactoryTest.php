@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace SwagIndustries\Melodiia\Crud\Pagination;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\CrudControllerInterface;
 use SwagIndustries\Melodiia\MelodiiaConfigurationInterface;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaginationRequestFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var MelodiiaConfigurationInterface|ObjectProphecy */
     private $configuration;
 
     /** @var Request|ObjectProphecy */
     private $request;
-
-    /** @var ParameterBag */
-    private $queryBag;
 
     /** @var ParameterBag */
     private $attributesBag;
@@ -33,25 +33,22 @@ class PaginationRequestFactoryTest extends TestCase
     {
         $this->configuration = $this->prophesize(MelodiiaConfigurationInterface::class);
         $this->request = $this->prophesize(Request::class);
-        $this->queryBag = $this->prophesize(ParameterBag::class);
         $this->attributesBag = $this->prophesize(ParameterBag::class);
 
         $this->attributesBag->getInt(CrudControllerInterface::MAX_PER_PAGE_ATTRIBUTE, PaginationRequestFactory::DEFAULT_ITEMS_PER_PAGE)->willReturn(PaginationRequestFactory::DEFAULT_ITEMS_PER_PAGE);
         $this->attributesBag->get(PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE, PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE)->willReturn(PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE);
         $this->attributesBag->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(30);
         $this->attributesBag->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(false);
-        $this->queryBag->getInt('page', Argument::any())->willReturn(1);
 
         $this->request->attributes = $this->attributesBag->reveal();
-        $this->request->query = $this->queryBag->reveal();
+        $this->request->query = new InputBag(['page' => 1]);
         $this->subject = new PaginationRequestFactory($this->configuration->reveal());
     }
 
     public function testItDoesNotAllowUserToAskForALimitIfNotConfigured()
     {
         $this->attributesBag->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(false);
-        $this->queryBag->getInt('page', PaginationRequestFactory::DEFAULT_PAGE)->willReturn(PaginationRequestFactory::DEFAULT_PAGE);
-        $this->queryBag->getInt('max_per_page', 0)->shouldNotBeCalled();
+        $this->request->query = new InputBag(['page' => 1]);
 
         $this->configuration->getApiConfigFor($this->request->reveal())->willReturn($this->configApi())->shouldBeCalled();
 
@@ -61,7 +58,7 @@ class PaginationRequestFactoryTest extends TestCase
     public function testItDoAllowUserToAskForALimitIfConfigured()
     {
         $this->attributesBag->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(true);
-        $this->queryBag->getInt(PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE, 0)->willReturn(15)->shouldBeCalled();
+        $this->request->query = new InputBag([PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE => 15]);
 
         $paginationRequest = $this->subject->createPaginationRequest($this->request->reveal());
         $this->assertEquals(1, $paginationRequest->getPage());
@@ -72,7 +69,7 @@ class PaginationRequestFactoryTest extends TestCase
     {
         $this->attributesBag->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(true);
         $this->attributesBag->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(555);
-        $this->queryBag->getInt(PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE, 0)->willReturn(666 * 666 * 666)->shouldBeCalled();
+        $this->request->query = new InputBag([PaginationRequestFactory::DEFAULT_MAX_PER_PAGE_ATTRIBUTE => 666 * 666 * 666]);
 
         $paginationRequest = $this->subject->createPaginationRequest($this->request->reveal());
         $this->assertEquals(1, $paginationRequest->getPage());
@@ -86,7 +83,7 @@ class PaginationRequestFactoryTest extends TestCase
         $this->configuration->getApiConfigFor($this->request->reveal())->willReturn($config);
         $this->attributesBag->getBoolean(CrudControllerInterface::ALLOW_USER_DEFINE_MAX_PAGE, false)->willReturn(true);
         $this->attributesBag->getInt(CrudControllerInterface::MAX_PER_PAGE_ALLOWED, 250)->willReturn(555);
-        $this->queryBag->getInt('size', 0)->willReturn(12)->shouldBeCalled();
+        $this->request->query = new InputBag(['size' => 12]);
 
         $paginationRequest = $this->subject->createPaginationRequest($this->request->reveal());
         $this->assertEquals(1, $paginationRequest->getPage());

@@ -25,7 +25,7 @@ abstract class BaseCrudController implements CrudControllerInterface
     /**
      * @return ApiResponse|FormInterface
      */
-    protected function decodeInputData(FormFactoryInterface $formFactory, string $form, Request $request, bool $clearMissing = null, object $data = null)
+    protected function decodeInputData(FormFactoryInterface $formFactory, string $form, Request $request, ?bool $clearMissing = null, ?object $data = null)
     {
         $form = $formFactory->createNamed('', $form, $data, ['clear_missing' => $clearMissing]);
         $form->handleRequest($request);

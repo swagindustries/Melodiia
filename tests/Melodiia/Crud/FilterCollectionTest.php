@@ -7,6 +7,7 @@ namespace SwagIndustries\Melodiia\Test\Crud\Controller;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Crud\FilterCollection;
 use SwagIndustries\Melodiia\Crud\FilterInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Form\FormInterface;
 
 class FilterCollectionTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var FormFactoryInterface|ObjectProphecy */
     private $formFactory;
 

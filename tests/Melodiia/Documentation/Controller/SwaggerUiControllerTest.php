@@ -6,6 +6,7 @@ namespace SwagIndustries\Melodiia\Test\Documentation\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Documentation\Controller\SwaggerUiController;
 use SwagIndustries\Melodiia\MelodiiaConfiguration;
@@ -17,6 +18,8 @@ use Twig\Environment;
 
 class SwaggerUiControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var SwaggerUiController */
     private $controller;
 

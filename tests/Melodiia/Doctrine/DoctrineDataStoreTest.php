@@ -11,13 +11,16 @@ use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Crud\FilterCollection;
 use SwagIndustries\Melodiia\Crud\Persistence\DataStoreInterface;
 use SwagIndustries\Melodiia\Doctrine\DoctrineDataStore;
 
 class DoctrineDataStoreTest extends TestCase
 {
-    public function testItIsAMelodiiaDataStore()
+    use ProphecyTrait;
+
+    public function testItIsAMelodiiaDataStore(): void
     {
         $datastore = new DoctrineDataStore($this->prophesize(ManagerRegistry::class)->reveal());
 

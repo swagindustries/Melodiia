@@ -36,7 +36,7 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
      *
      * @return array|bool|float|int|string
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
     {
         $groups = $object->getSerializationContext()->getGroups();
         if (!empty($context['groups'])) {
@@ -106,10 +106,7 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
         return $result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         return is_object($data) && $data instanceof OkContent;
     }

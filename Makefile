@@ -22,7 +22,7 @@ clean: ## Stop the project and remove generated files
 # -------
 #
 
-test: test.composer test.phpcs test.phpunit ## Run all tests
+test: test.composer test.phpcs test.phpunit test.behat ## Run all tests
 .PHONY: test
 
 test.composer: ## Validate composer.json

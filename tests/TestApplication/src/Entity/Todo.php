@@ -7,26 +7,18 @@ namespace TestApplication\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use SwagIndustries\Melodiia\Crud\MelodiiaModel;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity]
 class Todo implements MelodiiaModel
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $content;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
+    #[ORM\Column(type: 'datetime_immutable')]
     private $publishDate;
 
     public function getId(): ?int

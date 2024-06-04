@@ -15,8 +15,8 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-//        $container->import('../config/config.yaml');
-//        $container->import('../config/melodiia.yaml');
+        //        $container->import('../config/config.yaml');
+        //        $container->import('../config/melodiia.yaml');
         $loader->load(__DIR__ . '/../config/config.yaml');
         $loader->load(__DIR__ . '/../config/melodiia.yaml');
     }

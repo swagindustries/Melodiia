@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Melodiia\Serialization\Context;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use SwagIndustries\Melodiia\Response\ApiResponse;
 use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderChain;
 use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderInterface;
 
 class ContextBuilderFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testItBuildContextUsingGivenBuilders()
     {
         $builder1 = new class() implements ContextBuilderInterface {

@@ -22,9 +22,6 @@ class PaginationRequestFactory implements PaginationRequestFactoryInterface
         $this->configuration = $configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createPaginationRequest(Request $request): PaginationRequest
     {
         $page = $request->query->getInt('page', self::DEFAULT_PAGE);

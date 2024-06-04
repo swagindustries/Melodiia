@@ -6,6 +6,7 @@ namespace SwagIndustries\Melodiia\Test\Error;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SwagIndustries\Melodiia\Error\OnError;
 use SwagIndustries\Melodiia\Exception\MelodiiaRuntimeException;
@@ -16,6 +17,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class OnErrorTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var SerializerInterface|ObjectProphecy */
     private $serializer;
 
