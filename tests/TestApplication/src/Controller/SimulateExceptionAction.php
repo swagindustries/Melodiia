@@ -11,7 +11,7 @@ class SimulateExceptionAction
     /**
      * Simulate an exception while processing a controller.
      */
-    public function __invoke(EntityManagerInterface $manager, $word)
+    public function __invoke(EntityManagerInterface $manager)
     {
         throw new \Exception('oupsii, it\'s broken ! :D');
     }
