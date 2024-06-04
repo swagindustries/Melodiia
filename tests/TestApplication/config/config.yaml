@@ -54,6 +54,8 @@ services:
 
     TestApplication\Controller\TodoContainsAction:
         tags: ['controller.service_arguments']
+    TestApplication\Controller\SimulateExceptionAction:
+        tags: ['controller.service_arguments']
 
     TestApplication\Filters\TodoContainFilter:
         autoconfigure: true
