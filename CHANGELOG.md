@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.4] 2024-06-25
+
+### Added
+- Fix version for Symfony 7 #79
+
 ## [0.10.3] 2024-06-04
 
 ### Added
