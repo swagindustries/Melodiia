@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.10.4] 2024-06-25
 
 ### Added
-- Fix version for Symfony 7 #79
+- Add support for any version of Symfony 7 #79
+- Make the Melodiia data mapper a service so it's overridable more easily globally #78
 
 ## [0.10.3] 2024-06-04
 

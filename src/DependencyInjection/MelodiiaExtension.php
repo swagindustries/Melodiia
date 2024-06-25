@@ -42,6 +42,8 @@ class MelodiiaExtension extends Extension
             if ($container->hasAlias('melodiia.data_provider')) {
                 $loader->load('crud.yaml');
             }
+
+            $loader->load('form.yaml');
         }
 
         if (class_exists(Environment::class)) {

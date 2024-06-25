@@ -1,0 +1,9 @@
+services:
+    melodiia.form.data_mapper:
+        class: SwagIndustries\Melodiia\Form\DomainObjectsDataMapper
+
+    SwagIndustries\Melodiia\Form\Type\ApiType:
+        arguments:
+            $dataMapper: '@melodiia.form.data_mapper'
+        tags:
+            - { name: 'form.type' }
