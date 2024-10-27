@@ -63,7 +63,7 @@ jobs:
                 run: make test.composer
 
             -   name: Install dependencies
-                run: composer update --prefer-dist --no-progress --no-suggest --no-plugins ${{ matrix.composer-flag }}
+                run: composer update --prefer-dist --no-progress --no-plugins ${{ matrix.composer-flag }}
 
             -   name: Run PHPUnit tests
                 run: make test.phpunit
