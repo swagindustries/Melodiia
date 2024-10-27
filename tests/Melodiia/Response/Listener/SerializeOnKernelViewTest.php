@@ -42,7 +42,7 @@ class SerializeOnKernelViewTest extends TestCase
         $this->contextChain = $this->prophesize(ContextBuilderChainInterface::class);
         $this->contextChain->buildContext(Argument::cetera())->willReturn([]);
         $this->listener = new SerializeOnKernelView($this->serializer->reveal(), $this->contextChain->reveal());
-        $this->dummyResponse = new class() implements ApiResponse {
+        $this->dummyResponse = new class implements ApiResponse {
             public function httpStatus(): int
             {
                 return 200;

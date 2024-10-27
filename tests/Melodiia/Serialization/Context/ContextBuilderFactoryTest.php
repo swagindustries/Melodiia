@@ -16,7 +16,7 @@ class ContextBuilderFactoryTest extends TestCase
 
     public function testItBuildContextUsingGivenBuilders()
     {
-        $builder1 = new class() implements ContextBuilderInterface {
+        $builder1 = new class implements ContextBuilderInterface {
             public function buildContext(array $context, ApiResponse $response): array
             {
                 $context['foo'] = true;
@@ -29,7 +29,7 @@ class ContextBuilderFactoryTest extends TestCase
                 return true;
             }
         };
-        $builder2 = new class() implements ContextBuilderInterface {
+        $builder2 = new class implements ContextBuilderInterface {
             public function buildContext(array $context, ApiResponse $response): array
             {
                 $context['baz'] = true;
@@ -42,7 +42,7 @@ class ContextBuilderFactoryTest extends TestCase
                 return false;
             }
         };
-        $builder3 = new class() implements ContextBuilderInterface {
+        $builder3 = new class implements ContextBuilderInterface {
             public function buildContext(array $context, ApiResponse $response): array
             {
                 $context['bar'] = true;

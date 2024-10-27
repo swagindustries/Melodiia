@@ -67,7 +67,7 @@ class ExceptionListenerTest extends TestCase
 
     private function fakeErrorListener()
     {
-        return new class() extends ErrorListener {
+        return new class extends ErrorListener {
             private $isCalled = false;
 
             public function __construct()
