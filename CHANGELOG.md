@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Support for Symfony 5 #83
+- Support for PHP 8.0 #83
+
 ## [0.10.4] 2024-06-25
 
 ### Added
