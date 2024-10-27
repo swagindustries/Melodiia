@@ -24,7 +24,8 @@ Feature:
         {
           "id": 1,
           "content": "foo",
-          "publishDate":"2050-01-02T00:00:00+00:00"
+          "publishDate":"2050-01-02T00:00:00+00:00",
+          "archived": false
         }
       ]
     }
@@ -33,3 +34,9 @@ Feature:
   Scenario: In debug mode, when an exception occurred I should get a response with stacktrace
     When I make a GET request on "/error"
     Then I should retrieve a stacktrace formatted in JSON
+
+  Scenario: return ok content response
+    Given there are some todos
+    And I make a PATCH request on "/todos/1/archive"
+    Then the last response is empty
+    And the http code is 204

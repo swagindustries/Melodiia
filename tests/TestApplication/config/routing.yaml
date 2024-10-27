@@ -10,6 +10,11 @@ get_todo_contains:
     methods: GET
     controller: 'TestApplication\Controller\TodoContainsAction'
 
+archive_todo:
+    path: /todos/{id}/archive
+    methods: PATCH
+    controller: 'TestApplication\Controller\ArchiveTodoAction'
+
 get_todo:
     path: /todos/{id}
     controller: 'melodiia.crud.controller.get'

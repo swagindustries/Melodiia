@@ -25,17 +25,20 @@ Feature:
         {
           "id": 1,
           "content": "foo",
-          "publishDate":"2050-01-02T00:00:00+00:00"
+          "publishDate":"2050-01-02T00:00:00+00:00",
+          "archived": false
         },
         {
           "id": 2,
           "content": "bar",
-          "publishDate":"2050-01-02T00:00:00+00:00"
+          "publishDate":"2050-01-02T00:00:00+00:00",
+          "archived": false
         },
         {
           "id": 3,
           "content": "baz",
-          "publishDate":"2050-01-02T00:00:00+00:00"
+          "publishDate":"2050-01-02T00:00:00+00:00",
+          "archived": false
         }
       ]
     }
@@ -61,7 +64,8 @@ Feature:
     {
       "id": 1,
       "content": "hello",
-      "publishDate":"2050-01-02T00:00:00+00:00"
+      "publishDate":"2050-01-02T00:00:00+00:00",
+      "archived": false
     }
     """
 
@@ -87,12 +91,14 @@ Feature:
         {
           "id": 2,
           "content": "bar",
-          "publishDate":"2050-01-02T00:00:00+00:00"
+          "publishDate":"2050-01-02T00:00:00+00:00",
+          "archived": false
         },
         {
           "id": 3,
           "content": "baz",
-          "publishDate":"2050-01-02T00:00:00+00:00"
+          "publishDate":"2050-01-02T00:00:00+00:00",
+          "archived": false
         }
       ]
     }

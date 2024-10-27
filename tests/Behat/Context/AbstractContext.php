@@ -32,7 +32,7 @@ abstract class AbstractContext implements Context
         return $this->kernel->getContainer();
     }
 
-    final protected function request(string $uri, string $verb, $rawContent): Response
+    final protected function request(string $uri, string $verb, ?string $rawContent): Response
     {
         $client = $this->getContainer()->get('test.client');
 
@@ -42,10 +42,9 @@ abstract class AbstractContext implements Context
             return self::$response = $client->getResponse();
         }
 
-        if (null === $rawContent) {
-            throw new \Exception(sprintf('Cannot process request "%s" with no content.', $verb));
+        if (null !== $rawContent) {
+            json_decode($rawContent, true, 512, \JSON_THROW_ON_ERROR);
         }
-        json_decode($rawContent, true, 512, \JSON_THROW_ON_ERROR);
 
         $client->request($verb, $uri, [], [], [], $rawContent);
 
