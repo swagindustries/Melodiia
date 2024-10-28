@@ -50,7 +50,23 @@ paths:
                 400:
                     description: Invalid input
                     content: {}
-
+    /todos/{todoId}/archive:
+        patch:
+            tags:
+                - todo
+            summary: Archive a todo
+            operationId: archiveTodo
+            parameters:
+                - name: todoId
+                  in: path
+                  description: ID of the todo to archive
+                  required: true
+                  schema:
+                      type: integer
+                      format: int64
+            responses:
+                204:
+                    description: Todo will be archived
 components:
     schemas:
         Todo:

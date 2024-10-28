@@ -29,7 +29,7 @@ class FilterCollectionFactoryTest extends TestCase
 
     public function testItCreatesCollection()
     {
-        $subject = new FilterCollectionFactory($this->formFactory->reveal(), [new class() implements FilterInterface {
+        $subject = new FilterCollectionFactory($this->formFactory->reveal(), [new class implements FilterInterface {
             public function filter($queryBuilder, FormInterface $form): void
             { /* do nothing */
             }

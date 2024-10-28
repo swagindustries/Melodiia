@@ -33,7 +33,7 @@ class GetAll implements CrudControllerInterface
         DataStoreInterface $dataStore,
         FilterCollectionFactoryInterface $collectionFactory,
         PaginationRequestFactoryInterface $pagesRequestFactory,
-        ?AuthorizationCheckerInterface $checker = null
+        ?AuthorizationCheckerInterface $checker = null,
     ) {
         $this->dataStore = $dataStore;
         $this->checker = $checker;

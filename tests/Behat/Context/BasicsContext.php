@@ -11,13 +11,29 @@ use Webmozart\Assert\Assert;
 class BasicsContext extends AbstractContext
 {
     /**
-     * @When I make a GET request on :uri
+     * @BeforeScenario
+     */
+    public function resetDb()
+    {
+        @unlink(dirname(__DIR__) . '/../TestApplication/var/data.db');
+
+        $entityManager = $this->getContainer()->get('doctrine')->getManager();
+        $metadatas = $entityManager->getMetadataFactory()->getAllMetadata();
+        $schemaTool = new SchemaTool($entityManager);
+        $schemaTool->createSchema($metadatas);
+    }
+
+    /**
+     * @When I make a :verb request on :uri
      *
      * @Given I make a :verb request on :uri with the content:
      */
     public function iMakeARequestOn($uri, $verb = 'GET', ?PyStringNode $content = null)
     {
-        $this->request($uri, $verb, (string) $content);
+        if ($content instanceof PyStringNode) {
+            $content = (string) $content;
+        }
+        $this->request($uri, $verb, $content);
     }
 
     /**
@@ -49,19 +65,6 @@ class BasicsContext extends AbstractContext
     }
 
     /**
-     * @BeforeScenario
-     */
-    public function resetDb()
-    {
-        @unlink(dirname(__DIR__) . '/../TestApplication/var/data.db');
-
-        $entityManager = $this->getContainer()->get('doctrine')->getManager();
-        $metadatas = $entityManager->getMetadataFactory()->getAllMetadata();
-        $schemaTool = new SchemaTool($entityManager);
-        $schemaTool->createSchema($metadatas);
-    }
-
-    /**
      * @Then I should retrieve a stacktrace formatted in JSON
      */
     public function iShouldRetrieveAStacktraceFormattedInJson()
@@ -72,5 +75,22 @@ class BasicsContext extends AbstractContext
         Assert::keyExists($content, 'title');
         Assert::keyExists($content, 'detail');
         Assert::keyExists($content, 'trace');
+    }
+
+    /**
+     * @Then the last response is empty
+     */
+    public function theLastResponseIsEmpty()
+    {
+        $responseContent = $this->getLastResponse()->getContent();
+        Assert::isEmpty($responseContent);
+    }
+
+    /**
+     * @Then the http code is :httpCode
+     */
+    public function theHttpCodeIs($httpCode)
+    {
+        Assert::same($this->getLastResponse()->getStatusCode(), (int) $httpCode);
     }
 }

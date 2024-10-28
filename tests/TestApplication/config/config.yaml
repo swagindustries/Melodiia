@@ -52,6 +52,8 @@ services:
     SwagIndustries\Melodiia\Tests\Behat\:
         resource: '../../Behat/*'
 
+    TestApplication\Controller\ArchiveTodoAction:
+        tags: ['controller.service_arguments']
     TestApplication\Controller\TodoContainsAction:
         tags: ['controller.service_arguments']
     TestApplication\Controller\SimulateExceptionAction:

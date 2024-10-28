@@ -13,13 +13,16 @@ class Todo implements MelodiiaModel
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'text')]
-    private $content;
+    private ?string $content;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $publishDate;
+    private ?\DateTimeImmutable $publishDate;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $archived = false;
 
     public function getId(): ?int
     {
@@ -36,7 +39,7 @@ class Todo implements MelodiiaModel
         $this->content = $content;
     }
 
-    public function getPublishDate()
+    public function getPublishDate(): ?\DateTimeImmutable
     {
         return $this->publishDate;
     }
@@ -44,5 +47,15 @@ class Todo implements MelodiiaModel
     public function setPublishDate(?\DateTimeImmutable $publishDate): void
     {
         $this->publishDate = $publishDate;
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->archived;
+    }
+
+    public function archive(): void
+    {
+        $this->archived = true;
     }
 }
