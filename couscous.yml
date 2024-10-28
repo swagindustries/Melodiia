@@ -35,3 +35,6 @@ menu:
         forms:
             text: Forms Reference
             relativeUrl: docs/form-types.html
+        troubleshooting:
+            text: Troubleshooting
+            relativeUrl: docs/troubleshooting.html
