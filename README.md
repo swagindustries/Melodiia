@@ -41,16 +41,11 @@ please refer to the
 
 You may want to read the [getting started doc](./docs/getting-started.md) at this point!
 
+If you're experimenting an issue while trying Melodiia, you will maybe find the solution in the [troubleshooting](./docs/troubleshooting.md) section.
+
 One last thing
 --------------
 
 I ([Nek-](https://github.com/Nek-)) designed Melodiia while I was working at Biig in the mean time. This [presentation of Melodiia @Biig-io](https://docs.google.com/presentation/d/1dtxUOzZFGRq7Ar5YV5aZ6AN60RhDbf_0OcXKj5iiDS8/edit?usp=sharing) is related to an old version of Melodiia but can still helps you to understand what is melodiia and how it's different from API Platform (TL;DR: Melodiia does less).
 
 Feel free to open an issue, if you encounter problems while implementing Melodiia.
-
-FAQ
----
-
-### Blank page on documentation
-
-You probably forget to install assets. `bin/console assets:install`.
