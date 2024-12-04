@@ -68,18 +68,23 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
             $previousPage = null;
             $nextPage = null;
 
+            $hasPageParameter = str_contains($uri, 'page=');
+            $prefix = $uri . (str_contains($uri, '?') ? '&' : '?') . 'page=';
+
             if ($content->hasPreviousPage()) {
                 $previousPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getPreviousPage(), $uri);
             }
             if ($content->hasNextPage()) {
-                $nextPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNextPage(), $uri);
+                $nextPage = $hasPageParameter
+                    ? preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNextPage(), $uri)
+                    : $prefix . $content->getNextPage();
             }
 
             $result['links'] = [
                 'prev' => $previousPage,
                 'next' => $nextPage,
-                'last' => \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri),
-                'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri),
+                'last' => $hasPageParameter && 1 !== $content->getNbPages() ? \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri) : $prefix . $content->getNbPages(),
+                'first' => $hasPageParameter && 1 !== $content->getNbPages() ? \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri) : $prefix . 1,
             ];
         }
         if ($content instanceof Collection) {
