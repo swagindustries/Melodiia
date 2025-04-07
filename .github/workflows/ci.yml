@@ -20,12 +20,11 @@ jobs:
                 with:
                     php-version: 8.3
 
-            -   uses: actions/cache@v2
+            -   uses: actions/cache@v4
                 id: cache-composer
                 with:
                     path: ~/.composer/cache
                     key: composer-php-8.3-${{ github.sha }}
-                    restore-keys: composer-php-8.3-
 
             -   name: Install dependencies
                 run: composer update --prefer-dist --no-progress --no-suggest
@@ -37,7 +36,7 @@ jobs:
         name: Unit tests
         strategy:
             matrix:
-                php: [ 8.2, 8.3 ]
+                php: [ 8.2, 8.3, 8.4 ]
                 os: [ ubuntu-latest ]
                 include:
                     -   os: [ ubuntu-latest ]
@@ -52,12 +51,11 @@ jobs:
                 with:
                     php-version: ${{ matrix.php }}
 
-            -   uses: actions/cache@v2
+            -   uses: actions/cache@v4
                 id: cache-composer
                 with:
                     path: ~/.composer/cache
                     key: composer-php-${{ matrix.php }}-${{ github.sha }}
-                    restore-keys: composer-php-${{ matrix.php }}-
 
             -   name: Valid composer.json
                 run: make test.composer
@@ -72,7 +70,7 @@ jobs:
         name: Functionnal tests
         strategy:
             matrix:
-                php: [ 8.2, 8.3 ]
+                php: [ 8.2, 8.3, 8.4 ]
                 os: [ ubuntu-latest ]
                 include:
                     -   os: [ ubuntu-latest ]
@@ -89,12 +87,11 @@ jobs:
                     php-version: ${{ matrix.php }}
                     extensions: sqlite3
 
-            -   uses: actions/cache@v2
+            -   uses: actions/cache@v4
                 id: cache-composer
                 with:
                     path: ~/.composer/cache
                     key: composer-php-${{ matrix.php }}-${{ github.sha }}
-                    restore-keys: composer-php-${{ matrix.php }}-
 
 
             -   name: Install dependencies
