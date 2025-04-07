@@ -18,8 +18,8 @@ Feature:
       "links": {
         "prev": null,
         "next": null,
-        "last": "http://localhost/todos",
-        "first": "http://localhost/todos"
+        "last": "http://localhost/todos?page=1",
+        "first": "http://localhost/todos?page=1"
       },
       "data": [
         {
@@ -84,8 +84,8 @@ Feature:
       "links": {
         "prev": null,
         "next": null,
-        "last": "http://localhost/todos?q=ba",
-        "first": "http://localhost/todos?q=ba"
+        "last": "http://localhost/todos?q=ba&page=1",
+        "first": "http://localhost/todos?q=ba&page=1"
       },
       "data": [
         {
