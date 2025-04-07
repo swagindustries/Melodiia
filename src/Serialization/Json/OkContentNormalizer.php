@@ -67,18 +67,29 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
             $uri = $this->requestStack->getMainRequest()->getUri();
             $previousPage = null;
             $nextPage = null;
+            $hasPageParameter = (bool)preg_match( '/[\?&]page=/', $uri);
 
             if ($content->hasPreviousPage()) {
                 $previousPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getPreviousPage(), $uri);
             }
             if ($content->hasNextPage()) {
-                $nextPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNextPage(), $uri);
+                if ($hasPageParameter) {
+                    $nextPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNextPage(), $uri);
+                } else {
+                    $nextPage = $this->addParameter('page', (string) $content->getNextPage(), $uri);
+                }
+            }
+
+            $lastPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri);
+
+            if ($content->getCurrentPage() === 1 && $content->getNbPages() > 1 && !$hasPageParameter) {
+                $lastPage = $this->addParameter('page', (string) $content->getNbPages(), $lastPage);
             }
 
             $result['links'] = [
                 'prev' => $previousPage,
                 'next' => $nextPage,
-                'last' => \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri),
+                'last' => $lastPage,
                 'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri),
             ];
         }
@@ -116,5 +127,10 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
         return [
             OkContent::class => true,
         ];
+    }
+
+    private function addParameter(string $parameter, string $value, string $uri): string
+    {
+        return $uri.(str_contains($uri, '?') ? '&' : '?') . $parameter . '=' . $value;
     }
 }
