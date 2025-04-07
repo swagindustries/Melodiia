@@ -4,6 +4,7 @@ get_todos:
     methods: GET
     defaults:
         melodiia_model: TestApplication\Entity\Todo
+        melodiia_allow_user_define_max_per_page: true
 
 get_todo_contains:
     path: /todos/contains/{word}

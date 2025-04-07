@@ -51,8 +51,8 @@ class DoctrineDataStore implements DataStoreInterface
         } else {
             $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
         }
-        $pager->setCurrentPage($page);
         $pager->setMaxPerPage($maxPerPage);
+        $pager->setCurrentPage($page);
 
         return $pager;
     }
