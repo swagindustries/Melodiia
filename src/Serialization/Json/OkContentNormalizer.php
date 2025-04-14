@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Serialization\Json;
 
+use League\Uri\Components\Query;
+use League\Uri\Uri;
 use Pagerfanta\Pagerfanta;
 use SwagIndustries\Melodiia\Response\Model\Collection;
 use SwagIndustries\Melodiia\Response\OkContent;
@@ -64,22 +66,30 @@ class OkContentNormalizer implements NormalizerInterface, SerializerAwareInterfa
                 'currentPage' => $content->getCurrentPage(),
                 'maxPerPage' => $content->getMaxPerPage(),
             ];
-            $uri = $this->requestStack->getMainRequest()->getUri();
-            $previousPage = null;
-            $nextPage = null;
+            $uri = Uri::new($this->requestStack->getMainRequest()->getUri());
+            $currentPageQuery = Query::fromUri($uri);
+            $previousPageQuery = null;
+            $nextPageQuery = null;
+            $lastPageQuery = clone $currentPageQuery;
+            $firstPageQuery = $currentPageQuery->withPair('page', 1);
 
             if ($content->hasPreviousPage()) {
-                $previousPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getPreviousPage(), $uri);
+                $previousPageQuery = $currentPageQuery->withPair('page', $content->getPreviousPage());
             }
             if ($content->hasNextPage()) {
-                $nextPage = \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNextPage(), $uri);
+                $nextPageQuery = $currentPageQuery->withPair('page', $content->getNextPage());
+            }
+            if ($content->getNbPages() > 1) {
+                $lastPageQuery = $lastPageQuery->withPair('page', $content->getNbPages());
+            } else {
+                $lastPageQuery = $lastPageQuery->withPair('page', 1);
             }
 
             $result['links'] = [
-                'prev' => $previousPage,
-                'next' => $nextPage,
-                'last' => \preg_replace('/([?&])page=(\d+)/', '$1page=' . $content->getNbPages(), $uri),
-                'first' => \preg_replace('/([?&])page=(\d+)/', '$1page=1', $uri),
+                'prev' => null === $previousPageQuery ? null : $uri->withQuery($previousPageQuery),
+                'next' => null === $nextPageQuery ? null : $uri->withQuery($nextPageQuery),
+                'last' => $uri->withQuery($lastPageQuery),
+                'first' => $uri->withQuery($firstPageQuery),
             ];
         }
         if ($content instanceof Collection) {

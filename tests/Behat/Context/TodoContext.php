@@ -34,6 +34,26 @@ class TodoContext extends AbstractContext
     }
 
     /**
+     * @Given there are many todos
+     */
+    public function thereAreMany()
+    {
+        $entityManager = $this->getContainer()->get('doctrine')->getManager();
+
+        $todos = [
+            'foo', 'bar', 'baz', 'bak', 'baf', 'bas', 'bab', 'bap',
+        ];
+        foreach ($todos as $todo) {
+            $todox = new Todo();
+            $todox->setContent($todo);
+            $todox->setPublishDate(new \DateTimeImmutable('2050-01-02'));
+            $entityManager->persist($todox);
+        }
+
+        $entityManager->flush();
+    }
+
+    /**
      * @Given there is one todo ":content"
      */
     public function thereIsOneTodo($content)

@@ -14,7 +14,9 @@
         "pagerfanta/pagerfanta": "^2.0.1 || ^3.0.0",
         "symfony/yaml": "^6.0 || ^7.0",
         "symfony/serializer": "^6.0 || ^7.0",
-        "pagerfanta/doctrine-orm-adapter": "^3.5"
+        "pagerfanta/doctrine-orm-adapter": "^3.5",
+        "league/uri": "^7.5.1",
+        "league/uri-components": "^7.5.1"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
