@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0] 2025-04-14
+
+### Added
+
+- Support for PHP 8.4 #86
+
+### Fixed
+
+- Pagination on JSON API output format #87
+
 ### Removed
 
 - Support for Symfony 5 #83
