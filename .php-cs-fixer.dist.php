@@ -3,6 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude(['tests/TestApplication/var', 'vendor'])
+    ->notPath('tests/TestApplication/config/reference.php')
 ;
 
 return (new PhpCsFixer\Config())

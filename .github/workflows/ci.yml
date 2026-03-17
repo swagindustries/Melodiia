@@ -18,13 +18,13 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.3
+                    php-version: 8.5
 
             -   uses: actions/cache@v4
                 id: cache-composer
                 with:
                     path: ~/.composer/cache
-                    key: composer-php-8.3-${{ github.sha }}
+                    key: composer-php-8.5-${{ github.sha }}
 
             -   name: Install dependencies
                 run: composer update --prefer-dist --no-progress --no-suggest
@@ -36,11 +36,11 @@ jobs:
         name: Unit tests
         strategy:
             matrix:
-                php: [ 8.2, 8.3, 8.4 ]
+                php: [ 8.3, 8.4, 8.5 ]
                 os: [ ubuntu-latest ]
                 include:
                     -   os: [ ubuntu-latest ]
-                        php: 8.1
+                        php: 8.2
                         composer-flag: "'--prefer-lowest'"
 
         runs-on: ${{ matrix.os }}
@@ -70,11 +70,11 @@ jobs:
         name: Functionnal tests
         strategy:
             matrix:
-                php: [ 8.2, 8.3, 8.4 ]
+                php: [ 8.3, 8.4, 8.5 ]
                 os: [ ubuntu-latest ]
                 include:
                     -   os: [ ubuntu-latest ]
-                        php: 8.1
+                        php: 8.2
                         composer-flag: "'--prefer-lowest'"
 
         runs-on: ${{ matrix.os }}

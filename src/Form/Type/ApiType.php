@@ -25,7 +25,7 @@ class ApiType extends AbstractType
         $this->dataMapper = $dataMapper ?? new DomainObjectsDataMapper();
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $dataMapper = $this->dataMapper;
 
@@ -40,7 +40,7 @@ class ApiType extends AbstractType
         $builder->setRequestHandler(new ApiRequestHandler());
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'csrf_protection' => false,

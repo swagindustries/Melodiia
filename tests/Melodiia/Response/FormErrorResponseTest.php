@@ -79,7 +79,7 @@ class FormErrorResponseTest extends TestCase
     {
         $form = $this->formFactory
             ->createNamedBuilder('')
-            ->add('foo', TextType::class, ['constraints' => [new Email(), new Length(['min' => 10])]])
+            ->add('foo', TextType::class, ['constraints' => [new Email(), new Length(min: 10)]])
             ->getForm()
         ;
         $form->submit(['foo' => 'bar']);
@@ -185,7 +185,7 @@ class FormErrorResponseTest extends TestCase
 
 class DummyBazFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('baz', TextType::class, ['constraints' => new NotBlank()]);
     }
@@ -193,12 +193,12 @@ class DummyBazFormType extends AbstractType
 
 class DummyOtherDummyFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('baz', TextType::class, ['constraints' => new NotBlank()]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('data_class', OtherDummy::class);
     }
