@@ -7,7 +7,7 @@ services:
         class: SwagIndustries\Melodiia\Crud\FilterCollectionFactory
         arguments:
             $formFactory: '@form.factory'
-            $filters: !tagged melodiia.crud_filter
+            $filters: !tagged_iterator melodiia.crud_filter
 
     SwagIndustries\Melodiia\Crud\Pagination\PaginationRequestFactoryInterface:
         alias: 'melodiia.crud.pagination.pages_request_factory'

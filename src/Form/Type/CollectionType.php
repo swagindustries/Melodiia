@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CollectionType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $resizeListener = new ResizeFormListener(
             $options['entry_type'],
@@ -29,7 +29,7 @@ class CollectionType extends AbstractType
         $builder->addEventSubscriber($reorderInputDataListener);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'allow_add' => true,

@@ -22,7 +22,7 @@ class MelodiiaExtension extends Extension
     public const TAG_CRUD_FILTER = 'melodiia.crud_filter';
     public const TAG_CONTEXT_BUILDER = 'melodiia.context_builder';
 
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configFileLocator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new YamlFileLoader($container, $configFileLocator);
