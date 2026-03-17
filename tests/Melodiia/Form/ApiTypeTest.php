@@ -64,7 +64,7 @@ class ApiTypeTest extends FormIntegrationTestCase
         $this->assertTrue($customDataMapper->hasBeenCalled());
     }
 
-    protected function getTypes()
+    protected function getTypes(): array
     {
         return [new ApiType()];
     }
@@ -87,12 +87,12 @@ class FakeModel
 
 class FakeTypeUsingApiType extends \SwagIndustries\Melodiia\Form\AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('foo');
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => FakeModel::class, 'value_object' => true]);
     }

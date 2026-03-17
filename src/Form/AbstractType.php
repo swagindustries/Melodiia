@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType as BaseType;
 
 abstract class AbstractType extends BaseType
 {
-    public function getParent()
+    public function getParent(): ?string
     {
         return ApiType::class;
     }
