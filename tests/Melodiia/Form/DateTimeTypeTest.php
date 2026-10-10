@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Test\Form;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use SwagIndustries\Melodiia\Form\Type\DateTimeType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class DateTimeTypeTest extends TypeTestCase
 {
+    #[AllowMockObjectsWithoutExpectations]
     public function testItChangesDefaultOptions()
     {
         $form = $this->factory->create(DateTimeType::class, null, [

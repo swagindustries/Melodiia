@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace SwagIndustries\Melodiia\Test\Doctrine;
 
+use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Pagerfanta;
@@ -42,10 +44,15 @@ class DoctrineDataStoreTest extends TestCase
 
     public function testItPaginate()
     {
-        $qb = $this->prophesize(QueryBuilder::class)->reveal();
+        $manager = $this->prophesize(EntityManagerInterface::class);
+        $manager->getConfiguration()->willReturn(new Configuration());
+        // Query is final since Doctrine ORM 3, it cannot be mocked
+        $query = new Query($manager->reveal());
+        $qbProphecy = $this->prophesize(QueryBuilder::class);
+        $qbProphecy->getQuery()->willReturn($query);
+        $qb = $qbProphecy->reveal();
         $repo = $this->prophesize(EntityRepository::class);
         $repo->createQueryBuilder(Argument::any())->willReturn($qb);
-        $manager = $this->prophesize(EntityManagerInterface::class);
         $manager->getRepository(Argument::any())->willReturn($repo->reveal());
         $registry = $this->prophesize(ManagerRegistry::class);
         $registry->getManager()->willReturn($manager->reveal());

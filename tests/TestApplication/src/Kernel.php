@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TestApplication;
 
+use Doctrine\ORM\Configuration as OrmConfiguration;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -19,6 +20,13 @@ class Kernel extends BaseKernel
         //        $container->import('../config/melodiia.yaml');
         $loader->load(__DIR__ . '/../config/config.yaml');
         $loader->load(__DIR__ . '/../config/melodiia.yaml');
+
+        // Doctrine ORM 3.4+ relies on PHP native lazy objects on PHP 8.4+, older setups use generated proxies
+        if (PHP_VERSION_ID >= 80400 && method_exists(OrmConfiguration::class, 'enableNativeLazyObjects')) {
+            $container->loadFromExtension('doctrine', ['orm' => ['enable_native_lazy_objects' => true]]);
+        } else {
+            $container->loadFromExtension('doctrine', ['orm' => ['auto_generate_proxy_classes' => true]]);
+        }
     }
 
     protected function configureRoutes($routes): void

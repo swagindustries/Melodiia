@@ -12,7 +12,6 @@ use SwagIndustries\Melodiia\Serialization\Context\ContextBuilderInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Form\Form;
 use Twig\Environment;
@@ -27,8 +26,7 @@ class MelodiiaExtension extends Extension
         $configFileLocator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new YamlFileLoader($container, $configFileLocator);
         $loader->load('services.yaml');
-        $xmlLoader = new XmlFileLoader($container, $configFileLocator);
-        $xmlLoader->load('error-management.xml');
+        $loader->load('error-management.yaml');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);

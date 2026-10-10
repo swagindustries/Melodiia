@@ -1,0 +1,21 @@
+services:
+    melodiia.exception.controller:
+        class: SwagIndustries\Melodiia\Error\OnError
+        arguments:
+            $serializer: '@serializer'
+
+    melodiia.exception.listener:
+        class: SwagIndustries\Melodiia\EventListener\ExceptionListener
+        arguments:
+            $config: '@melodiia.configuration'
+            $controller: '@melodiia.exception.controller'
+            $debug: '%kernel.debug%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: -96 }
+
+    melodiia.exception.normalizer:
+        class: SwagIndustries\Melodiia\Serialization\Json\ExceptionNormalizer
+        arguments:
+            $debug: '%kernel.debug%'
+        tags:
+            - { name: serializer.normalizer, priority: -1 }
