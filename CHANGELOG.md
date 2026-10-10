@@ -6,12 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.12.0] 2026-10-10
+## [0.12.2] 2026-10-10
 
 ### Added
 
 - Support for Doctrine ORM 3 (and `pagerfanta/doctrine-orm-adapter` 4)
-- Support for Symfony 8
+
+## Fixed
+
+- Fix for Symfony 8
 
 ## [0.11.0] 2025-04-14
 
