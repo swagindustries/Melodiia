@@ -19,22 +19,16 @@ Step 1: your model
 To work with Melodiia, your model must implement the interface `MelodiiaModel`.
 
 ```php
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity]
 class Todo implements MelodiiaModel
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
+    #[ORM\Column(type: 'text')]
+    private ?string $content = null;
 }
 ```
 
